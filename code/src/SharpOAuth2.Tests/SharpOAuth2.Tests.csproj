@@ -31,6 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CuttingEdge.ServiceLocation">
+      <HintPath>..\..\lib\SimpleServiceLocator\CuttingEdge.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CommonServiceLocator\v1.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq\v4.0.10827\NET40\Moq.dll</HintPath>
     </Reference>
@@ -52,6 +59,7 @@
     <Compile Include="ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Authorization\AuthorizationContextBuilderTests.cs" />
+    <Compile Include="Provider\Authorization\AuthorizationProviderTests.cs" />
     <Compile Include="Provider\Authorization\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
   </ItemGroup>

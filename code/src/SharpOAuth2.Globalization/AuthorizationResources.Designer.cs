@@ -61,6 +61,15 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current authorization context already contains an authorization token.
+        /// </summary>
+        public static string AuthorizationContextContainsToken {
+            get {
+                return ResourceManager.GetString("AuthorizationContextContainsToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The client &apos;{0}&apos; is invalid, unregistered, or has invalid credentials.
         /// </summary>
         public static string InvalidClient {

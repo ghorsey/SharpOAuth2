@@ -6,6 +6,7 @@ using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.Authorization.Inspectors;
 using SharpOAuth2.Provider.Authorization.Services;
 using SharpOAuth2.Globalization;
+using System.Globalization;
 
 namespace SharpOAuth2.Provider.Authorization
 {
@@ -39,25 +40,31 @@ namespace SharpOAuth2.Provider.Authorization
             }
         }
 
+        private void AssertNoAuthorizationToken(IAuthorizationContext context)
+        {
+            if (context.Authorization != null)
+                throw new OAuthFatalException(AuthorizationResources.AuthorizationContextContainsToken);
+        }
         #region IAuthorizationProvider Members
 
-        public IToken CreateAuthorizationRequest(IAuthorizationContext context)
+        public void CreateAuthorizationRequest(IAuthorizationContext context)
         {
             InspectRequest(context);
+            AssertNoAuthorizationToken(context);
 
             if (context.ResponseType == Parameters.ResponseTypeValues.AuthorizationCode)
             {
                 if (!ClientService.AuthenticateClient(context.Client))
-                    throw new OAuthFatalException(string.Format(AuthorizationResources.InvalidClient, context.Client.ClientId));
+                    throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture, 
+                        AuthorizationResources.InvalidClient, context.Client.ClientId));
             }
             if (!ClientService.ValidateRedirectUri(context))
-                throw new OAuthFatalException(string.Format(AuthorizationResources.InvalidRedirectUri, context.RedirectUri.ToString()));
+                throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
+                    AuthorizationResources.InvalidRedirectUri, context.RedirectUri.ToString()));
 
             ClientService.ValidateRedirectUri(context);
 
             context.Authorization = TokenService.MakeRequestToken(context);
-
-            return context.Authorization;
         }
         
         public void ApproveAuthorizationRequest(IAuthorizationContext context)

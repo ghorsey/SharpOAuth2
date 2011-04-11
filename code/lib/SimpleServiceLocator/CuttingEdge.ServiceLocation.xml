@@ -1,0 +1,587 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CuttingEdge.ServiceLocation</name>
+    </assembly>
+    <members>
+        <member name="T:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs">
+            <summary>
+            Provides data for and interaction with the 
+            <see cref="E:CuttingEdge.ServiceLocation.SimpleServiceLocator.ResolveUnregisteredType">ResolveUnregisteredType</see> event of 
+            the <see cref="T:CuttingEdge.ServiceLocation.SimpleServiceLocator"/>. An observer can check the 
+            <see cref="P:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.UnregisteredServiceType"/> to see whether the unregistered type can be handled. The
+            <see cref="M:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.Register(System.Func{System.Object})"/> method can be called to register a <see cref="T:System.Func`1"/> delegate that
+            allows creation of instances of the unregistered for this and future requests.
+            </summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.#ctor(System.Type)">
+            <summary>Initializes a new instance of the UnregisteredTypeEventArgs class.</summary>
+            <param name="unregisteredServiceType">The unregistered service type.</param>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.Register(System.Func{System.Object})">
+            <summary>
+            Registers a <see cref="T:System.Func`1"/> delegate that allows creation of instances of the type
+            expressed by the <see cref="P:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.UnregisteredServiceType"/> for this and future requests. The delegate
+            will be caches and future requests will directly call that delegate.
+            </summary>
+            <param name="instanceCreator">The delegate that allows creation of instances of the type
+            expressed by the <see cref="P:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.UnregisteredServiceType"/>.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="instanceCreator"/> is a
+            null reference.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when multiple observers that have registered to
+            the <see cref="E:CuttingEdge.ServiceLocation.SimpleServiceLocator.ResolveUnregisteredType">ResolveUnregisteredType</see> event
+            called this method for the same type.</exception>
+        </member>
+        <member name="P:CuttingEdge.ServiceLocation.UnregisteredTypeEventArgs.UnregisteredServiceType">
+            <summary>Gets the unregistered service type that is currently requested.</summary>
+            <value>The unregistered service type that is currently requested.</value>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.KeyedFuncSingletonInstanceProducer`1">
+            <summary>
+            Caches instances by key as they get created by the supplied delegate.
+            </summary>
+            <typeparam name="T">The service type.</typeparam>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.IKeyedInstanceProducer">
+            <summary>Defines an interface for retrieving instances by a key.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.IKeyedInstanceProducer.GetInstance(System.String)">
+            <summary>Gets the instance using the specified <paramref name="key"/>.</summary>
+            <param name="key">The key to get the instance with.</param>
+            <returns>Gets an instance by a given <paramref name="key"/>; never returns null.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when something went wrong :-).</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncSingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#GetInstance(System.String)">
+            <summary>Produces an instance by a given key.</summary>
+            <param name="key">The key that produces the instance.</param>
+            <returns>An produced instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncSingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#Verify">
+            <summary>Does nothing.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncSingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#ThrowTypeAlreadyRegisteredException">
+            <summary>Throws an expressive exception.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncSingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#CheckIfKeyIsAlreadyRegistered(System.String)">
+            <summary>Throws an expressive exception.</summary>
+            <param name="key">The key that is used for the registration.</param>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.SimpleServiceLocator">
+            <summary>
+            The Simple Service Locator container. Create an instance of this type for registration of dependencies.
+            </summary>
+            <summary>
+            Methods for resolving instances.
+            </summary>
+            <summary>
+            Methods for registration.
+            </summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:CuttingEdge.ServiceLocation.SimpleServiceLocator"/> class.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetInstance``1">
+            <summary>Gets an instance of the given <typeparamref name="TService"/>.</summary>
+            <typeparam name="TService">Type of object requested.</typeparam>
+            <returns>The requested service instance.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetAllInstances``1">
+            <summary>
+            Gets all instances of the given <typeparamref name="TService"/> currently registered in the container.
+            </summary>
+            <typeparam name="TService">Type of object requested.</typeparam>
+            <returns>A sequence of instances of the requested TService.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetAllInstances(System.Type)">
+            <summary>
+            Gets all instances of the given <paramref name="serviceType"/> currently registered in the container.
+            </summary>
+            <param name="serviceType">Type of object requested.</param>
+            <returns>A sequence of instances of the requested serviceType.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetInstance``1(System.String)">
+            <summary>Gets an instance of the given named <typeparamref name="TService"/>.</summary>
+            <typeparam name="TService">Type of object requested.</typeparam>
+            <param name="key">The name the object was registered with.</param>
+            <returns>The requested service instance.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetInstance(System.Type,System.String)">
+            <summary>Gets an instance of the given named <paramref name="serviceType"/>.</summary>
+            <param name="serviceType">Type of object requested.</param>
+            <param name="key">Name the object was registered with.</param>
+            <returns>The requested service instance.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.GetInstance(System.Type)">
+            <summary>Gets an instance of the given <paramref name="serviceType"/>.</summary>
+            <param name="serviceType">Type of object requested.</param>
+            <returns>The requested service instance.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when there are errors resolving the service instance.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.System#IServiceProvider#GetService(System.Type)">
+            <summary>Gets the service object of the specified type.</summary>
+            <param name="serviceType">An object that specifies the type of service object to get.</param>
+            <returns>A service object of type serviceType.  -or- null if there is no service object of type 
+            <paramref name="serviceType"/>.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.LockContainer">
+            <summary>Prevents any new registrations to be made to the container.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.Register``2">
+            <summary>
+            Registers that a new instance of <typeparamref name="TImplementation"/> will be returned every time a
+            <typeparamref name="TService"/> is requested.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
+            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TImplementation"/> has already been registered.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the given <typeparamref name="TService"/> type
+            is not a type that can be created by the container.
+            </exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.Register``1(System.Func{``0})">
+            <summary>
+            Registers the specified delegate that allows returning instances of <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="instanceCreator">The delegate that allows building or creating new instances.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a 
+            <paramref name="instanceCreator"/> for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="instanceCreator"/> is a null reference.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TService"/> has already been registered.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.Register``1(System.Action{``0})">
+            <summary>
+            Registers a concrete instance that will be constructed using constructor injection, and that will
+            be initialized using the <paramref name="instanceInitializer"/> delegate.
+            </summary>
+            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
+            <param name="instanceInitializer">The delegate that will be called after the instance has been
+            constructed and before it is returned.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="instanceInitializer"/> is a null reference.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TConcrete"/> has already been registered.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the given <typeparamref name="TConcrete"/> type
+            is not a type that can be created by the container.
+            </exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterByKey``1(System.Func{System.String,``0})">
+            <summary>
+            Registers the specified delegate that allows returning instances of <typeparamref name="TService"/>
+            by a string key.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="keyedInstanceCreator">The keyed instance creator.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a 
+            <paramref name="keyedInstanceCreator"/> for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="keyedInstanceCreator"/> is a
+            null reference.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterByKey``1(System.String,System.Func{``0})">
+            <summary>
+            Registers the specified delegate that allows returning instances of <typeparamref name="TService"/>
+            for the specified (ordinal) case-sensitive <paramref name="key"/>.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="key">The (ordinal) case-sensitive key that can be used to retrieve the instance.</param>
+            <param name="instanceCreator">The delegate that allows building or creating new instances.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a 
+            <paramref name="key"/> for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="key"/> or the
+            <paramref name="instanceCreator"/> is a null reference.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="key"/> contains an empty string.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingle``2">
+            <summary>
+            Registers that the same instance of <typeparamref name="TImplementation"/> will be returned every time a
+            <typeparamref name="TService"/> is requested.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
+            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TImplementation"/> has already been registered.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the given <typeparamref name="TService"/> type
+            is not a type that can be created by the container.
+            </exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingle``1">
+            <summary>
+            Registers a single concrete instance that will be constructed using constructor injection. 
+            This <typeparamref name="TConcrete"/> must be thread-safe.
+            </summary>
+            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TConcrete"/> has already been registered, or when the given 
+            <typeparamref name="TConcrete"/> is not a concrete type.
+            </exception>
+            <exception cref="T:System.ArgumentException">Thrown when the <typeparamref name="TConcrete"/> is a type
+            that can not be created by the container.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingle``1(``0)">
+            <summary>Registers a single instance. This <paramref name="instance"/> must be thread-safe.</summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve the instance.</typeparam>
+            <param name="instance">The instance to register.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="instance"/> is a null reference.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TService"/> has already been registered.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingle``1(System.Func{``0})">
+            <summary>
+            Registers the specified delegate that allows constructing a single instance of 
+            <typeparamref name="TService"/>. This delegate will be called at most once during the lifetime of the
+            application.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="instanceCreator">The delegate that allows building or creating this single
+            instance.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a 
+            <paramref name="instanceCreator"/> for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="singleInstanceCreator"/> is a 
+            null reference.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingle``1(System.Action{``0})">
+            <summary>
+            Registers a single concrete instance that will be constructed using constructor injection, and 
+            that will be initialized using the <paramref name="instanceInitializer"/> delegate. 
+            This <typeparamref name="TConcrete"/> must be thread-safe.
+            </summary>
+            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
+            <param name="instanceInitializer">The delegate that will be called once after the instance has been
+            constructed and before it is returned.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="instanceInitializer"/> is a null reference.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TConcrete"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentException">Thrown when the <typeparamref name="TConcrete"/> is a type
+            that can not be created by the container.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingleByKey``1(System.String,``0)">
+            <summary>Registers a single instance by a given (ordinal) case-sensitive <paramref name="key"/>. 
+            This <paramref name="instance"/> must be thread-safe.</summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="key">The (ordinal) case-sensitive key that can be used to retrieve the instance.</param>
+            <param name="instance">The instance to register.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an 
+            <paramref name="instance"/> with <paramref name="key"/> for <typeparamref name="TService"/> has already
+            been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="key"/> or 
+            <paramref name="instance"/> are null references.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="key"/> is an empty string.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when an <paramref name="instance"/>
+            for <typeparamref name="TConcrete"/> has already been registered with that <paramref name="key"/>.
+            </exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingleByKey``1(System.String,System.Func{``0})">
+            <summary>
+            Registers a single instance by a given (ordinal) case-sensitive <paramref name="key"/> by 
+            specifying a delegate.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="key">The (ordinal) case-sensitive key that can be used to retrieve the instance.</param>
+            <param name="instanceCreator">The delegate that allows building or creating new instances.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, when a 
+            <paramref name="key"/> for <typeparamref name="TService"/> has already been registered or when 
+            <typeparamref name="TService"/> has already been registered using one of the overloads that take an
+            <b>Func&lt;string, T&gt;</b>.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="key"/> or the
+            <paramref name="instanceCreator"/> is a null reference.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="key"/> contains an empty string.
+            </exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterSingleByKey``1(System.Func{System.String,``0})">
+            <summary>
+            Registers the specified delegate that allows returning singletons of <typeparamref name="TService"/>
+            by a string key. The delegate will get called at most once per given (ordinal) case-sensitive key.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="keyedInstanceCreator">The keyed instance creator.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when the <typeparamref name="TService"/> 
+            already been registered using one of the overloads that take a <b>string</b> key.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="key"/> or the
+            <paramref name="instanceCreator"/> is a null reference.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="key"/> contains an empty string.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterAll``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Registers a collection of elements of <typeparamref name="TService"/>.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="collection">The collection to register.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a <paramref name="collection"/>
+            for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="collection"/> is a null
+            reference.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.RegisterAll``1(``0[])">
+            <summary>
+            Registers a collection of elements of <typeparamref name="TService"/>.
+            </summary>
+            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
+            <param name="collection">The collection to register.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the instance is locked and can not be altered, or when a <paramref name="collection"/>
+            for <typeparamref name="TService"/> has already been registered.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="collection"/> is a null
+            reference.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SimpleServiceLocator.Verify">
+            <summary>
+            Verifies the <b>SimpleServiceLocator</b>. This method will call all registered delegates, 
+            iterate registered collections and throws an exception if there was an error.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when the registration of instances was
+            invalid.</exception>
+        </member>
+        <member name="E:CuttingEdge.ServiceLocation.SimpleServiceLocator.ResolveUnregisteredType">
+            <summary>
+            Occurs when an instance of a type is requested that has not been registered, allowing resolution
+            of unregistered types.
+            </summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1">
+            <summary>
+            Allows retrieval of instances of type <typeparamref name="T"/> that are resolved using unregistered
+            type resolution.
+            </summary>
+            <typeparam name="T">The service type.</typeparam>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.IInstanceProducer">
+            <summary>Contract for types that produce instances.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.IInstanceProducer.GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance. Will never return null.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">When the instance could not be retrieved or is null.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.IInstanceProducer.BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1.#ctor(System.Func{System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1"/> class.
+            </summary>
+            <param name="instanceCreator">The delegate that knows how to create that type.</param>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.ResolutionInstanceProducer`1.GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.StringResources">
+            <summary>Internal helper for string resources.</summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.Helpers">
+            <summary>
+            Helper methods for the Simple Service Locator.
+            </summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.TransientInstanceProducer`1">
+            <summary>
+            Allows retrieval of concrete transient instances of type <typeparamref name="TConcrete"/>, where the
+            producer postpones the creation of the instanceCreator delegate till the first time an instance is
+            requested. This ensures the compiled delegate to be as efficient as possible, because all dependencies
+            will be registered by that time.
+            </summary>
+            <typeparam name="TConcrete">The concrete type to create.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInstanceProducer`1.#ctor(CuttingEdge.ServiceLocation.SimpleServiceLocator)">
+            <summary>Initializes a new instance of the <see cref="T:CuttingEdge.ServiceLocation.TransientInstanceProducer`1"/> class.</summary>
+            <param name="container">The parent container.</param>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInstanceProducer`1.BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInstanceProducer`1.GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInstanceProducer`1.BuildInstanceCreator">
+            <summary>
+            Builds the delegate that allows the creation of instances of type TConcrete.
+            </summary>
+            <returns>Returns a new delegate.</returns>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.CyclicDependencyValidatorExtensions">
+            <summary>
+            Extension methods for the RecursiveDependencyValidator class.
+            </summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.FuncInstanceProducer`1">
+            <summary>
+            Allows producing instances based on a supplied Func{T} delegate.
+            </summary>
+            <typeparam name="T">Type service type.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.FuncInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.FuncInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.FuncInstanceProducer`1.GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.KeyedInstanceProducer">
+            <summary>
+            Represents a collection of string keys and object instances for a single interface or base type,
+            registered with on of the XXXByKey(string, T) or XXXByKey(T, Func{T}) methods.
+            </summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedInstanceProducer.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#GetInstance(System.String)">
+            <summary>Gets the instance using the specified <paramref name="key"/>.</summary>
+            <param name="key">The key to get the instance with.</param>
+            <returns>Gets an instance by a given <paramref name="key"/>; never returns null.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when something went wrong.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedInstanceProducer.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#Verify">
+            <summary>Validates the registered instance producers.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedInstanceProducer.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#ThrowTypeAlreadyRegisteredException">
+            <summary>Throws an expressive exception.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedInstanceProducer.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#CheckIfKeyIsAlreadyRegistered(System.String)">
+            <summary>Throws an expressive exception in case the key has already been registered.</summary>
+            <param name="key">The key that is used for the registration.</param>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.KeyedFuncInstanceProducer`1">
+            <summary>
+            Locates instances based on the supplied <see cref="T:System.Func`2"/> delegate.
+            </summary>
+            <typeparam name="T">The interface or base type that can be used to retrieve instances.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#GetInstance(System.String)">
+            <summary>Gets the instance using the specified <paramref name="key"/>.</summary>
+            <param name="key">The key to get the instance with.</param>
+            <returns>Gets an instance by a given <paramref name="key"/>; never returns null.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown when something went wrong.</exception>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#Verify">
+            <summary>Does nothing.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#ThrowTypeAlreadyRegisteredException">
+            <summary>Throws an expressive exception.</summary>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.KeyedFuncInstanceProducer`1.CuttingEdge#ServiceLocation#IKeyedInstanceProducer#CheckIfKeyIsAlreadyRegistered(System.String)">
+            <summary>Throws an expressive exception.</summary>
+            <param name="key">The key to register the type with.</param>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.TransientInitializerInstanceProducer`1">
+            <summary>
+            Allows retrieval of concrete transient instances of type <typeparamref name="TConcrete"/> with will
+            after creation be initialized by calling the supplied Action delegate..
+            </summary>
+            <typeparam name="TConcrete">The concrete type to create.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInitializerInstanceProducer`1.BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.TransientInitializerInstanceProducer`1.BuildInstanceCreator">
+            <summary>
+            Builds the delegate that allows the creation of instances of type TConcrete.
+            </summary>
+            <returns>Returns a new delegate.</returns>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.SingletonInstanceProducer`1">
+            <summary>Wraps an instance and returns that single instance every time.</summary>
+            <typeparam name="T">The type, what else.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SingletonInstanceProducer`1.#ctor(`0)">
+            <summary>Initializes a new instance of the <see cref="T:CuttingEdge.ServiceLocation.SingletonInstanceProducer`1"/> class.</summary>
+            <param name="instance">The single instance.</param>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance. Will never return null.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.SingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.CyclicDependencyValidator">
+            <summary>
+            Allows verifying whether a given type has a direct or indirect dependency on itself. Verifying is done
+            by preventing recursive calls to a IInstanceProvider. An instance of this type is related to a single 
+            instance of a IInstanceProvider. A RecursiveDependencyValidator instance checks a single 
+            IInstanceProvider and therefore a single service type.
+            </summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.DelegateBuilder">
+            <summary>
+            Builds <see cref="T:System.Func`1"/> delegates that can create a new instance of the supplied Type, where
+            the supplied container will be used to locate the constructor arguments. The generated code of the
+            built <see cref="T:System.Func`1"/> might look like this.
+            <![CDATA[
+                Func<object> func = () => return new Samurai(container.GetInstance<IWeapon>());
+            ]]>
+            </summary>
+        </member>
+        <member name="T:CuttingEdge.ServiceLocation.FuncSingletonInstanceProducer`1">
+            <summary>Ensures that the wrapped delegate will only be executed once.</summary>
+            <typeparam name="T">The interface or base type that can be used to retrieve instances.</typeparam>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.FuncSingletonInstanceProducer`1.GetInstance">
+            <summary>Produces an instance.</summary>
+            <returns>An instance.</returns>
+        </member>
+        <member name="M:CuttingEdge.ServiceLocation.FuncSingletonInstanceProducer`1.CuttingEdge#ServiceLocation#IInstanceProducer#BuildExpression">
+            <summary>Builds an expression that expresses the intent to get an instance by the current producer.</summary>
+            <returns>An Expression.</returns>
+        </member>
+    </members>
+</doc>
