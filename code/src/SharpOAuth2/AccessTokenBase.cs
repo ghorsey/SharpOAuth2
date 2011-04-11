@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpOAuth2
 {
-    public class TokenBase : IToken
+    public class AccessTokenBase : IToken
     {
         #region IToken Members
 

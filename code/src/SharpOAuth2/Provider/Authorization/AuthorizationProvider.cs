@@ -12,13 +12,11 @@ namespace SharpOAuth2.Provider.Authorization
 {
     public class AuthorizationProvider : IAuthorizationProvider
     {
-        readonly IClientService ClientService;
-        readonly ITokenService TokenService;
+        readonly IAuthorizationServiceFactory ServiceFactory;
 
-        public AuthorizationProvider(IClientService clientService, ITokenService tokenService)
+        public AuthorizationProvider(IAuthorizationServiceFactory serviceFactory)
         {
-            ClientService = clientService;
-            TokenService = tokenService;
+            ServiceFactory = serviceFactory;
         }
         private void InspectRequest(IAuthorizationContext context)
         {
@@ -45,40 +43,39 @@ namespace SharpOAuth2.Provider.Authorization
             if (context.Authorization != null)
                 throw new OAuthFatalException(AuthorizationResources.AuthorizationContextContainsToken);
         }
+
+        private void AssertIsClient(IAuthorizationContext context)
+        {
+            if (!ServiceFactory.ClientService.IsClient(context.Client))
+                throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
+                    AuthorizationResources.InvalidClient, context.Client.ClientId));
+        }
+
+        private void AssertRedirectUriIsValid(IAuthorizationContext context)
+        {
+            if (!ServiceFactory.ClientService.ValidateRedirectUri(context))
+                throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
+                    AuthorizationResources.InvalidRedirectUri, context.RedirectUri.ToString()));
+        }
         #region IAuthorizationProvider Members
 
-        public void CreateAuthorizationRequest(IAuthorizationContext context)
+        public void CreateAuthorizationGrant(IAuthorizationContext context, bool isApproved)
         {
             InspectRequest(context);
             AssertNoAuthorizationToken(context);
+            AssertIsClient(context);
+            AssertRedirectUriIsValid(context);
 
-            if (context.ResponseType == Parameters.ResponseTypeValues.AuthorizationCode)
+            if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
+                throw new NotSupportedException();
+            else
             {
-                if (!ClientService.AuthenticateClient(context.Client))
-                    throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture, 
-                        AuthorizationResources.InvalidClient, context.Client.ClientId));
+                AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
+                ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, isApproved);
+                context.IsApproved = isApproved;
+                context.Authorization = grant;
             }
-            if (!ClientService.ValidateRedirectUri(context))
-                throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
-                    AuthorizationResources.InvalidRedirectUri, context.RedirectUri.ToString()));
-
-            ClientService.ValidateRedirectUri(context);
-
-            context.Authorization = TokenService.MakeRequestToken(context);
         }
-        
-        public void ApproveAuthorizationRequest(IAuthorizationContext context)
-        {
-            context.IsApproved = true;
-            TokenService.ApproveAuthorizationToken(context.Authorization);
-        }
-
-        public void DenyAuthorizationRequest(IAuthorizationContext context)
-        {
-            context.IsApproved = false;
-            TokenService.DenyAuthorizationToken(context.Authorization);
-        }
-
         #endregion
     }
 }

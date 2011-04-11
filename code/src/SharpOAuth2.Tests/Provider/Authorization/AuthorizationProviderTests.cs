@@ -16,27 +16,34 @@ namespace SharpOAuth2.Tests.Provider.Authorization
     [TestFixture]
     public class AuthorizationProviderTests
     {
-        private static IToken MakeCommonToken(IAuthorizationContext context)
+        private static AuthorizationGrantBase MakeCommonToken(IAuthorizationContext context)
         {
-            return new TokenBase { Expires = 3000, Scope = context.Scope, Token = new Guid().ToString() };
+            return new AuthorizationGrantBase { Expires = 3000, Scope = context.Scope, Token = new Guid().ToString() };
         }
         private static Mock<IClientService> MakeClientService(IAuthorizationContext context, bool validClient, bool validUri)
         {
             Mock<IClientService> mckClientService = new Mock<IClientService>();
-            mckClientService.Setup(x => x.AuthenticateClient(It.IsAny<IClient>())).Returns(validClient);
+            mckClientService.Setup(x => x.IsClient(It.IsAny<IClient>())).Returns(validClient);
             mckClientService.Setup(x => x.ValidateRedirectUri(context)).Returns(validUri);
             return mckClientService;
         }
-        private static Mock<ITokenService> MakeTokenService(IAuthorizationContext context, IToken token)
+        private static Mock<IAuthorizationServiceFactory> MakeServiceFactory(Mock<IClientService> clientService, Mock<ITokenService> tokenService)
+        {
+            Mock<IAuthorizationServiceFactory> mckFactory = new Mock<IAuthorizationServiceFactory>();
+            mckFactory.SetupGet(x => x.ClientService).Returns(clientService.Object);
+            mckFactory.SetupGet(x => x.TokenService).Returns(tokenService.Object);
+            return mckFactory;
+        }
+        private static Mock<ITokenService> MakeTokenService(IAuthorizationContext context, AuthorizationGrantBase token)
         {
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.MakeRequestToken(context)).Returns(token);
+            mckTokenService.Setup(x => x.MakeAuthorizationGrant(context)).Returns(token);
             return mckTokenService;
         }
         private static Mock<ITokenService> MakeTokenService(IAuthorizationContext context)
         {
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.MakeRequestToken(context)).Returns(MakeCommonToken(context));
+            mckTokenService.Setup(x => x.MakeAuthorizationGrant(context)).Returns(MakeCommonToken(context));
             return mckTokenService;
         }
         private static AuthorizationContext MakeCommonAuthorizationContext()
@@ -61,11 +68,11 @@ namespace SharpOAuth2.Tests.Provider.Authorization
         public void TestCreatingAuthorizationRequestFatalAuthorizationExists()
         {
             AuthorizationContext context = MakeCommonAuthorizationContext ();
-            context.Authorization = new TokenBase();
+            context.Authorization = new AccessTokenBase();
             
-            IAuthorizationProvider provider = new AuthorizationProvider(new Mock<IClientService>().Object, new Mock<ITokenService>().Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(new Mock<IAuthorizationServiceFactory>().Object);
 
-            provider.CreateAuthorizationRequest(context);
+            provider.CreateAuthorizationGrant(context, true);
 
         }
         [Test]
@@ -74,15 +81,14 @@ namespace SharpOAuth2.Tests.Provider.Authorization
             AuthorizationContext context = MakeCommonAuthorizationContext();
 
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
-
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
 
-            provider.CreateAuthorizationRequest(context);
+            provider.CreateAuthorizationGrant(context, true);
 
             Assert.IsNotNull(context.Authorization);
-            Assert.IsFalse(context.IsApproved);
+            Assert.IsTrue(context.IsApproved);
             mckTokenService.VerifyAll();
             mckClientService.VerifyAll();
         }
@@ -96,9 +102,9 @@ namespace SharpOAuth2.Tests.Provider.Authorization
 
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
 
-            provider.CreateAuthorizationRequest(context);
+            provider.CreateAuthorizationGrant(context, true);
         }
 
         [Test, ExpectedException(typeof(OAuthFatalException))]
@@ -110,9 +116,9 @@ namespace SharpOAuth2.Tests.Provider.Authorization
 
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
 
-            provider.CreateAuthorizationRequest(context);
+            provider.CreateAuthorizationGrant(context, true);
         }
 
 
@@ -126,52 +132,15 @@ namespace SharpOAuth2.Tests.Provider.Authorization
 
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
 
-            provider.CreateAuthorizationRequest(context);
+            provider.CreateAuthorizationGrant(context, true);
 
             Assert.IsNotNull(context.Authorization);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, context.Error.Error);
 
-        }
-
-        [Test]
-        public void TestApproveAuthorization()
-        {
-            AuthorizationContext context = MakeCommonAuthorizationContext();
-            IToken t = MakeCommonToken(context);
-            context.Authorization = t;
-            Mock<IClientService> mckClientService = MakeClientService(context, true, true);
-            Mock<ITokenService> mckTokenService = MakeTokenService(context, t);
-            mckTokenService.Setup(x => x.ApproveAuthorizationToken(t));
-
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
-
-            provider.ApproveAuthorizationRequest(context);
-
-            Assert.IsTrue(context.IsApproved);
-            mckTokenService.Verify(x => x.ApproveAuthorizationToken(t));
-        }
-
-        [Test]
-        public void TestDenyAuthorization()
-        {
-            AuthorizationContext context = MakeCommonAuthorizationContext();
-            context.IsApproved = true;
-            IToken t = MakeCommonToken(context);
-            context.Authorization = t;
-            Mock<IClientService> mckClientService = MakeClientService(context, true, true);
-            Mock<ITokenService> mckTokenService = MakeTokenService(context, t);
-            mckTokenService.Setup(x => x.DenyAuthorizationToken(t));
-
-            IAuthorizationProvider provider = new AuthorizationProvider(mckClientService.Object, mckTokenService.Object);
-
-            provider.DenyAuthorizationRequest(context);
-
-            Assert.IsFalse(context.IsApproved);
-            mckTokenService.Verify(x => x.DenyAuthorizationToken(t));
         }
     }
 }

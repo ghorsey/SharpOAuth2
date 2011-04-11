@@ -51,10 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationGrantBase.cs" />
     <Compile Include="Provider\Authorization\AuthorizationContext.cs" />
     <Compile Include="Provider\Authorization\AuthorizationContextBuilder.cs" />
     <Compile Include="Provider\Authorization\AuthorizationProvider.cs" />
     <Compile Include="Provider\Authorization\IAuthorizationProvider.cs" />
+    <Compile Include="Provider\Authorization\Services\IAuthorizationServiceFactory.cs" />
     <Compile Include="Provider\Authorization\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
     <Compile Include="Provider\OAuthFatalException.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\OAuthErrorResponseException.cs" />
-    <Compile Include="TokenBase.cs" />
+    <Compile Include="AccessTokenBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">
