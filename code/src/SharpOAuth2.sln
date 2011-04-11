@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2", "SharpOAuth2\SharpOAuth2.csproj", "{31316DF7-5293-4235-B299-1C172A9BFF79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Tests", "SharpOAuth2.Tests\SharpOAuth2.Tests.csproj", "{04E6ED91-9775-4ABE-9B09-12FE6CE8CB36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Globalization", "SharpOAuth2.Globalization\SharpOAuth2.Globalization.csproj", "{799D94B8-6301-46C2-AFEF-D783429EDF24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31316DF7-5293-4235-B299-1C172A9BFF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31316DF7-5293-4235-B299-1C172A9BFF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31316DF7-5293-4235-B299-1C172A9BFF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31316DF7-5293-4235-B299-1C172A9BFF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E6ED91-9775-4ABE-9B09-12FE6CE8CB36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E6ED91-9775-4ABE-9B09-12FE6CE8CB36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E6ED91-9775-4ABE-9B09-12FE6CE8CB36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E6ED91-9775-4ABE-9B09-12FE6CE8CB36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
