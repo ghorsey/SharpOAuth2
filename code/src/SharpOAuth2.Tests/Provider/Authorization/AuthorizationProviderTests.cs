@@ -23,7 +23,7 @@ namespace SharpOAuth2.Tests.Provider.Authorization
         private static Mock<IClientService> MakeClientService(IAuthorizationContext context, bool validClient, bool validUri)
         {
             Mock<IClientService> mckClientService = new Mock<IClientService>();
-            mckClientService.Setup(x => x.IsClient(It.IsAny<IClient>())).Returns(validClient);
+            mckClientService.Setup(x => x.IsClient(context)).Returns(validClient);
             mckClientService.Setup(x => x.ValidateRedirectUri(context)).Returns(validUri);
             return mckClientService;
         }
@@ -136,7 +136,7 @@ namespace SharpOAuth2.Tests.Provider.Authorization
 
             provider.CreateAuthorizationGrant(context, true);
 
-            Assert.IsNotNull(context.Authorization);
+            Assert.IsNull(context.Authorization);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, context.Error.Error);

@@ -46,7 +46,7 @@ namespace SharpOAuth2.Provider.Authorization
 
         private void AssertIsClient(IAuthorizationContext context)
         {
-            if (!ServiceFactory.ClientService.IsClient(context.Client))
+            if (!ServiceFactory.ClientService.IsClient(context))
                 throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
                     AuthorizationResources.InvalidClient, context.Client.ClientId));
         }
@@ -65,6 +65,9 @@ namespace SharpOAuth2.Provider.Authorization
             AssertNoAuthorizationToken(context);
             AssertIsClient(context);
             AssertRedirectUriIsValid(context);
+
+            if (context.Error != null)
+                return; // we have an error and we're done
 
             if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
                 throw new NotSupportedException();

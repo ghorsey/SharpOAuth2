@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Tests", "SharpO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Globalization", "SharpOAuth2.Globalization\SharpOAuth2.Globalization.csproj", "{799D94B8-6301-46C2-AFEF-D783429EDF24}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExampleSite", "ExampleSite", "{0821FFC6-038F-492B-9891-0E85EEB68237}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.ClientSite", "SharpOAuth2.ClientSite\SharpOAuth2.ClientSite.csproj", "{B6074FAB-7851-44CB-B149-13DF33DA886B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.ProviderSite", "SharpOAuth2.Provider\SharpOAuth2.ProviderSite.csproj", "{6832C9C3-68A5-4399-9689-2BF995222B72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuthProvider.Domain", "SharpOAuthProvider.Domain\SharpOAuthProvider.Domain.csproj", "{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +33,25 @@ Global
 		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{799D94B8-6301-46C2-AFEF-D783429EDF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6074FAB-7851-44CB-B149-13DF33DA886B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6074FAB-7851-44CB-B149-13DF33DA886B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6074FAB-7851-44CB-B149-13DF33DA886B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6074FAB-7851-44CB-B149-13DF33DA886B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6832C9C3-68A5-4399-9689-2BF995222B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6832C9C3-68A5-4399-9689-2BF995222B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6832C9C3-68A5-4399-9689-2BF995222B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6832C9C3-68A5-4399-9689-2BF995222B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B6074FAB-7851-44CB-B149-13DF33DA886B} = {0821FFC6-038F-492B-9891-0E85EEB68237}
+		{6832C9C3-68A5-4399-9689-2BF995222B72} = {0821FFC6-038F-492B-9891-0E85EEB68237}
+		{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286} = {0821FFC6-038F-492B-9891-0E85EEB68237}
 	EndGlobalSection
 EndGlobal
