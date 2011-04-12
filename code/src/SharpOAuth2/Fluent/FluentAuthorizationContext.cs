@@ -43,5 +43,40 @@ namespace SharpOAuth2.Fluent
 
             return builder.FromUri(uri);
         }
+
+        public static IAuthorizationContext SetResourceOwner( this IAuthorizationContext context, string resourceOwnerId)
+        {
+            context.ResourceOwnerId = resourceOwnerId;
+            return context;
+        }
+
+        public static IAuthorizationContext SetApproval(this IAuthorizationContext context, bool isApproved)
+        {
+            context.IsApproved = isApproved;
+            return context;
+        }
+
+        public static IAuthorizationContext CreateAuthorizationGrant(this IAuthorizationContext context)
+        {
+            Provider().CreateAuthorizationGrant(context);
+            return context;
+        }
+        private static IAuthorizationProvider Provider()
+        {
+            try
+            {
+                IAuthorizationProvider  provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
+                return provider;
+            }
+            catch (Exception x)
+            {
+                Log.Error("Failed to inject the AuthorizationProvider", x);
+                throw;
+            }
+        }
+
+       
+
+
     }
 }

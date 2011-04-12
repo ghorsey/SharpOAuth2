@@ -34,5 +34,19 @@ namespace SharpOAuth2.Provider
                 string.Format(CultureInfo.CurrentUICulture, ErrorResponseResources.InvalidResponseType, responseType),
                  uri);
         }
+
+        public static OAuthErrorResponseException<T> AccessDenied<T>(T context) where T: class
+        {
+            return new OAuthErrorResponseException<T>(context,
+                        Parameters.ErrorParameters.ErrorValues.AccessDenied,
+                        description: AuthorizationResources.ResourceOwnerDenied);
+        }
+
+        public static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T: class
+        {
+            return new OAuthErrorResponseException<T>(context,
+                Parameters.ErrorParameters.ErrorValues.UnauthorizedClient,
+                description: string.Format(CultureInfo.CurrentUICulture, AuthorizationResources.InvalidClient, client.ClientId));
+        }
     }
 }

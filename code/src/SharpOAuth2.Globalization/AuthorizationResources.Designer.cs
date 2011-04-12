@@ -70,7 +70,7 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The client &apos;{0}&apos; is invalid, unregistered, or has invalid credentials.
+        ///   Looks up a localized string similar to The client &apos;{0}&apos; is invalid, unauthorized, or has invalid credentials.
         /// </summary>
         public static string InvalidClient {
             get {
@@ -111,6 +111,15 @@ namespace SharpOAuth2.Globalization {
         public static string ResourceOwnerDenied {
             get {
                 return ResourceManager.GetString("ResourceOwnerDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The resource owner who is approving this authorization is not included.
+        /// </summary>
+        public static string ResourceOwnerNotIncluded {
+            get {
+                return ResourceManager.GetString("ResourceOwnerNotIncluded", resourceCulture);
             }
         }
         

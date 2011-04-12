@@ -7,6 +7,6 @@ namespace SharpOAuth2.Provider.Authorization
 {
     public interface IAuthorizationProvider
     {
-        void CreateAuthorizationGrant(IAuthorizationContext context, bool approved);
+        void CreateAuthorizationGrant(IAuthorizationContext context);
     }
 }

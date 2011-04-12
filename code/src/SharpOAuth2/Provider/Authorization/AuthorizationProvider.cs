@@ -22,22 +22,14 @@ namespace SharpOAuth2.Provider.Authorization
         {
             IEnumerable<IAuthorizationContextInspector> inspectors = ServiceLocator.Current.GetAllInstances<IAuthorizationContextInspector>();
 
-            try
-            {
-                foreach (IAuthorizationContextInspector inspector in inspectors)
-                    inspector.Insepct(context);
-            }
-            catch (OAuthErrorResponseException<IAuthorizationContext> exception)
-            {
-                context.Error = new ErrorResponse
-                {
-                    Error = exception.Error,
-                    ErrorDescription = exception.Message,
-                    ErrorUri = exception.ErrorUri
-                };
-            }
+            foreach (IAuthorizationContextInspector inspector in inspectors)
+                inspector.Insepct(context);
         }
-
+        private void AssertResourceOwnerIdIsNotBlank(IAuthorizationContext context)
+        {
+            if (string.IsNullOrWhiteSpace(context.ResourceOwnerId))
+                throw new OAuthFatalException(AuthorizationResources.ResourceOwnerNotIncluded);
+        }
         private void AssertNoAuthorizationToken(IAuthorizationContext context)
         {
             if (context.Authorization != null)
@@ -47,8 +39,7 @@ namespace SharpOAuth2.Provider.Authorization
         private void AssertIsClient(IAuthorizationContext context)
         {
             if (!ServiceFactory.ClientService.IsClient(context))
-                throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
-                    AuthorizationResources.InvalidClient, context.Client.ClientId));
+                throw Errors.UnauthorizedClient(context, context.Client);
         }
 
         private void AssertRedirectUriIsValid(IAuthorizationContext context)
@@ -59,40 +50,40 @@ namespace SharpOAuth2.Provider.Authorization
         }
         #region IAuthorizationProvider Members
 
-        public void CreateAuthorizationGrant(IAuthorizationContext context, bool isApproved)
+        public void CreateAuthorizationGrant(IAuthorizationContext context)
         {
-            InspectRequest(context);
-            AssertNoAuthorizationToken(context);
-            AssertIsClient(context);
-            AssertRedirectUriIsValid(context);
-
-            if (context.Error != null)
-                return; // we have an error and we're done
-
-            if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
-                throw new NotSupportedException();
-            else
+            try
             {
-                AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
-                ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, isApproved);
-                context.IsApproved = isApproved;
-                context.Authorization = grant;
-            }
+                InspectRequest(context);
+                AssertNoAuthorizationToken(context);
+                AssertIsClient(context);
+                AssertRedirectUriIsValid(context);
+                AssertResourceOwnerIdIsNotBlank(context);
+                
+                if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
+                    throw Errors.UnsupportedResponseType(context, context.ResponseType);
+                else
+                {
+                    AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
+                    ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, context.IsApproved);
+                    context.Authorization = grant;
+                }
 
-            if (!isApproved)
+                if (!context.IsApproved)
+                    throw Errors.AccessDenied(context);
+            }
+            catch (OAuthErrorResponseException<IAuthorizationContext> ex)
             {
                 context.Error = new ErrorResponse
                 {
-                    Error = Parameters.ErrorParameters.ErrorValues.AccessDenied,
-                    ErrorDescription = AuthorizationResources.ResourceOwnerDenied
+                    Error = ex.Error,
+                    ErrorDescription = ex.Message,
+                    ErrorUri = ex.ErrorUri
                 };
             }
         }
 
-        private void AssertUsernameIsNotBlank(IAuthorizationContext context)
-        {
-            throw new NotImplementedException();
-        }
+        
         #endregion
     }
 }

@@ -121,7 +121,7 @@
     <value>The current authorization context already contains an authorization token</value>
   </data>
   <data name="InvalidClient" xml:space="preserve">
-    <value>The client '{0}' is invalid, unregistered, or has invalid credentials</value>
+    <value>The client '{0}' is invalid, unauthorized, or has invalid credentials</value>
     <comment>0: the client_id</comment>
   </data>
   <data name="InvalidContentType" xml:space="preserve">
@@ -138,6 +138,9 @@
   </data>
   <data name="ResourceOwnerDenied" xml:space="preserve">
     <value>The resource owner denied the authorization request</value>
+  </data>
+  <data name="ResourceOwnerNotIncluded" xml:space="preserve">
+    <value>The resource owner who is approving this authorization is not included</value>
   </data>
   <data name="UriParseFailure" xml:space="preserve">
     <value>Failed to parse the {0} url into an instance of a Uri</value>

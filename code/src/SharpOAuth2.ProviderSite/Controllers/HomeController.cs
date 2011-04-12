@@ -33,11 +33,12 @@ namespace SharpOAuth2.ProviderSite.Controllers
             IAuthorizationContext ctx = (IAuthorizationContext)Session["context"];
             IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
 
-            ctx.ResourceOwnerId = User.Identity.Name;
-
             bool isAuthorized = (authButton == "GRANT");
 
-            provider.CreateAuthorizationGrant(ctx, isAuthorized);
+            ctx.SetApproval(isAuthorized)
+                .SetResourceOwner(User.Identity.Name)
+                .CreateAuthorizationGrant();
+
             return null;
         }
 
