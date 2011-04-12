@@ -33,6 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator.NinjectAdapter">
+      <HintPath>..\..\lib\Ninject\Ninject-2.2.0.0\extensions\CommonServiceLocator.NinjectAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CommonServiceLocator\v1.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\lib\Ninject\Ninject-2.2.0.0\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -118,6 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">
+      <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
+      <Name>SharpOAuth2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpOAuthProvider.Domain\SharpOAuthProvider.Domain.csproj">
+      <Project>{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}</Project>
+      <Name>SharpOAuthProvider.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

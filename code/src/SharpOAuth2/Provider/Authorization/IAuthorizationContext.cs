@@ -16,5 +16,6 @@ namespace SharpOAuth2.Provider.Authorization
         string State { get; set; }
         bool IsApproved { get; set; }
         IToken Authorization { get; set; }
+        string ResourceOwnerId { get; set; }
     }
 }

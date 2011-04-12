@@ -22,7 +22,17 @@ namespace SharpOAuth2
         public const string ResourceOwnerUsername = "username";
         public const string ResourceOwnerPassword = "password";
 
-
+        public static class AuthorizationResponse
+        {
+            public const string Code = "code";
+        }
+        public static class AccessTokenResponse
+        {
+            public const string AccessToken = "access_token";
+            public const string TokenType = "token_type";
+            public const string ExpiresIn = "expires_in";
+            public const string RefreshToken = "refresh_token";
+        }
 
         public static class AccessTokenTypeValues
         {

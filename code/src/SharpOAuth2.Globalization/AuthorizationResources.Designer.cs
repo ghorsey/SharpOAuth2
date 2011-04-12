@@ -106,6 +106,15 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The resource owner denied the authorization request.
+        /// </summary>
+        public static string ResourceOwnerDenied {
+            get {
+                return ResourceManager.GetString("ResourceOwnerDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to parse the {0} url into an instance of a Uri.
         /// </summary>
         public static string UriParseFailure {

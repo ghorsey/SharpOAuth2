@@ -9,5 +9,6 @@ namespace SharpOAuthProvider.Domain
     public class Client : ClientBase
     {
         public Uri RedirectUri { get; set; }
+        public string Name { get; set; }
     }
 }

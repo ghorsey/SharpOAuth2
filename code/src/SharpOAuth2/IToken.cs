@@ -12,5 +12,8 @@ namespace SharpOAuth2
         int Expires{ get; set; }
         string RefreshToken{ get; set; }
         string[] Scope { get; set; }
+
+        string ToUriEncodedString();
+        string ToJsonEncodedString();
     }
 }

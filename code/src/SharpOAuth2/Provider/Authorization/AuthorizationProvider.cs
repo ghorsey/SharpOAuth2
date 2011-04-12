@@ -78,6 +78,20 @@ namespace SharpOAuth2.Provider.Authorization
                 context.IsApproved = isApproved;
                 context.Authorization = grant;
             }
+
+            if (!isApproved)
+            {
+                context.Error = new ErrorResponse
+                {
+                    Error = Parameters.ErrorParameters.ErrorValues.AccessDenied,
+                    ErrorDescription = AuthorizationResources.ResourceOwnerDenied
+                };
+            }
+        }
+
+        private void AssertUsernameIsNotBlank(IAuthorizationContext context)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

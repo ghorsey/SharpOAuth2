@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationGrant.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Repository\IClientRepository.cs" />
     <Compile Include="Repository\InMemoryClientRepository.cs" />
+    <Compile Include="Repository\InMemoryTokenRepository.cs" />
+    <Compile Include="Repository\ITokenRepository.cs" />
     <Compile Include="Service\ClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ServiceFactory.cs" />
+    <Compile Include="Service\TokenService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">

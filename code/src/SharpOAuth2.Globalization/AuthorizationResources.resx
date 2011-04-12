@@ -136,6 +136,9 @@
     <value>The '{0}' method is not allowed for this request</value>
     <comment>0:the original request method</comment>
   </data>
+  <data name="ResourceOwnerDenied" xml:space="preserve">
+    <value>The resource owner denied the authorization request</value>
+  </data>
   <data name="UriParseFailure" xml:space="preserve">
     <value>Failed to parse the {0} url into an instance of a Uri</value>
     <comment>0: the original url</comment>

@@ -1,0 +1,21 @@
+﻿@model SharpOAuth2.Provider.Authorization.IAuthorizationContext
+<h1>Authroize</h1>
+
+<p>
+@ViewBag.ClientName wants to access your data
+</p>
+
+<p>
+They want to access:
+</p>
+<ul>
+    @foreach (string scope in Model.Scope)
+    {
+        <li>@scope</li>
+    }
+</ul>
+@using(Html.BeginForm("HandleAuthorization", "Home"))
+{
+    <button id="authButton" name="authButton" value="GRANT">Grant</button>
+    <button id="authButton" name="authButton" value="DENY">Deny</button>
+}

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using SharpOAuth2.Provider.Authorization.Services;
 using SharpOAuth2.Provider.Authorization;
+using SharpOAuthProvider.Domain.Repository;
 
-namespace SharpOAuthProvider.Domain
+namespace SharpOAuthProvider.Domain.Service
 {
     public class ClientService : IClientService
     {
