@@ -30,7 +30,7 @@ namespace SharpOAuthProvider.Domain.Service
             grant.Expires = 120; // 2 minutes
             grant.Scope = context.Scope;
             grant.ResourceOwnerId = context.ResourceOwnerId;
-            grant.Token = new Guid().ToString();
+            grant.Token = Guid.NewGuid().ToString();
             return grant;
         }
 

@@ -13,8 +13,12 @@ namespace SharpOAuth2.ProviderSite.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return Redirect("http://localhost:15075");
+        }
+
         [Authorize]
         public ActionResult Authorize()
         {
@@ -35,11 +39,12 @@ namespace SharpOAuth2.ProviderSite.Controllers
 
             bool isAuthorized = (authButton == "GRANT");
 
-            ctx.SetApproval(isAuthorized)
+            Uri response = ctx.SetApproval(isAuthorized)
                 .SetResourceOwner(User.Identity.Name)
-                .CreateAuthorizationGrant();
+                .CreateAuthorizationGrant()
+                .CreateAuthorizationResponse();
 
-            return null;
+            return Redirect(response.ToString());
         }
 
         [HttpGet]

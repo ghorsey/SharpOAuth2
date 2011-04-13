@@ -26,6 +26,34 @@ namespace SharpOAuth2.Fluent
             }
             return builder;
         }
+
+        private static IAuthorizationProvider GetProvider()
+        {
+            try
+            {
+                IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
+                return provider;
+            }
+            catch (Exception x)
+            {
+                Log.Error("Failed to inject the AuthorizationProvider", x);
+                throw;
+            }
+        }
+
+        private static IAuthorizationResponseBuilder GetResponseBuilder()
+        {
+            try
+            {
+                IAuthorizationResponseBuilder builder = ServiceLocator.Current.GetInstance<IAuthorizationResponseBuilder>();
+                return builder;
+            }
+            catch (Exception x)
+            {
+                Log.Info("Failed to inject IAuthorizationResponseBuilder", x);
+                return new AuthorizationResponseBuilder();
+            }
+        }
         public static IAuthorizationContext ToAuthorizationContext(this HttpRequest reqeust)
         {
             return ToAuthorizationContext(new HttpRequestWrapper(reqeust));
@@ -58,23 +86,14 @@ namespace SharpOAuth2.Fluent
 
         public static IAuthorizationContext CreateAuthorizationGrant(this IAuthorizationContext context)
         {
-            Provider().CreateAuthorizationGrant(context);
+            GetProvider().CreateAuthorizationGrant(context);
             return context;
         }
-        private static IAuthorizationProvider Provider()
-        {
-            try
-            {
-                IAuthorizationProvider  provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
-                return provider;
-            }
-            catch (Exception x)
-            {
-                Log.Error("Failed to inject the AuthorizationProvider", x);
-                throw;
-            }
-        }
 
+        public static Uri CreateAuthorizationResponse(this IAuthorizationContext context)
+        {
+            return GetResponseBuilder().CreateResponse(context);
+        }
        
 
 

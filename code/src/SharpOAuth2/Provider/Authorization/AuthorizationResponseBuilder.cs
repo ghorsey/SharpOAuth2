@@ -48,7 +48,7 @@ namespace SharpOAuth2.Provider.Authorization
 
                 return result.Uri;
             }
-            result.Fragment = "monkey=butter";
+            
             queryComponents[Parameters.AuthroizationCode] = context.Authorization.Token;
             queryComponents[Parameters.State] = context.State;
 
