@@ -22,3 +22,20 @@ THE SOFTWARE.
 
 
 SharpOAuth2 is an OAuth2 Implementation.  A work in progress is only partially complete
+
+Provider
+Things To Do
+--Issuing Access Token
+--Accessing Protected Resources
+--Implicit Grant
+--Client Credentials
+--Resource Owner Password Credentials
+Done
+--Issue Authorization Code (response_type=authorization_code)
+--Building authorization response URL (authorization & token response_types)
+
+Client
+TTD
+--Build Authorization Code Request (authorizaton & token response_types)
+--Access Protected Resource
+--Build Token Request
