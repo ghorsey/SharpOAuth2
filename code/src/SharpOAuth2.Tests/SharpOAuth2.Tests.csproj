@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Authorization\AuthorizationContextBuilderTests.cs" />
     <Compile Include="Provider\Authorization\AuthorizationProviderTests.cs" />
+    <Compile Include="Provider\Authorization\AuthorizationResponseBuilderTests.cs" />
     <Compile Include="Provider\Authorization\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
   </ItemGroup>
@@ -68,6 +69,11 @@
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
       <Name>SharpOAuth2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SharpOAuth2\App.config">
+      <Link>App.config</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,7 +60,9 @@
     <Compile Include="Provider\Authorization\AuthorizationContext.cs" />
     <Compile Include="Provider\Authorization\AuthorizationContextBuilder.cs" />
     <Compile Include="Provider\Authorization\AuthorizationProvider.cs" />
+    <Compile Include="Provider\Authorization\AuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\Authorization\IAuthorizationProvider.cs" />
+    <Compile Include="Provider\Authorization\IAuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\Authorization\Services\IAuthorizationServiceFactory.cs" />
     <Compile Include="Provider\Authorization\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
@@ -82,6 +84,9 @@
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">
       <Link>SharpOAuth2.snk</Link>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
