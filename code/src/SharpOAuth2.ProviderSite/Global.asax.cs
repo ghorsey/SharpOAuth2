@@ -46,7 +46,7 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<ITokenRepository>().To<InMemoryTokenRepository>();
             kernel.Bind<IClientService>().To<ClientService>();
             kernel.Bind<ITokenService>().To<TokenService>();
-            kernel.Bind<IAuthorizationServiceFactory>().To<ServiceFactory>();
+            kernel.Bind<IServiceFactory>().To<ServiceFactory>();
             kernel.Bind<IAuthorizationProvider>().To<AuthorizationProvider>();
                 
             NinjectServiceLocator adapter = new NinjectServiceLocator(kernel);

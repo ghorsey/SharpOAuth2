@@ -12,9 +12,9 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationProvider : IAuthorizationProvider
     {
-        readonly IAuthorizationServiceFactory ServiceFactory;
+        readonly IServiceFactory ServiceFactory;
 
-        public AuthorizationProvider(IAuthorizationServiceFactory serviceFactory)
+        public AuthorizationProvider(IServiceFactory serviceFactory)
         {
             ServiceFactory = serviceFactory;
         }

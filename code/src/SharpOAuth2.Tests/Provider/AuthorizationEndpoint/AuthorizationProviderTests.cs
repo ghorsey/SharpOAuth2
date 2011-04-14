@@ -27,9 +27,9 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             mckClientService.Setup(x => x.ValidateRedirectUri(context)).Returns(validUri);
             return mckClientService;
         }
-        private static Mock<IAuthorizationServiceFactory> MakeServiceFactory(Mock<IClientService> clientService, Mock<ITokenService> tokenService)
+        private static Mock<IServiceFactory> MakeServiceFactory(Mock<IClientService> clientService, Mock<ITokenService> tokenService)
         {
-            Mock<IAuthorizationServiceFactory> mckFactory = new Mock<IAuthorizationServiceFactory>();
+            Mock<IServiceFactory> mckFactory = new Mock<IServiceFactory>();
             mckFactory.SetupGet(x => x.ClientService).Returns(clientService.Object);
             mckFactory.SetupGet(x => x.TokenService).Returns(tokenService.Object);
             return mckFactory;
@@ -70,7 +70,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             AuthorizationContext context = MakeCommonAuthorizationContext ();
             context.Authorization = new AccessTokenBase();
             
-            IAuthorizationProvider provider = new AuthorizationProvider(new Mock<IAuthorizationServiceFactory>().Object);
+            IAuthorizationProvider provider = new AuthorizationProvider(new Mock<IServiceFactory>().Object);
 
             provider.CreateAuthorizationGrant(context);
 

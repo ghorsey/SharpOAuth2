@@ -64,9 +64,10 @@
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationProvider.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\ContextBuilderHelpers.cs" />
+    <Compile Include="Provider\ContextProcessor.cs" />
     <Compile Include="Provider\IOAuthContext.cs" />
     <Compile Include="Provider\IContextInspector.cs" />
-    <Compile Include="Provider\Services\IAuthorizationServiceFactory.cs" />
+    <Compile Include="Provider\Services\IServiceFactory.cs" />
     <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
     <Compile Include="Provider\IContextBuilder.cs" />
@@ -87,8 +88,11 @@
     <Compile Include="Provider\TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspector.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspector.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
+    <Compile Include="Provider\TokenEndpoint\ITokenProvider.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processor\AuthenticationCodeProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilder.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">

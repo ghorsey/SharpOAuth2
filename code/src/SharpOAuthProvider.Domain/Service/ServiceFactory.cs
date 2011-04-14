@@ -6,7 +6,7 @@ using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuthProvider.Domain.Service
 {
-    public class ServiceFactory : IAuthorizationServiceFactory
+    public class ServiceFactory : IServiceFactory
     {
 
         public ServiceFactory(IClientService clientService, ITokenService tokenService)

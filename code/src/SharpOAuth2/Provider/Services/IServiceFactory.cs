@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpOAuth2.Provider.Services
 {
-    public interface IAuthorizationServiceFactory
+    public interface IServiceFactory
     {
         IClientService ClientService { get; }
         ITokenService TokenService { get; }
