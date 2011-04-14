@@ -20,20 +20,20 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         }
         private void InspectRequest(IAuthorizationContext context)
         {
-            IEnumerable<IAuthorizationContextInspector> inspectors = ServiceLocator.Current.GetAllInstances<IAuthorizationContextInspector>();
+            IEnumerable<IContextInspector<IAuthorizationContext>> inspectors = ServiceLocator.Current.GetAllInstances<IContextInspector<IAuthorizationContext>>();
 
-            foreach (IAuthorizationContextInspector inspector in inspectors)
-                inspector.Insepct(context);
+            foreach (IContextInspector<IAuthorizationContext> inspector in inspectors)
+                inspector.Inspect(context);
         }
         private void AssertResourceOwnerIdIsNotBlank(IAuthorizationContext context)
         {
             if (string.IsNullOrWhiteSpace(context.ResourceOwnerId))
-                throw new OAuthFatalException(AuthorizationResources.ResourceOwnerNotIncluded);
+                throw new OAuthFatalException(AuthorizationEndpointResources.ResourceOwnerNotIncluded);
         }
         private void AssertNoAuthorizationToken(IAuthorizationContext context)
         {
             if (context.Authorization != null)
-                throw new OAuthFatalException(AuthorizationResources.AuthorizationContextContainsToken);
+                throw new OAuthFatalException(AuthorizationEndpointResources.AuthorizationContextContainsToken);
         }
 
         private void AssertIsClient(IAuthorizationContext context)
@@ -46,7 +46,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         {
             if (!ServiceFactory.ClientService.ValidateRedirectUri(context))
                 throw new OAuthFatalException(string.Format(CultureInfo.CurrentUICulture,
-                    AuthorizationResources.InvalidRedirectUri, context.RedirectUri.ToString()));
+                    AuthorizationEndpointResources.InvalidRedirectUri, context.RedirectUri.ToString()));
         }
         #region IAuthorizationProvider Members
 

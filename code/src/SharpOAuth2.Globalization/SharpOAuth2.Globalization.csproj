@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationResources.Designer.cs">
+    <Compile Include="AuthorizationEndpointResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AuthorizationResources.resx</DependentUpon>
+      <DependentUpon>AuthorizationEndpointResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ErrorResponseResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -57,15 +57,24 @@
       <DependentUpon>ErrorResponseResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenEndpointResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TokenEndpointResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuthorizationResources.resx">
+    <EmbeddedResource Include="AuthorizationEndpointResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AuthorizationResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AuthorizationEndpointResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorResponseResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorResponseResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TokenEndpointResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TokenEndpointResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

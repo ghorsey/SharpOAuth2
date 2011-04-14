@@ -60,7 +60,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         public void SetUp()
         {
             SimpleServiceLocator container = new SimpleServiceLocator();
-            container.RegisterAll<IAuthorizationContextInspector>(new SpecificationInspector());
+            container.RegisterAll<IContextInspector<IAuthorizationContext>>(new SpecificationInspector());
 
             ServiceLocator.SetLocatorProvider(() => container);
         }

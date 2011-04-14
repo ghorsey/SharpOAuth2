@@ -63,6 +63,7 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">
@@ -75,9 +76,7 @@
       <Link>App.config</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Provider\TokenEndpoint\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

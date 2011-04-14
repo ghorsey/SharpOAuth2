@@ -5,11 +5,11 @@ using System.Text;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors
 {
-    public class SpecificationInspector : IAuthorizationContextInspector
+    public class SpecificationInspector : IContextInspector<IAuthorizationContext>
     {
         #region IAuthorizationContextInspector Members
 
-        public void Insepct(IAuthorizationContext context)
+        public void Inspect(IAuthorizationContext context)
         {
             if (string.IsNullOrWhiteSpace(context.ResponseType))
                 throw Errors.InvalidRequestException(context, Parameters.ResponseType);

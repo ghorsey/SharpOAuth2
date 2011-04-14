@@ -25,10 +25,10 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Inspectors
 
         private static void CommonInvalidRequestSpecificationTest(IAuthorizationContext context, string parameter)
         {
-            IAuthorizationContextInspector inspector = new SpecificationInspector();
+            IContextInspector<IAuthorizationContext> inspector = new SpecificationInspector();
             try
             {
-                inspector.Insepct(context);
+                inspector.Inspect(context);
                 Assert.Fail("No exception was thrown");
             }
             catch (OAuthErrorResponseException<IAuthorizationContext> ex)
@@ -82,11 +82,11 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Inspectors
 
             context.ResponseType = "unk";
 
-            IAuthorizationContextInspector inspector = new SpecificationInspector();
+            IContextInspector<IAuthorizationContext> inspector = new SpecificationInspector();
 
             try
             {
-                inspector.Insepct(context);
+                inspector.Inspect(context);
                 Assert.Fail("Did not throw exception");
             }
             catch (OAuthErrorResponseException<IAuthorizationContext> ex)
@@ -104,9 +104,9 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Inspectors
         public void TestSuccessfulSpecificationInspector()
         {
             IAuthorizationContext context = MakeAuthorizationContext();
-            IAuthorizationContextInspector inspector = new SpecificationInspector();
+            IContextInspector<IAuthorizationContext> inspector = new SpecificationInspector();
 
-            inspector.Insepct(context);
+            inspector.Inspect(context);
         }
         
     }

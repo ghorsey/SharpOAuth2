@@ -63,6 +63,8 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationProvider.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationResponseBuilder.cs" />
+    <Compile Include="Provider\ContextBuilderHelpers.cs" />
+    <Compile Include="Provider\IContextInspector.cs" />
     <Compile Include="Provider\Services\IAuthorizationServiceFactory.cs" />
     <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
@@ -70,7 +72,6 @@
     <Compile Include="Provider\OAuthFatalException.cs" />
     <Compile Include="Provider\Services\IClientService.cs" />
     <Compile Include="Provider\Errors.cs" />
-    <Compile Include="Provider\AuthorizationEndpoint\Inspectors\IAuthorizationContextInspector.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspector.cs" />
     <Compile Include="ClientBase.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationContext.cs" />

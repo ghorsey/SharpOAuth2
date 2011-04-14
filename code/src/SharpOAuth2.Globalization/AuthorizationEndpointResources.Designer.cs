@@ -22,14 +22,14 @@ namespace SharpOAuth2.Globalization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AuthorizationResources {
+    public class AuthorizationEndpointResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AuthorizationResources() {
+        internal AuthorizationEndpointResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SharpOAuth2.Globalization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SharpOAuth2.Globalization.AuthorizationResources", typeof(AuthorizationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SharpOAuth2.Globalization.AuthorizationEndpointResources", typeof(AuthorizationEndpointResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

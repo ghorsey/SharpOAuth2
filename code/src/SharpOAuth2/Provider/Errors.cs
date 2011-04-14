@@ -39,14 +39,14 @@ namespace SharpOAuth2.Provider
         {
             return new OAuthErrorResponseException<T>(context,
                         Parameters.ErrorParameters.ErrorValues.AccessDenied,
-                        description: AuthorizationResources.ResourceOwnerDenied);
+                        description: AuthorizationEndpointResources.ResourceOwnerDenied);
         }
 
         public static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T: class
         {
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.UnauthorizedClient,
-                description: string.Format(CultureInfo.CurrentUICulture, AuthorizationResources.InvalidClient, client.ClientId));
+                description: string.Format(CultureInfo.CurrentUICulture, AuthorizationEndpointResources.InvalidClient, client.ClientId));
         }
     }
 }
