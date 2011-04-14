@@ -6,18 +6,19 @@ using SharpOAuth2.Provider.AuthorizationEndpoint;
 using System.Web;
 using Microsoft.Practices.ServiceLocation;
 using Common.Logging;
+using SharpOAuth2.Provider;
 
 namespace SharpOAuth2.Fluent
 {
     public static class FluentAuthorizationContext
     {
         readonly static ILog Log = LogManager.GetCurrentClassLogger();
-        private static IAuthorizationContextBuilder GetBuilder()
+        private static IContextBuilder<IAuthorizationContext> GetBuilder()
         {
-            IAuthorizationContextBuilder builder;
+            IContextBuilder<IAuthorizationContext> builder;
             try
             {
-                builder = ServiceLocator.Current.GetInstance<IAuthorizationContextBuilder>();
+                builder = ServiceLocator.Current.GetInstance<IContextBuilder<IAuthorizationContext>>();
             }
             catch (Exception ex)
             {
@@ -60,14 +61,14 @@ namespace SharpOAuth2.Fluent
         }
         public static IAuthorizationContext ToAuthorizationContext(this HttpRequestBase request)
         {
-            IAuthorizationContextBuilder builder = GetBuilder();
+            IContextBuilder<IAuthorizationContext> builder = GetBuilder();
 
             return builder.FromHttpRequest(request);
         }
 
         public static IAuthorizationContext ToAuthorizationContext(this Uri uri)
         {
-            IAuthorizationContextBuilder builder = GetBuilder();
+            IContextBuilder<IAuthorizationContext> builder = GetBuilder();
 
             return builder.FromUri(uri);
         }

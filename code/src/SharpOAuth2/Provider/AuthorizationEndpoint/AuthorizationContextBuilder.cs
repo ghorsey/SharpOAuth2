@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
-    public class AuthorizationContextBuilder : IAuthorizationContextBuilder
+    public class AuthorizationContextBuilder : IContextBuilder<IAuthorizationContext>
     {
         #region IAuthorizationContextBuilder Members
 

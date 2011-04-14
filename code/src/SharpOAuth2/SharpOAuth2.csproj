@@ -63,17 +63,17 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationProvider.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationResponseBuilder.cs" />
-    <Compile Include="Provider\AuthorizationEndpoint\Services\IAuthorizationServiceFactory.cs" />
-    <Compile Include="Provider\AuthorizationEndpoint\Services\ITokenService.cs" />
+    <Compile Include="Provider\Services\IAuthorizationServiceFactory.cs" />
+    <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
+    <Compile Include="Provider\IContextBuilder.cs" />
     <Compile Include="Provider\OAuthFatalException.cs" />
-    <Compile Include="Provider\AuthorizationEndpoint\Services\IClientService.cs" />
+    <Compile Include="Provider\Services\IClientService.cs" />
     <Compile Include="Provider\Errors.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\IAuthorizationContextInspector.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspector.cs" />
     <Compile Include="ClientBase.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationContext.cs" />
-    <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationContextBuilder.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="IToken.cs" />
     <Compile Include="Parameters.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="AccessTokenBase.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContext.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenContextBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">

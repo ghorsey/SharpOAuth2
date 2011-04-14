@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
-using SharpOAuth2.Provider.AuthorizationEndpoint.Services;
 using SharpOAuth2.Globalization;
 using System.Globalization;
+using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {

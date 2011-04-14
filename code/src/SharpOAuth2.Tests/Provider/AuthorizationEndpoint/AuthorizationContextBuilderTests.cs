@@ -9,6 +9,7 @@ using Moq;
 using System.Collections.Specialized;
 using System.Net;
 using System.IO;
+using SharpOAuth2.Provider;
 
 namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {
@@ -32,14 +33,14 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         [Test, ExpectedException(typeof(ArgumentNullException))]
         public void CreateContextFromNullUriString()
         {
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             builder.FromUri((string)null);
         }
 
         [Test, ExpectedException(typeof(ArgumentNullException))]
         public void CreateContextFromNullUri()
         {
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             builder.FromUri((Uri)null);
         }
 
@@ -48,7 +49,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             string url = CreateUrl("authorization_code", "1234432", "secret", "create-user manage-clients", "mystate","http://www.mysite.com/callback");
 
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             IAuthorizationContext context = builder.FromUri(url);
 
             Assert.AreEqual("authorization_code", context.ResponseType);
@@ -61,14 +62,14 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         [Test, ExpectedException(typeof(UriFormatException))]
         public void TestInvalidUriFormat()
         {
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             builder.FromUri("/relativeUrl");
         }
 
         [Test, ExpectedException(typeof(UriFormatException))]
         public void TestInvalidRedirectUriFormat()
         {
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             string url = CreateUrl("authorization_code", "1234432", "secret", "create-user manage-clients", "mystate","/callback");
             builder.FromUri(url);
         }
@@ -78,7 +79,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             string url = CreateUrl("", "", "", null, "", null);
 
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             IAuthorizationContext context = builder.FromUri(url);
 
             Assert.IsNull(context.RedirectUri);
@@ -102,7 +103,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             else if (httpMethod.ToUpperInvariant() == "POST")
                 mckHttpRequest.SetupGet(x => x.Form).Returns(querystring);
 
-            IAuthorizationContextBuilder builder = new AuthorizationContextBuilder();
+            IContextBuilder<IAuthorizationContext> builder = new AuthorizationContextBuilder();
             IAuthorizationContext context = builder.FromHttpRequest(mckHttpRequest.Object);
 
             Assert.AreEqual("123", context.Client.ClientId);

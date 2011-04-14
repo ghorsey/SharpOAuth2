@@ -5,11 +5,11 @@ using System.Text;
 using NUnit.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using Moq;
-using SharpOAuth2.Provider.AuthorizationEndpoint.Services;
 using Microsoft.Practices.ServiceLocation;
 using CuttingEdge.ServiceLocation;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider;
+using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {

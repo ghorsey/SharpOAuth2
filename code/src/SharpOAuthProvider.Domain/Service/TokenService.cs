@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpOAuth2.Provider.AuthorizationEndpoint.Services;
 using SharpOAuthProvider.Domain.Repository;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2;
+using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuthProvider.Domain.Service
 {
