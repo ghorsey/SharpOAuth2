@@ -120,4 +120,7 @@
   <data name="InvalidHttpMethodTokenRequest" xml:space="preserve">
     <value>All token requests must be made through HTTP POST verb</value>
   </data>
+  <data name="MissingClientInContext" xml:space="preserve">
+    <value>Client was not included in the token response</value>
+  </data>
 </root>

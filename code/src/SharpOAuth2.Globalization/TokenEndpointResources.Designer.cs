@@ -68,5 +68,14 @@ namespace SharpOAuth2.Globalization {
                 return ResourceManager.GetString("InvalidHttpMethodTokenRequest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client was not included in the token response.
+        /// </summary>
+        public static string MissingClientInContext {
+            get {
+                return ResourceManager.GetString("MissingClientInContext", resourceCulture);
+            }
+        }
     }
 }

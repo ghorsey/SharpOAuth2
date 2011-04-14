@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SharpOAuth2.Globalization;
 
 namespace SharpOAuth2.Provider.TokenEndpoint.Inspectors
 {
@@ -22,6 +23,14 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Inspectors
             if (!allowedGrantTypes.Contains(context.GrantType))
                 throw Errors.InvalidRequestException(context, Parameters.GrantType);
 
+            if (context.Client == null)
+                throw new OAuthFatalException(TokenEndpointResources.MissingClientInContext);
+
+            if (string.IsNullOrWhiteSpace(context.Client.ClientId))
+                throw Errors.InvalidRequestException(context, Parameters.ClientId);
+
+            if (string.IsNullOrWhiteSpace(context.Client.ClientSecret))
+                throw Errors.InvalidRequestException(context, Parameters.ClientSecret);
         }
 
         #endregion
