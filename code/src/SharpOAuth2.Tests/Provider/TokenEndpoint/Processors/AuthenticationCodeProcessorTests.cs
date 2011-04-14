@@ -7,11 +7,12 @@ using SharpOAuth2.Provider.TokenEndpoint;
 using SharpOAuth2.Provider.Services;
 using Moq;
 using SharpOAuth2.Provider.TokenEndpoint.Processor;
+using SharpOAuth2.Provider;
 
 namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
 {
     [TestFixture]
-    public class AuthenticationCodeProcessorTests
+    public class AuthenticationCodeProcessorTests : ProcessorTestBase
     {
         [Test]
         public void TestSatisfiedByMethod()
@@ -56,5 +57,98 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             mckClientService.VerifyAll();
             mckTokenService.VerifyAll();
         }
+
+        [Test]
+        public void TestProcessingInValidAuthorizationGrantContext()
+        {
+            TokenContext context = new TokenContext()
+            {
+                Client = new ClientBase { ClientId = "321", ClientSecret = "secret" },
+                AuthorizationCode = "123",
+                GrantType = Parameters.GrantTypeValues.AuthorizationCode,
+                RedirectUri = new Uri("http://www.mysites.com/callback"),
+                Scope = new string[] { "create", "delete" }
+            };
+
+            Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
+            mckTokenService.Setup(x => x.AuthorizationGrantIsValid(It.IsAny<AuthorizationGrantBase>())).Returns(false);
+            Mock<IClientService> mckClientService = new Mock<IClientService>();
+
+            Mock<IServiceFactory> mckFactory = new Mock<IServiceFactory>();
+            mckFactory.SetupGet(x => x.TokenService).Returns(mckTokenService.Object);
+
+            AuthenticationCodeProcessor processor = new AuthenticationCodeProcessor(mckFactory.Object);
+
+            CommonProcessorErrorAssert(processor, context, Parameters.ErrorParameters.ErrorValues.InvalidGrant);
+
+            mckFactory.VerifyAll();
+            mckClientService.VerifyAll();
+            mckTokenService.VerifyAll();
+        }
+
+        [Test]
+        public void TestProcessingInvalidClient()
+        {
+            TokenContext context = new TokenContext()
+            {
+                Client = new ClientBase { ClientId = "321", ClientSecret = "secret" },
+                AuthorizationCode = "123",
+                GrantType = Parameters.GrantTypeValues.AuthorizationCode,
+                RedirectUri = new Uri("http://www.mysites.com/callback"),
+                Scope = new string[] { "create", "delete" }
+            };
+
+            Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
+            mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(new AuthorizationGrantBase { Client = new ClientBase { ClientId = "321", ClientSecret = "secret" } });
+            mckTokenService.Setup(x => x.AuthorizationGrantIsValid(It.IsAny<AuthorizationGrantBase>())).Returns(true);
+            
+            Mock<IClientService> mckClientService = new Mock<IClientService>();
+            mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(false);
+
+            Mock<IServiceFactory> mckFactory = new Mock<IServiceFactory>();
+            mckFactory.SetupGet(x => x.ClientService).Returns(mckClientService.Object);
+            mckFactory.SetupGet(x => x.TokenService).Returns(mckTokenService.Object);
+
+            AuthenticationCodeProcessor processor = new AuthenticationCodeProcessor(mckFactory.Object);
+            CommonProcessorErrorAssert(processor, context, Parameters.ErrorParameters.ErrorValues.InvalidClient);
+
+            
+            mckFactory.VerifyAll();
+            mckClientService.VerifyAll();
+            mckTokenService.VerifyAll();
+        }
+
+        [Test]
+        public void TestProcessingMismatchedClientTest()
+        {
+            TokenContext context = new TokenContext()
+            {
+                Client = new ClientBase { ClientId = "321", ClientSecret = "secret" },
+                AuthorizationCode = "123",
+                GrantType = Parameters.GrantTypeValues.AuthorizationCode,
+                RedirectUri = new Uri("http://www.mysites.com/callback"),
+                Scope = new string[] { "create", "delete" }
+            };
+
+            Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
+            mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(new AuthorizationGrantBase { Client = new ClientBase { ClientId = "555", ClientSecret = "secret" } });
+            mckTokenService.Setup(x => x.AuthorizationGrantIsValid(It.IsAny<AuthorizationGrantBase>())).Returns(true);
+            Mock<IClientService> mckClientService = new Mock<IClientService>();
+            mckClientService.Setup(x => x.FindClient("321")).Returns(new ClientBase { ClientSecret = "secret", ClientId = "321" });
+            mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);
+
+            Mock<IServiceFactory> mckFactory = new Mock<IServiceFactory>();
+            mckFactory.SetupGet(x => x.ClientService).Returns(mckClientService.Object);
+            mckFactory.SetupGet(x => x.TokenService).Returns(mckTokenService.Object);
+
+            
+            AuthenticationCodeProcessor processor = new AuthenticationCodeProcessor(mckFactory.Object);
+            CommonProcessorErrorAssert(processor, context, Parameters.ErrorParameters.ErrorValues.InvalidGrant);
+
+            mckFactory.VerifyAll();
+            mckClientService.VerifyAll();
+            mckTokenService.VerifyAll();
+        }
+
     }
 }
