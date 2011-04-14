@@ -12,8 +12,8 @@ namespace SharpOAuth2.Provider.TokenEndpoint
         public string AuthorizationCode{ get; set; }
         public Uri RedirectUri{get; set; }
         public IClient Client { get; set; }
-        public string Username{ get; set; }
-        public string Password{ get; set; }
+        public string ResourceOwnerUsername{ get; set; }
+        public string ResourceOwnerPassword{ get; set; }
         public string RefreshToken{ get; set; }
         public string[] Scope{ get; set; }
 

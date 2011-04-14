@@ -83,6 +83,7 @@
     <Compile Include="Provider\OAuthErrorResponseException.cs" />
     <Compile Include="AccessTokenBase.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\AuthorizationCodeInspector.cs" />
+    <Compile Include="Provider\TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspector.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspector.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContext.cs" />

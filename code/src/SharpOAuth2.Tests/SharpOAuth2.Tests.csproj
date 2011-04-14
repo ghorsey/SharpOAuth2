@@ -65,6 +65,7 @@
     <Compile Include="Provider\ErrorsTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\AuthorizationCodeInspectorTest.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\InspectorTestBase.cs" />
+    <Compile Include="Provider\TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
   </ItemGroup>

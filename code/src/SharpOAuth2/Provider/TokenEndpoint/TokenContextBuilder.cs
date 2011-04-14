@@ -23,8 +23,8 @@ namespace SharpOAuth2.Provider.TokenEndpoint
                 AuthorizationCode = parameters[Parameters.AuthroizationCode],
                 GrantType = parameters[Parameters.GrantType],
                 RedirectUri = ContextBuilderHelpers.CreateRedirectUri(parameters[Parameters.RedirectUri]),
-                Username = parameters[Parameters.ResourceOwnerUsername],
-                Password = parameters[Parameters.ResourceOwnerPassword],
+                ResourceOwnerUsername = parameters[Parameters.ResourceOwnerUsername],
+                ResourceOwnerPassword = parameters[Parameters.ResourceOwnerPassword],
                 RefreshToken = parameters[Parameters.RefreshToken],
                 Scope = ContextBuilderHelpers.CreateScope(parameters[Parameters.Scope])
             };

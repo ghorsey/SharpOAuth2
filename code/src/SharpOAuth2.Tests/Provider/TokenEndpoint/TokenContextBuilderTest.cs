@@ -67,8 +67,8 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint
 
             Assert.AreEqual("123", context.Client.ClientId);
             Assert.AreEqual("client-secret", context.Client.ClientSecret);
-            Assert.AreEqual("owner-secret", context.Password);
-            Assert.AreEqual("456", context.Username);
+            Assert.AreEqual("owner-secret", context.ResourceOwnerPassword);
+            Assert.AreEqual("456", context.ResourceOwnerUsername);
             Assert.AreEqual("auth-code", context.AuthorizationCode);
             Assert.AreEqual(Parameters.GrantTypeValues.AuthorizationCode, context.GrantType);
             Assert.AreEqual("refresh-token", context.RefreshToken);
