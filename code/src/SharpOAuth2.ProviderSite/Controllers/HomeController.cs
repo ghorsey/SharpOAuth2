@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using SharpOAuth2.Provider.Authorization;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Fluent;
 using SharpOAuthProvider.Domain.Repository;
 using Microsoft.Practices.ServiceLocation;

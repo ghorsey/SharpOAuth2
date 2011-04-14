@@ -8,12 +8,8 @@ namespace SharpOAuth2
     public interface IToken 
     {
         string Token { get; set; }
-        string TokenType { get; set; } // bearer, mac
+        string TokenType { get; set; }
         int Expires{ get; set; }
         string RefreshToken{ get; set; }
-        string[] Scope { get; set; }
-
-        string ToUriEncodedString();
-        string ToJsonEncodedString();
     }
 }

@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
 using SharpOAuthProvider.Domain.Repository;
-using SharpOAuth2.Provider.Authorization.Services;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Services;
 using SharpOAuthProvider.Domain;
 using SharpOAuthProvider.Domain.Service;
-using SharpOAuth2.Provider.Authorization;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using CommonServiceLocator.NinjectAdapter;
 using Microsoft.Practices.ServiceLocation;
 

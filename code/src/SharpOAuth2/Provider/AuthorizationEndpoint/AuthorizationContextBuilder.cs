@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.IO;
 
-namespace SharpOAuth2.Provider.Authorization
+namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationContextBuilder : IAuthorizationContextBuilder
     {

@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.IO;
 
-namespace SharpOAuth2.Provider.Authorization
+namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationResponseBuilder : IAuthorizationResponseBuilder
     {

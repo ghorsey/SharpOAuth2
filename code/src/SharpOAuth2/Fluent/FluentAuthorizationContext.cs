@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpOAuth2.Provider.Authorization;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using System.Web;
 using Microsoft.Practices.ServiceLocation;
 using Common.Logging;

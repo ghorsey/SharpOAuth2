@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SharpOAuth2.Provider.Authorization.Services
+namespace SharpOAuth2.Provider.AuthorizationEndpoint.Services
 {
     /// <summary>
     /// Client service that or encapsulates that deals with the fetching and validating 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SharpOAuth2.Provider.Authorization
+namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationContext : IAuthorizationContext
     {

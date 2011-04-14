@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SharpOAuth2.Provider.Authorization.Services
+namespace SharpOAuth2.Provider.AuthorizationEndpoint.Services
 {
     public interface IAuthorizationServiceFactory
     {

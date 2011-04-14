@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Net;
 
-namespace SharpOAuth2.Provider.Authorization
+namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public interface IAuthorizationContextBuilder
     {

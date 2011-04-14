@@ -58,10 +58,10 @@
   <ItemGroup>
     <Compile Include="ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider\Authorization\AuthorizationContextBuilderTests.cs" />
-    <Compile Include="Provider\Authorization\AuthorizationProviderTests.cs" />
-    <Compile Include="Provider\Authorization\AuthorizationResponseBuilderTests.cs" />
-    <Compile Include="Provider\Authorization\Inspectors\SpecificationInspectorTests.cs" />
+    <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContextBuilderTests.cs" />
+    <Compile Include="Provider\AuthorizationEndpoint\AuthorizationProviderTests.cs" />
+    <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilderTests.cs" />
+    <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +74,9 @@
     <None Include="..\SharpOAuth2\App.config">
       <Link>App.config</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Provider\TokenEndpoint\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

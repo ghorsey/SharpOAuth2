@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using System.Web;
-using SharpOAuth2.Provider.Authorization;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using Moq;
 using System.Collections.Specialized;
 using System.Net;
 using System.IO;
 
-namespace SharpOAuth2.Tests.Provider.Authorization
+namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {
     [TestFixture]
     public class AuthorizationContextBuilderTests

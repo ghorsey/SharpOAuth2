@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.ServiceLocation;
-using SharpOAuth2.Provider.Authorization.Inspectors;
-using SharpOAuth2.Provider.Authorization.Services;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Services;
 using SharpOAuth2.Globalization;
 using System.Globalization;
 
-namespace SharpOAuth2.Provider.Authorization
+namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationProvider : IAuthorizationProvider
     {

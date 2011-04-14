@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using SharpOAuth2.Provider.Authorization;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider;
 
-namespace SharpOAuth2.Tests.Provider.Authorization
+namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {
     [TestFixture]
     public class AuthorizationResponseBuilderTests

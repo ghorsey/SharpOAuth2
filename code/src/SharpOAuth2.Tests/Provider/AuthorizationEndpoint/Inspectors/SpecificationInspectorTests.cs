@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using SharpOAuth2.Provider.Authorization;
-using SharpOAuth2.Provider.Authorization.Inspectors;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider;
 
-namespace SharpOAuth2.Tests.Provider.Authorization.Inspectors
+namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Inspectors
 {
     [TestFixture]
     public class SpecificationInspectorTests
