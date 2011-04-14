@@ -6,7 +6,7 @@ using System.Text;
 namespace SharpOAuth2.Provider
 {
     [Serializable]
-    public class OAuthErrorResponseException<T> : Exception where T : class
+    public class OAuthErrorResponseException<T> : Exception where T : IOAuthContext
     {
         public T Context{ get; private set; }
         public string Error { get; private set; }

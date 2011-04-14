@@ -38,6 +38,27 @@ namespace SharpOAuthProvider.Domain.Service
             return ClientRepo.LoadClient(context.Client.ClientId) != null;
         }
 
+
+        public bool AuthenticateClient(SharpOAuth2.Provider.IOAuthContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ValidateRedirectUri(SharpOAuth2.Provider.IOAuthContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsClient(SharpOAuth2.Provider.IOAuthContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SharpOAuth2.ClientBase FindClient(string clientId)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

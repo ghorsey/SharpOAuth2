@@ -43,6 +43,22 @@ namespace SharpOAuthProvider.Domain.Service
             TokenRepo.AddAuthorizationGrant(grant);
         }
 
+
+        public AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AuthorizationGrantIsValid(AuthorizationGrantBase grant)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAccessToken(SharpOAuth2.Provider.TokenEndpoint.ITokenContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

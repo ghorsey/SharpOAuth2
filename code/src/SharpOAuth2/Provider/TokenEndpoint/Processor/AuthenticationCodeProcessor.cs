@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Globalization;
 
 namespace SharpOAuth2.Provider.TokenEndpoint.Processor
 {
@@ -21,7 +22,21 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
 
         public override void Process(ITokenContext context)
         {
-            throw new NotImplementedException();
+            AuthorizationGrantBase grant = ServiceFactory.TokenService.FindAuthorizationGrant(context.AuthorizationCode);
+
+            if (!ServiceFactory.TokenService.AuthorizationGrantIsValid(grant))
+                throw new OAuthFatalException(TokenEndpointResources.InvalidAuthorizationGrant);
+
+            if (!ServiceFactory.ClientService.AuthenticateClient(context))
+                throw Errors.InvalidClient(context);
+
+            ClientBase client = ServiceFactory.ClientService.FindClient(context.Client.ClientId);
+
+            if (client.ClientId != grant.Client.ClientId)
+                throw Errors.InvalidGrant(context);
+
+            ServiceFactory.TokenService.SetAccessToken(context);
+
         }
 
         #endregion

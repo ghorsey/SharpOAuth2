@@ -61,6 +61,33 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The authorization code &apos;{0}&apos; is invalid or expired.
+        /// </summary>
+        public static string InvalidAuthorizationGrant {
+            get {
+                return ResourceManager.GetString("InvalidAuthorizationGrant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The authorization code was not issued to this client.
+        /// </summary>
+        public static string InvalidAuthorizationGrantForClient {
+            get {
+                return ResourceManager.GetString("InvalidAuthorizationGrantForClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client &apos;{0}&apos; authentication failed.
+        /// </summary>
+        public static string InvalidClientCredentials {
+            get {
+                return ResourceManager.GetString("InvalidClientCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All token requests must be made through HTTP POST verb.
         /// </summary>
         public static string InvalidHttpMethodTokenRequest {

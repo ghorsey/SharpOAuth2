@@ -20,13 +20,13 @@ namespace SharpOAuth2.Provider.Services
         /// <returns>
         /// 	<c>true</c> if the client id and client secret match the values from the data store; otherwise <c>false</c>.
         /// </returns>
-        bool AuthenticateClient(IAuthorizationContext context);
+        bool AuthenticateClient(IOAuthContext context);
         /// <summary>
         /// Validates the redirect URI.
         /// </summary>
         /// <param name="context">The current authoricaton context<param>
         /// <returns><c>true</c> if the redirect uri matches the client record; otherwise, <c>false</c></returns>
-        bool ValidateRedirectUri(IAuthorizationContext context);
+        bool ValidateRedirectUri(IOAuthContext context);
 
         /// <summary>
         /// Determines whether the specified client is client.
@@ -35,6 +35,8 @@ namespace SharpOAuth2.Provider.Services
         /// <returns>
         /// 	<c>true</c> if the specified client id matches an existing client; otherwise, <c>false</c>.
         /// </returns>
-        bool IsClient(IAuthorizationContext context);
+        bool IsClient(IOAuthContext context);
+
+        ClientBase FindClient(string clientId);
     }
 }
