@@ -60,7 +60,10 @@ namespace SharpOAuth2.Provider
         public static OAuthErrorResponseException<ITokenContext> InvalidGrant(ITokenContext context) 
         {
             return new OAuthErrorResponseException<ITokenContext>(context,
-                Parameters.ErrorParameters.ErrorValues.InvalidGrant, context.GrantType);
+                Parameters.ErrorParameters.ErrorValues.InvalidGrant,
+                description: string.Format( CultureInfo.CurrentUICulture,
+                TokenEndpointResources.InvalidGrant,
+                context.AuthorizationCode));
         }
     }
 }

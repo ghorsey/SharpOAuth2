@@ -30,7 +30,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = new AuthorizationContext
             {
-                Authorization = new AuthorizationGrantBase
+                Token = new AuthorizationGrantBase
                 {
                     Scope = new string[] { "create", "delete" },
                     Token = "special-token-value"
@@ -65,7 +65,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain&error=access_denied&error_description=You%20do%20not%20have%20access"), result);
+            Assert.AreEqual("http://www.mysite.com/callback?param=maintain&error=access_denied&error_description=You%20do%20not%20have%20access", result.AbsoluteUri);
         }
 
         [Test]

@@ -15,7 +15,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         public string[] Scope{ get; set; }
         public string State{ get; set; }
         public ErrorResponse Error { get; set; }
-        public IToken Authorization { get; set; }
+        public IToken Token { get; set; }
         public bool IsApproved { get; set; }
         public string ResourceOwnerId { get; set; }
         #endregion

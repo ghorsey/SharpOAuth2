@@ -69,7 +69,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         public void TestCreatingAuthorizationRequestFatalAuthorizationExists()
         {
             AuthorizationContext context = MakeCommonAuthorizationContext ();
-            context.Authorization = new AccessTokenBase();
+            context.Token = new AccessTokenBase();
             
             IAuthorizationProvider provider = new AuthorizationProvider(new Mock<IServiceFactory>().Object);
 
@@ -93,7 +93,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             provider.CreateAuthorizationGrant(context);
 
-            Assert.IsNotNull(context.Authorization);
+            Assert.IsNotNull(context.Token);
             Assert.IsTrue(context.IsApproved);
             mckTokenService.VerifyAll();
             mckClientService.VerifyAll();
@@ -115,7 +115,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             provider.CreateAuthorizationGrant(context);
 
-            Assert.IsNotNull(context.Authorization);
+            Assert.IsNotNull(context.Token);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.AccessDenied, context.Error.Error);
@@ -182,7 +182,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             provider.CreateAuthorizationGrant(context);
 
-            Assert.IsNull(context.Authorization);
+            Assert.IsNull(context.Token);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, context.Error.Error);
@@ -207,7 +207,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             provider.CreateAuthorizationGrant(context);
 
-            Assert.IsNull(context.Authorization);
+            Assert.IsNull(context.Token);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, context.Error.Error);

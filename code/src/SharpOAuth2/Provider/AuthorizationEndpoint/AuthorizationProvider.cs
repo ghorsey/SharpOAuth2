@@ -33,7 +33,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         }
         private void AssertNoAuthorizationToken(IAuthorizationContext context)
         {
-            if (context.Authorization != null)
+            if (context.Token != null)
                 throw new OAuthFatalException(AuthorizationEndpointResources.AuthorizationContextContainsToken);
         }
 

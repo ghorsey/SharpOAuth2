@@ -49,7 +49,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
                 return result.Uri;
             }
             
-            queryComponents[Parameters.AuthroizationCode] = context.Authorization.Token;
+            queryComponents[Parameters.AuthroizationCode] = context.Token.Token;
             queryComponents[Parameters.State] = context.State;
 
             SetModifiedContext(context, result, queryComponents);

@@ -88,6 +88,15 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The grant &apos;{0}&apos; for this request unauthorzed, invalid, expired or revoked.
+        /// </summary>
+        public static string InvalidGrant {
+            get {
+                return ResourceManager.GetString("InvalidGrant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All token requests must be made through HTTP POST verb.
         /// </summary>
         public static string InvalidHttpMethodTokenRequest {

@@ -44,7 +44,7 @@ namespace SharpOAuth2.ProviderSite.Controllers
                 .CreateAuthorizationGrant()
                 .CreateAuthorizationResponse();
 
-            return Redirect(response.ToString());
+            return Redirect(response.AbsoluteUri);
         }
 
         [HttpGet]

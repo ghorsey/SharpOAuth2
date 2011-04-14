@@ -25,7 +25,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             AuthorizationGrantBase grant = ServiceFactory.TokenService.FindAuthorizationGrant(context.AuthorizationCode);
 
             if (!ServiceFactory.TokenService.AuthorizationGrantIsValid(grant))
-                throw new OAuthFatalException(TokenEndpointResources.InvalidAuthorizationGrant);
+                throw Errors.InvalidGrant(context);
 
             if (!ServiceFactory.ClientService.AuthenticateClient(context))
                 throw Errors.InvalidClient(context);

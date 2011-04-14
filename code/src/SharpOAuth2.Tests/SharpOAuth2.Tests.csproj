@@ -68,7 +68,9 @@
     <Compile Include="Provider\TokenEndpoint\Inspectors\RefreshAccessTokenInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspectorTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processors\AuthenticationCodeProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">

@@ -19,7 +19,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
         {
             AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
             ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, context.IsApproved);
-            context.Authorization = grant;
+            context.Token = grant;
         }
     }
 }

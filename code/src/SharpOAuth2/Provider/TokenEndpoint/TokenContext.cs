@@ -16,6 +16,8 @@ namespace SharpOAuth2.Provider.TokenEndpoint
         public string ResourceOwnerPassword{ get; set; }
         public string RefreshToken{ get; set; }
         public string[] Scope{ get; set; }
+        public ErrorResponse Error{ get; set; }
+        public IToken Token{ get; set; }
 
         #endregion
     }

@@ -127,6 +127,10 @@
     <value>Client '{0}' authentication failed</value>
     <comment>0:the client_id</comment>
   </data>
+  <data name="InvalidGrant" xml:space="preserve">
+    <value>The grant '{0}' for this request unauthorzed, invalid, expired or revoked</value>
+    <comment>0:the authorization code</comment>
+  </data>
   <data name="InvalidHttpMethodTokenRequest" xml:space="preserve">
     <value>All token requests must be made through HTTP POST verb</value>
   </data>
