@@ -20,6 +20,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         }
         private void InspectRequest(IAuthorizationContext context)
         {
+            new SpecificationInspector().Inspect(context); // always run the known inspectors
             IEnumerable<IContextInspector<IAuthorizationContext>> inspectors = ServiceLocator.Current.GetAllInstances<IContextInspector<IAuthorizationContext>>();
 
             foreach (IContextInspector<IAuthorizationContext> inspector in inspectors)

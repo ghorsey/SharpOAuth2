@@ -63,6 +63,8 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\Inspectors\AuthorizationCodeRequestInspector.cs" />
+    <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
