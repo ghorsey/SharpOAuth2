@@ -63,6 +63,7 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilder.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationProvider.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\IAuthorizationResponseBuilder.cs" />
+    <Compile Include="Provider\AuthorizationEndpoint\Processor\AuthorizationCodeProcessor.cs" />
     <Compile Include="Provider\ContextBuilderHelpers.cs" />
     <Compile Include="Provider\ContextProcessor.cs" />
     <Compile Include="Provider\IOAuthContext.cs" />

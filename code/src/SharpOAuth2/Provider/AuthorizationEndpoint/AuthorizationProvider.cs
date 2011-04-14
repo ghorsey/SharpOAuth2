@@ -60,15 +60,19 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
                 AssertIsClient(context);
                 AssertRedirectUriIsValid(context);
                 AssertResourceOwnerIdIsNotBlank(context);
-                
-                if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
-                    throw Errors.UnsupportedResponseType(context, context.ResponseType);
-                else
+
+                IEnumerable<ContextProcessor<IAuthorizationContext>> processors = ServiceLocator.Current.GetAllInstances<ContextProcessor<IAuthorizationContext>>();
+
+                bool handled = false;
+                foreach (ContextProcessor<IAuthorizationContext> processor in processors)
                 {
-                    AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
-                    ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, context.IsApproved);
-                    context.Authorization = grant;
+                    if (!processor.IsSatisfiedBy(context)) continue;
+                    processor.Process(context);
+                    handled = true;
                 }
+
+                if (!handled)
+                    throw Errors.UnsupportedResponseType(context, context.ResponseType);
 
                 if (!context.IsApproved)
                     throw Errors.AccessDenied(context);

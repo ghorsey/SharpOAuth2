@@ -10,6 +10,7 @@ using CuttingEdge.ServiceLocation;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider;
 using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;
 
 namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {
@@ -56,12 +57,12 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             context.State = "my state";
             return context;
         }
-        [SetUp]
-        public void SetUp()
+        
+        public void SetUp(IServiceFactory factory)
         {
             SimpleServiceLocator container = new SimpleServiceLocator();
             container.RegisterAll<IContextInspector<IAuthorizationContext>>(new SpecificationInspector());
-
+            container.RegisterAll<ContextProcessor<IAuthorizationContext>>(new AuthorizationCodeProcessor(factory));
             ServiceLocator.SetLocatorProvider(() => container);
         }
         [Test, ExpectedException(typeof(OAuthFatalException))]
@@ -83,8 +84,12 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             context.ResourceOwnerId = "1234";
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
+            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
+            SetUp(mckServiceFactory.Object);
+            
+
+            IAuthorizationProvider provider = new AuthorizationProvider(mckServiceFactory.Object);
 
             provider.CreateAuthorizationGrant(context);
 
@@ -102,8 +107,11 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             context.ResourceOwnerId = "12345";
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
+            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
+            SetUp(mckServiceFactory.Object);
+
+            IAuthorizationProvider provider = new AuthorizationProvider(mckServiceFactory.Object);
 
             provider.CreateAuthorizationGrant(context);
 
@@ -191,8 +199,11 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
 
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
+            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
 
-            IAuthorizationProvider provider = new AuthorizationProvider(MakeServiceFactory(mckClientService, mckTokenService).Object);
+            SetUp(mckServiceFactory.Object);
+
+            IAuthorizationProvider provider = new AuthorizationProvider(mckServiceFactory.Object);
 
             provider.CreateAuthorizationGrant(context);
 

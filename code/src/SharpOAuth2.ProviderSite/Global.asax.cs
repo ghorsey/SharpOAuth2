@@ -12,6 +12,8 @@ using SharpOAuth2.Provider.AuthorizationEndpoint;
 using CommonServiceLocator.NinjectAdapter;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;
 
 namespace SharpOAuth2.ProviderSite
 {
@@ -48,6 +50,9 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<ITokenService>().To<TokenService>();
             kernel.Bind<IServiceFactory>().To<ServiceFactory>();
             kernel.Bind<IAuthorizationProvider>().To<AuthorizationProvider>();
+
+            // add supported response types
+            kernel.Rebind<ContextProcessor<IAuthorizationContext>>().To<AuthorizationCodeProcessor>();
                 
             NinjectServiceLocator adapter = new NinjectServiceLocator(kernel);
 
