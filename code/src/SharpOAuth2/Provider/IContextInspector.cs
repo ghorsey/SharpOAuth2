@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpOAuth2.Provider
 {
-    public interface IContextInspector<T> where T : class
+    public interface IContextInspector<T> where T : IOAuthContext
     {
         void Inspect(T context);
     }

@@ -7,6 +7,8 @@ namespace SharpOAuth2.Provider
 {
     public interface IOAuthContext
     {
-         // marker interface
+        string[] Scope { get; set; }
+        IClient Client { get; set; }
+        Uri RedirectUri { get; set; }
     }
 }
