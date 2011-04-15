@@ -22,9 +22,9 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             {
                 Assert.AreEqual(errorParamter, x.Error);
             }
-            catch (Exception)
+            catch (Exception x)
             {
-                Assert.Fail("Unexpected exception was thrown");
+                Assert.Fail("Unexpected exception was thrown: " + x.Message);
             }
         }
     }

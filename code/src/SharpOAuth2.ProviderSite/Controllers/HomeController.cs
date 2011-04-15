@@ -9,6 +9,7 @@ using SharpOAuth2.Fluent;
 using SharpOAuthProvider.Domain.Repository;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuthProvider.Domain;
+using SharpOAuth2.Provider.TokenEndpoint;
 namespace SharpOAuth2.ProviderSite.Controllers
 {
     public class HomeController : Controller
@@ -19,6 +20,18 @@ namespace SharpOAuth2.ProviderSite.Controllers
             return Redirect("http://localhost:15075");
         }
 
+        [HttpPost]
+        public ActionResult Token()
+        {
+            ITokenContext context = new TokenContextBuilder().FromHttpRequest(ControllerContext.HttpContext.Request);
+            ITokenProvider provider = ServiceLocator.Current.GetInstance<ITokenProvider>();
+
+            provider.GrantAuthorizationToken(context);
+
+
+            return null;
+        }
+
         [Authorize]
         public ActionResult Authorize()
         {
@@ -26,7 +39,7 @@ namespace SharpOAuth2.ProviderSite.Controllers
             Session["context"] = authContext;
             IClientRepository clientRepo = ServiceLocator.Current.GetInstance<IClientRepository>();
 
-            Client client = clientRepo.LoadClient(authContext.Client.ClientId);
+            Client client = clientRepo.FindClient(authContext.Client.ClientId);
             ViewBag.ClientName = client.Name;
             return View("Authorize", authContext);
         }

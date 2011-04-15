@@ -17,7 +17,7 @@ namespace SharpOAuthProvider.Domain.Repository
 
         #region IClientRepository Members
 
-        public Client LoadClient(string clientId)
+        public Client FindClient(string clientId)
         {
             if (!_clients.ContainsKey(clientId)) return null;
 

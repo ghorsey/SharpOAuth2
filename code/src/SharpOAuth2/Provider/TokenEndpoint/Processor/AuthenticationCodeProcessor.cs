@@ -24,7 +24,14 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
         {
             AuthorizationGrantBase grant = ServiceFactory.TokenService.FindAuthorizationGrant(context.AuthorizationCode);
 
-            if (!ServiceFactory.TokenService.AuthorizationGrantIsValid(grant))
+            
+            if (grant == null|| !grant.IsApproved)
+                throw Errors.InvalidGrant(context);
+
+            if (!ServiceFactory.TokenService.ValidateRedirectUri(context, grant))
+                throw Errors.InvalidGrant(context);
+
+            if (grant.Expires > 0 && grant.Created.AddSeconds(grant.Expires) < DateTime.Now)
                 throw Errors.InvalidGrant(context);
 
             if (!ServiceFactory.ClientService.AuthenticateClient(context))
@@ -35,7 +42,12 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             if (client.ClientId != grant.Client.ClientId)
                 throw Errors.InvalidGrant(context);
 
-            ServiceFactory.TokenService.SetAccessToken(context);
+            context.Token = ServiceFactory.TokenService.MakeAccessToken(grant);
+
+            ServiceFactory.TokenService.ConsumeGrant(grant);
+
+            
+
 
         }
 

@@ -22,7 +22,7 @@ namespace SharpOAuthProvider.Domain.Service
 
         public bool AuthenticateClient(IOAuthContext context)
         {
-            Client actual = ClientRepo.LoadClient(context.Client.ClientId);
+            Client actual = ClientRepo.FindClient(context.Client.ClientId);
             if (actual == null) return false;
 
             return actual.ClientSecret == context.Client.ClientSecret;
@@ -30,19 +30,19 @@ namespace SharpOAuthProvider.Domain.Service
 
         public bool ValidateRedirectUri(IOAuthContext context)
         {
-            Client cl = ClientRepo.LoadClient(context.Client.ClientId);
+            Client cl = ClientRepo.FindClient(context.Client.ClientId);
             return context.RedirectUri.Equals(cl.RedirectUri);
         }
 
         public bool IsClient(IOAuthContext context)
         {
-            return ClientRepo.LoadClient(context.Client.ClientId) != null;
+            return ClientRepo.FindClient(context.Client.ClientId) != null;
         }
 
 
         public SharpOAuth2.ClientBase FindClient(string clientId)
         {
-            throw new NotImplementedException();
+            return ClientRepo.FindClient(clientId);
         }
 
         #endregion

@@ -8,6 +8,7 @@ namespace SharpOAuthProvider.Domain.Repository
     public class InMemoryTokenRepository : ITokenRepository
     {
         static readonly IDictionary<string, AuthorizationGrant> _grants = new Dictionary<string, AuthorizationGrant>();
+        static readonly IDictionary<string, AccessToken> _tokens = new Dictionary<string, AccessToken>();
 
         #region ITokenRepository Members
 
@@ -21,6 +22,18 @@ namespace SharpOAuthProvider.Domain.Repository
             if (!_grants.ContainsKey(code)) return null;
 
             return _grants[code];
+        }
+
+        public SharpOAuth2.AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode)
+        {
+            if (!_grants.ContainsKey(authorizationCode)) return null;
+            return _grants[authorizationCode];
+        }
+
+
+        public void AddAccessToken(AccessToken token)
+        {
+            _tokens[token.Token] = token;
         }
 
         #endregion

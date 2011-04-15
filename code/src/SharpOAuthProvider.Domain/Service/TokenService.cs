@@ -25,7 +25,7 @@ namespace SharpOAuthProvider.Domain.Service
         public AuthorizationGrantBase MakeAuthorizationGrant(IAuthorizationContext context)
         {
             AuthorizationGrant grant = new AuthorizationGrant();
-            Client client = ClientRepo.LoadClient(context.Client.ClientId);
+            Client client = ClientRepo.FindClient(context.Client.ClientId);
             grant.Client = client;
             grant.Expires = 120; // 2 minutes
             grant.Scope = context.Scope;
@@ -46,17 +46,35 @@ namespace SharpOAuthProvider.Domain.Service
 
         public AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode)
         {
-            throw new NotImplementedException();
+            return TokenRepo.FindAuthorizationGrant(authorizationCode);
         }
 
-        public bool AuthorizationGrantIsValid(AuthorizationGrantBase grant)
+
+        public void ConsumeGrant(AuthorizationGrantBase grant)
         {
-            throw new NotImplementedException();
+            AuthorizationGrant gr = (AuthorizationGrant)grant;
+            gr.IsUsed = true;
+            TokenRepo.AddAuthorizationGrant(gr);
         }
 
-        public void SetAccessToken(SharpOAuth2.Provider.TokenEndpoint.ITokenContext context)
+        public AccessTokenBase MakeAccessToken(AuthorizationGrantBase grant)
         {
-            throw new NotImplementedException();
+            AccessToken token = new AccessToken
+            {
+                Expires = 120,
+                Token = Guid.NewGuid().ToString(),
+                TokenType = "bearer",
+                Grant = (AuthorizationGrant)grant
+            };
+
+            TokenRepo.AddAccessToken(token);
+            return token;
+
+        }
+
+        public bool ValidateRedirectUri(SharpOAuth2.Provider.IOAuthContext context, AuthorizationGrantBase grant)
+        {
+            return grant.RedirectUri.Equals(context.RedirectUri);
         }
 
         #endregion

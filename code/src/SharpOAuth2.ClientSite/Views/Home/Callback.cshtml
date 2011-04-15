@@ -1,13 +1,18 @@
-﻿
-<!DOCTYPE html>
+﻿@model SharpOAuth2.ClientSite.Models.Home.CallbackModel
 
-<html>
-<head>
-    <title>Callback</title>
-</head>
-<body>
-    <div>
-        
-    </div>
-</body>
-</html>
+@if (Model.HasError)
+{
+<h1>An Error Occured</h1>
+<dl>
+    <dt>@Model.Error</dt>
+    <dd>
+    @Model.Description
+    </dd>
+</dl>
+}
+else
+{
+    <pre>
+@Html.Raw(Model.TokenResponse)
+    </pre>
+}

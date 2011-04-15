@@ -16,10 +16,17 @@ namespace SharpOAuth2
         public virtual int Expires { get; set; }
         public virtual string RefreshToken { get; set; }
         public virtual string[] Scope { get; set; }
+        public virtual DateTime Created { get; private set; }
+        public virtual bool IsApproved { get; set; }
 
         public virtual ClientBase Client { get; set; }
 
         public virtual Uri RedirectUri { get; set; }
         #endregion
+
+        public AuthorizationGrantBase()
+        {
+            Created = DateTime.Now;
+        }
     }
 }

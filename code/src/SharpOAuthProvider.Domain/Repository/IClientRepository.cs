@@ -7,6 +7,6 @@ namespace SharpOAuthProvider.Domain.Repository
 {
     public interface IClientRepository
     {
-        Client LoadClient(string clientId);
+        Client FindClient(string clientId);
     }
 }

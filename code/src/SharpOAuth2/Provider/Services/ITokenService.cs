@@ -14,8 +14,9 @@ namespace SharpOAuth2.Provider.Services
 
         AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode);
 
-        bool AuthorizationGrantIsValid(AuthorizationGrantBase grant);
+        void ConsumeGrant(AuthorizationGrantBase grant);
+        AccessTokenBase MakeAccessToken(AuthorizationGrantBase grant);
 
-        void SetAccessToken(ITokenContext context);
+        bool ValidateRedirectUri(IOAuthContext context, AuthorizationGrantBase grant);
     }
 }

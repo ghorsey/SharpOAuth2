@@ -14,6 +14,8 @@ using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.Services;
 using SharpOAuth2.Provider;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;
+using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.TokenEndpoint.Processor;
 
 namespace SharpOAuth2.ProviderSite
 {
@@ -50,6 +52,8 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<ITokenService>().To<TokenService>();
             kernel.Bind<IServiceFactory>().To<ServiceFactory>();
             kernel.Bind<IAuthorizationProvider>().To<AuthorizationProvider>();
+            kernel.Bind<ITokenProvider>().To<TokenProvider>();
+            kernel.Bind<ContextProcessor<ITokenContext>>().To<AuthenticationCodeProcessor>();
 
             // add supported response types
             kernel.Rebind<ContextProcessor<IAuthorizationContext>>().To<AuthorizationCodeProcessor>();

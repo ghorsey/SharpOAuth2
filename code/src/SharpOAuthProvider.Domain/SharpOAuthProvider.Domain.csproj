@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessToken.cs" />
     <Compile Include="AuthorizationGrant.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Repository\IClientRepository.cs" />

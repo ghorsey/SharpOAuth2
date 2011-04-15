@@ -6,9 +6,8 @@ using SharpOAuth2;
 
 namespace SharpOAuthProvider.Domain
 {
-    public class AuthorizationGrant : AuthorizationGrantBase
+    public class AccessToken : AccessTokenBase
     {
-        public bool IsUsed { get; set; }
-        public string ResourceOwnerId { get; set; }
+        public AuthorizationGrant Grant { get; set; }
     }
 }
