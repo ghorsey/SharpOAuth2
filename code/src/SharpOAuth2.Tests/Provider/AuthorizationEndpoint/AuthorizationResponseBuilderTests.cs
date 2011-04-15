@@ -61,11 +61,12 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         public void CreateErrorAuthorizationResponse()
         {
             IAuthorizationContext context = MakeErrorAuthorizationContext(Parameters.ResponseTypeValues.AuthorizationCode);
+            context.Error.ErrorDescription = string.Empty;
             IAuthorizationResponseBuilder builder = new AuthorizationResponseBuilder();
 
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual("http://www.mysite.com/callback?param=maintain&error=access_denied&error_description=You%20do%20not%20have%20access", result.AbsoluteUri);
+            Assert.AreEqual("http://www.mysite.com/callback?param=maintain&error=access_denied", result.AbsoluteUri);
         }
 
         [Test]

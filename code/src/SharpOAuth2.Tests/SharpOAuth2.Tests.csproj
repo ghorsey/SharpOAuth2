@@ -72,6 +72,7 @@
     <Compile Include="Provider\TokenEndpoint\Processors\ProcessorTestBase.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenProviderTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenResponseBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">

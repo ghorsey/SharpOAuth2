@@ -18,8 +18,6 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             string queryComponentFormat = "{0}={1}";
             for (int i = 0; i < queryComponents.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(queryComponents[i])) continue; // ignore blank or empty
-
                 if (i > 0)
                     writer.Write("&");
 
@@ -62,7 +60,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             foreach (string key in responseValues.Keys)
             {
                 if (responseValues[key] == null) continue;
-                if (string.IsNullOrWhiteSpace(responseValues[key] as string)) continue;
+                if (responseValues[key] is string && string.IsNullOrWhiteSpace(responseValues[key] as string)) continue;
 
                 queryComponents[key] = responseValues[key].ToString();
             }

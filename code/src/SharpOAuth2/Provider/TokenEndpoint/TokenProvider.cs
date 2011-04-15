@@ -10,7 +10,6 @@ namespace SharpOAuth2.Provider.TokenEndpoint
 {
     public class TokenProvider : ITokenProvider
     {
-        readonly IServiceFactory ServiceFactory;
 
         private void InspectContext(ITokenContext context)
         {

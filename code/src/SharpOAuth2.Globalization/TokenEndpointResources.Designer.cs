@@ -61,6 +61,15 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The token context does not contain a token.
+        /// </summary>
+        public static string ContextDoesNotContainToken {
+            get {
+                return ResourceManager.GetString("ContextDoesNotContainToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The authorization code &apos;{0}&apos; is invalid or expired.
         /// </summary>
         public static string InvalidAuthorizationGrant {
