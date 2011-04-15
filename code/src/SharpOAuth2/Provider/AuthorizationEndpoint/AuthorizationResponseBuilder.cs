@@ -40,9 +40,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             
             if (context.Error != null)
             {
-                queryComponents[Parameters.ErrorParameters.Error] = context.Error.Error;
-                queryComponents[Parameters.ErrorParameters.ErrorDescription] = context.Error.ErrorDescription;
-                queryComponents[Parameters.ErrorParameters.ErrorUri] = context.Error.ErrorUri != null ? context.Error.ErrorUri.ToString() : string.Empty;
+                BuildResponseValues(queryComponents, context.Error.ToResponseValues());
 
                 SetModifiedContext(context, result, queryComponents);
 
@@ -50,6 +48,17 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             }
 
             IDictionary<string, object> responseValues = context.Token.ToResponseValues();
+            BuildResponseValues(queryComponents, responseValues);
+            queryComponents[Parameters.State] = context.State;
+
+            SetModifiedContext(context, result, queryComponents);
+
+            return result.Uri;
+            
+        }
+
+        private static void BuildResponseValues(NameValueCollection queryComponents, IDictionary<string, object> responseValues)
+        {
             foreach (string key in responseValues.Keys)
             {
                 if (responseValues[key] == null) continue;
@@ -57,12 +66,6 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 
                 queryComponents[key] = responseValues[key].ToString();
             }
-            queryComponents[Parameters.State] = context.State;
-
-            SetModifiedContext(context, result, queryComponents);
-
-            return result.Uri;
-            
         }
 
         private void SetModifiedContext(IAuthorizationContext context, UriBuilder builder, NameValueCollection components)
