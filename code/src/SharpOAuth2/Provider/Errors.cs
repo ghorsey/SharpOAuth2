@@ -65,5 +65,14 @@ namespace SharpOAuth2.Provider
                 TokenEndpointResources.InvalidGrant,
                 context.AuthorizationCode));
         }
+
+        public static OAuthErrorResponseException<ITokenContext> UnsupportedGrantType(ITokenContext context)
+        {
+            return new OAuthErrorResponseException<ITokenContext>(context,
+                Parameters.ErrorParameters.ErrorValues.UnsupportedGrantType,
+                description: string.Format(CultureInfo.CurrentUICulture,
+                TokenEndpointResources.UnsupportedGrantType,
+                context.GrantType));
+        }
     }
 }

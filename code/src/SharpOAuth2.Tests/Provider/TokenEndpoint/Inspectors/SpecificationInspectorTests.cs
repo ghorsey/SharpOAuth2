@@ -70,7 +70,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Inspectors
         {
             TokenContext context = new TokenContext();
 
-            context.GrantType = "Unknown";
+            context.GrantType = "";
 
             SpecificationInspector inspector = new SpecificationInspector();
             try

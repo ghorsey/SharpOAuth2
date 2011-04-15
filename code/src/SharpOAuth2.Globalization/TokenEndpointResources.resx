@@ -137,4 +137,8 @@
   <data name="MissingClientInContext" xml:space="preserve">
     <value>Client was not included in the token response</value>
   </data>
+  <data name="UnsupportedGrantType" xml:space="preserve">
+    <value>The '{0}' grant type is unsupported</value>
+    <comment>0: the specified grant type</comment>
+  </data>
 </root>

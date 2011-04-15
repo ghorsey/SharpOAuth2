@@ -12,15 +12,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Inspectors
 
         public void Inspect(ITokenContext context)
         {
-            string[] allowedGrantTypes = new string[]
-            {
-                Parameters.GrantTypeValues.AuthorizationCode,
-                Parameters.GrantTypeValues.ClientCredentials,
-                Parameters.GrantTypeValues.Password,
-                Parameters.GrantTypeValues.RefreshToken
-            };
-
-            if (!allowedGrantTypes.Contains(context.GrantType))
+            if (string.IsNullOrWhiteSpace(context.GrantType))
                 throw Errors.InvalidRequestException(context, Parameters.GrantType);
 
             if (context.Client == null)

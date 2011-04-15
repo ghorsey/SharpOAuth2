@@ -78,6 +78,7 @@ namespace SharpOAuth2
                 public const string UnauthorizedClient = "unauthorized_client";
                 public const string AccessDenied = "access_denied";
                 public const string UnsupportedResponseType = "unsupported_response_type";
+                public const string UnsupportedGrantType = "unsupported_grant_type";
                 public const string InvalidScope = "invalid_scope";
             }
         }

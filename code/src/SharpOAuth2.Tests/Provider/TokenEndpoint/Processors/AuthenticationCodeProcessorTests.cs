@@ -40,7 +40,15 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
             mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(new AuthorizationGrantBase { Client = new ClientBase { ClientId = "321", ClientSecret = "secret" } });
             mckTokenService.Setup(x => x.AuthorizationGrantIsValid(It.IsAny<AuthorizationGrantBase>())).Returns(true);
-            mckTokenService.Setup(x => x.SetAccessToken(context));
+            mckTokenService.Setup(x => x.SetAccessToken(context)).Callback<ITokenContext>(x=>{
+                x.Token = new AccessTokenBase
+                {
+                    Expires = 3600,
+                    RefreshToken = "refresh-token",
+                    Token = "token-value",
+                    TokenType = Parameters.AccessTokenTypeValues.Bearer
+                };
+            });
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.FindClient("321")).Returns(new ClientBase { ClientSecret = "secret", ClientId = "321" });
             mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);
@@ -52,6 +60,11 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             AuthenticationCodeProcessor processor = new AuthenticationCodeProcessor(mckFactory.Object);
 
             processor.Process(context);
+
+            Assert.IsNotNull(context.Token);
+            Assert.AreEqual(3600, context.Token.Expires);
+            Assert.AreEqual("refresh-token", context.Token.RefreshToken);
+            Assert.AreEqual("token-value", context.Token.Token);
 
             mckFactory.VerifyAll();
             mckClientService.VerifyAll();

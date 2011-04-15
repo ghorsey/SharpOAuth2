@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="AuthorizationGrantBase.cs" />
     <Compile Include="Fluent\FluentAuthorizationContext.cs" />
+    <Compile Include="AccessTokenMacBase.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContext.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContextBuilder.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationProvider.cs" />

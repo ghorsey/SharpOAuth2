@@ -113,5 +113,14 @@ namespace SharpOAuth2.Globalization {
                 return ResourceManager.GetString("MissingClientInContext", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; grant type is unsupported.
+        /// </summary>
+        public static string UnsupportedGrantType {
+            get {
+                return ResourceManager.GetString("UnsupportedGrantType", resourceCulture);
+            }
+        }
     }
 }
