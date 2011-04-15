@@ -48,8 +48,15 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 
                 return result.Uri;
             }
-            
-            queryComponents[Parameters.AuthroizationCode] = context.Token.Token;
+
+            IDictionary<string, object> responseValues = context.Token.ToResponseValues();
+            foreach (string key in responseValues.Keys)
+            {
+                if (responseValues[key] == null) continue;
+                if (string.IsNullOrWhiteSpace(responseValues[key] as string)) continue;
+
+                queryComponents[key] = responseValues[key].ToString();
+            }
             queryComponents[Parameters.State] = context.State;
 
             SetModifiedContext(context, result, queryComponents);

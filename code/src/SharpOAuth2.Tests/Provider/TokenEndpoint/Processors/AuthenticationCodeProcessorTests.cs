@@ -40,7 +40,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
             mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(new AuthorizationGrantBase { Client = new ClientBase { ClientId = "321", ClientSecret = "secret" }, IsApproved = true, RedirectUri = new Uri("http://www.mysites.com/callback") });
             mckTokenService.Setup(x=>x.ConsumeGrant(It.IsAny<AuthorizationGrantBase>()));
-            mckTokenService.Setup(x=>x.MakeAccessToken(It.IsAny<AuthorizationGrantBase>())).Returns(new AccessTokenBase{ TokenType="bearer", RefreshToken="refresh_token", Token = "token", Expires=120});
+            mckTokenService.Setup(x=>x.MakeAccessToken(It.IsAny<AuthorizationGrantBase>())).Returns(new AccessTokenBase{ TokenType="bearer", RefreshToken="refresh_token", Token = "token", ExpiresIn=120});
             mckTokenService.Setup(x => x.ValidateRedirectUri(context, It.IsAny<AuthorizationGrantBase>())).Returns(true);
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.FindClient("321")).Returns(new ClientBase { ClientSecret = "secret", ClientId = "321" });
@@ -55,7 +55,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             processor.Process(context);
 
             Assert.IsNotNull(context.Token);
-            Assert.AreEqual(120, context.Token.Expires);
+            Assert.AreEqual(120, context.Token.ExpiresIn);
             Assert.AreEqual("refresh_token", context.Token.RefreshToken);
             Assert.AreEqual("token", context.Token.Token);
 
@@ -107,7 +107,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             AuthorizationGrantBase grant = new AuthorizationGrantBase
             {
                 IsApproved = true,
-                Expires = 1,
+                ExpiresIn = 1,
             };
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
             mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(grant);

@@ -27,7 +27,7 @@ namespace SharpOAuthProvider.Domain.Service
             AuthorizationGrant grant = new AuthorizationGrant();
             Client client = ClientRepo.FindClient(context.Client.ClientId);
             grant.Client = client;
-            grant.Expires = 120; // 2 minutes
+            grant.ExpiresIn = 120; // 2 minutes
             grant.Scope = context.Scope;
             grant.ResourceOwnerId = context.ResourceOwnerId;
             grant.Token = Guid.NewGuid().ToString();
@@ -61,7 +61,7 @@ namespace SharpOAuthProvider.Domain.Service
         {
             AccessToken token = new AccessToken
             {
-                Expires = 120,
+                ExpiresIn = 120,
                 Token = Guid.NewGuid().ToString(),
                 TokenType = "bearer",
                 Grant = (AuthorizationGrant)grant

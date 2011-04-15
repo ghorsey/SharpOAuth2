@@ -19,7 +19,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
     {
         private static AuthorizationGrantBase MakeCommonToken(IAuthorizationContext context)
         {
-            return new AuthorizationGrantBase { Expires = 3000, Scope = context.Scope, Token = new Guid().ToString() };
+            return new AuthorizationGrantBase { ExpiresIn = 3000, Scope = context.Scope, Token = new Guid().ToString() };
         }
         private static Mock<IClientService> MakeClientService(IAuthorizationContext context, bool validClient, bool validUri)
         {

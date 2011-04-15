@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SharpOAuth2.Provider.Services;
 using SharpOAuth2.Globalization;
-
+using SharpOAuth2.Provider;
 namespace SharpOAuth2.Provider.TokenEndpoint.Processor
 {
     public class AuthenticationCodeProcessor : ContextProcessor<ITokenContext>
@@ -31,7 +31,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             if (!ServiceFactory.TokenService.ValidateRedirectUri(context, grant))
                 throw Errors.InvalidGrant(context);
 
-            if (grant.Expires > 0 && grant.Created.AddSeconds(grant.Expires) < DateTime.Now)
+            if (grant.ExpiresIn > 0 && (grant.Created.ToEpoch() + grant.ExpiresIn) < DateTime.Now.ToEpoch())
                 throw Errors.InvalidGrant(context);
 
             if (!ServiceFactory.ClientService.AuthenticateClient(context))
