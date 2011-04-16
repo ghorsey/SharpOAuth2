@@ -15,7 +15,7 @@ namespace SharpOAuth2
         public static DateTime FromEpoch(long epoch)
         {
             DateTime d = new DateTime(1970, 1, 1);
-            d.AddSeconds(epoch);
+            d = d.AddSeconds(epoch);
             return d.ToLocalTime();
         }
     }

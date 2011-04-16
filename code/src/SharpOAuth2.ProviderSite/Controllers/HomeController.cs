@@ -70,11 +70,14 @@ namespace SharpOAuth2.ProviderSite.Controllers
         {
             if (FormsAuthentication.Authenticate(username, password))
             {
-                FormsAuthentication.SetAuthCookie(username, true);
-                return Redirect(FormsAuthentication.GetRedirectUrl(username, true));
+                FormsAuthentication.SetAuthCookie(username, false);
+                return Redirect(FormsAuthentication.GetRedirectUrl(username, false));
             }
             else
                 return View("LogOn");
         }
+
+
+
     }
 }

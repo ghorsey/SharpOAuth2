@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EpochTests.cs" />
     <Compile Include="ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContextBuilderTests.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenProviderTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenResponseBuilderTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenResponseWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">

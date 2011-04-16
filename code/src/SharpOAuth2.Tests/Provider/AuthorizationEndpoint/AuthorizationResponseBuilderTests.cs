@@ -51,10 +51,10 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             IAuthorizationContext context = MakeAuthorizatonCodeContext(Parameters.ResponseTypeValues.AuthorizationCode);
             IAuthorizationResponseBuilder builder = new AuthorizationResponseBuilder();
-
+            context.State = "";
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain&code=special-token-value&state=special"), result.ToString());
+            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain&code=special-token-value"), result.ToString());
         }
 
         [Test]
@@ -62,6 +62,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             IAuthorizationContext context = MakeErrorAuthorizationContext(Parameters.ResponseTypeValues.AuthorizationCode);
             context.Error.ErrorDescription = string.Empty;
+            
             IAuthorizationResponseBuilder builder = new AuthorizationResponseBuilder();
 
             Uri result = builder.CreateResponse(context);

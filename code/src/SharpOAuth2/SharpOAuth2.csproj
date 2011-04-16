@@ -61,7 +61,6 @@
     <Compile Include="AuthorizationGrantBase.cs" />
     <Compile Include="Epoch.cs" />
     <Compile Include="Fluent\FluentAuthorizationContext.cs" />
-    <Compile Include="AccessTokenMacBase.cs" />
     <Compile Include="Fluent\FluentTokenContext.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContext.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContextBuilder.cs" />
