@@ -21,15 +21,17 @@ namespace SharpOAuth2.ProviderSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Token()
+        public void Token()
         {
-            ITokenContext context = new TokenContextBuilder().FromHttpRequest(ControllerContext.HttpContext.Request);
-            ITokenProvider provider = ServiceLocator.Current.GetInstance<ITokenProvider>();
-
-            provider.GrantAuthorizationToken(context);
-
-
-            return null;
+            TokenResponse response = ControllerContext.HttpContext.Request.ToTokenContext()
+                .GrantAuthorizationToken()
+                .CreateTokenResponse();
+            
+            ControllerContext.HttpContext.Response.AddHeader("Cache-Control", "no-store");
+            ControllerContext.HttpContext.Response.ContentType = response.ContentType;
+            ControllerContext.HttpContext.Response.StatusCode = response.HttpStatusCode;
+            ControllerContext.HttpContext.Response.Write(response.Body);
+           
         }
 
         [Authorize]

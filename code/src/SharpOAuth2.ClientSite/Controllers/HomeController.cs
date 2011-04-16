@@ -37,6 +37,7 @@ namespace SharpOAuth2.ClientSite.Controllers
                 byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
 
                 WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
+                request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("mykeys")));
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = data.Length;

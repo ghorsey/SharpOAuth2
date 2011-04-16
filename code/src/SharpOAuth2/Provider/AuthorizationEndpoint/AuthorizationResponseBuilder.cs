@@ -18,6 +18,9 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             string queryComponentFormat = "{0}={1}";
             for (int i = 0; i < queryComponents.Count; i++)
             {
+                if (string.IsNullOrWhiteSpace(queryComponents[i]))
+                    continue;
+
                 if (i > 0)
                     writer.Write("&");
 

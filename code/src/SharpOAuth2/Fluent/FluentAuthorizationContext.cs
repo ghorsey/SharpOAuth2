@@ -22,7 +22,7 @@ namespace SharpOAuth2.Fluent
             }
             catch (Exception ex)
             {
-                Log.Info("Faild to inject IAuthorizationContextBuilder", ex);
+                Log.Info("Faild to inject IContextBuilder<IAuthorizationContext>", ex);
                 builder = new AuthorizationContextBuilder();
             }
             return builder;
