@@ -36,6 +36,14 @@ namespace SharpOAuthProvider.Domain.Repository
             _tokens[token.Token] = token;
         }
 
+        public SharpOAuth2.AccessTokenBase FindToken(string token)
+        {
+            if (!_tokens.ContainsKey(token))
+                return null;
+
+            return _tokens[token];
+        }
+
         #endregion
     }
 }

@@ -77,6 +77,12 @@ namespace SharpOAuthProvider.Domain.Service
             return grant.RedirectUri.Equals(context.RedirectUri);
         }
 
+
+        public AccessTokenBase FindToken(string token)
+        {
+            return TokenRepo.FindToken(token);
+        }
+
         #endregion
     }
 }

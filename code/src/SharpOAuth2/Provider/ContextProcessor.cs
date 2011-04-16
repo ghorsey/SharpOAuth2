@@ -6,7 +6,7 @@ using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuth2.Provider
 {
-    public abstract class ContextProcessor<T> where T : IOAuthContext
+    public abstract class ContextProcessor<T> where T : class
     {
         protected readonly IServiceFactory ServiceFactory;
 

@@ -72,6 +72,7 @@ namespace SharpOAuth2
 
             public static class ErrorValues
             {
+                public const string InvalidToken = "invalid_token";
                 public const string InvalidRequest = "invalid_request";
                 public const string InvalidClient = "invalid_client";
                 public const string InvalidGrant = "invalid_grant";
@@ -83,6 +84,11 @@ namespace SharpOAuth2
             }
         }
 
+        public const string HttpAuthorizationHeader = "Authorization";
+        public static class BearerTokenValues
+        {
+            public const string BearerTokenRequest = "bearer_token";
+        }
 
     }
 }

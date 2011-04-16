@@ -13,5 +13,7 @@ namespace SharpOAuthProvider.Domain.Repository
         AuthorizationGrant LoadAuthroizationGrant(string code);
 
         AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode);
+
+        AccessTokenBase FindToken(string token);
     }
 }

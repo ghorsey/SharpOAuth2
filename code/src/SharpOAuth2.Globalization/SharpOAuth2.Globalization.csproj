@@ -57,6 +57,11 @@
       <DependentUpon>ErrorResponseResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceEndpointResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceEndpointResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TokenEndpointResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,6 +76,10 @@
     <EmbeddedResource Include="ErrorResponseResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorResponseResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceEndpointResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceEndpointResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TokenEndpointResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
