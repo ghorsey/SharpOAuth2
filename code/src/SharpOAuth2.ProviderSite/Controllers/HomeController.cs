@@ -26,12 +26,8 @@ namespace SharpOAuth2.ProviderSite.Controllers
             TokenResponse response = ControllerContext.HttpContext.Request.ToTokenContext()
                 .GrantAuthorizationToken()
                 .CreateTokenResponse();
-            
-            ControllerContext.HttpContext.Response.AddHeader("Cache-Control", "no-store");
-            ControllerContext.HttpContext.Response.ContentType = response.ContentType;
-            ControllerContext.HttpContext.Response.StatusCode = response.HttpStatusCode;
-            ControllerContext.HttpContext.Response.Write(response.Body);
-           
+
+            ControllerContext.HttpContext.Response.WriteTokenResponse(response);
         }
 
         [Authorize]

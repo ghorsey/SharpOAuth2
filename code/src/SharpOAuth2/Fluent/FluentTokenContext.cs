@@ -83,5 +83,16 @@ namespace SharpOAuth2.Fluent
             ITokenResponseBuilder builder = GetResponseBuilder();
             return builder.CreateResponse(context);
         }
+
+        public static void WriteTokenResponse(this HttpResponse response, TokenResponse tokenResponse)
+        {
+            WriteTokenResponse(new HttpResponseWrapper(response), tokenResponse);
+        }
+        public static void WriteTokenResponse(this HttpResponseBase response, TokenResponse tokenResponse)
+        {
+            TokenResponseWriter writer = new TokenResponseWriter(response);
+
+            writer.WriteResponse(tokenResponse);
+        }
     }
 }

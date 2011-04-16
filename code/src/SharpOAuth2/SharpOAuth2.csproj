@@ -97,12 +97,14 @@
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenProvider.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenResponseBuilder.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenWriter.cs" />
     <Compile Include="Provider\TokenEndpoint\Processor\AuthenticationCodeProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilder.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenProvider.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenResponse.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenResponseBuilder.cs" />
+    <Compile Include="Provider\TokenEndpoint\TokenResponseWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">
