@@ -76,6 +76,7 @@
     <Compile Include="Provider\ResourceEndpoint\Processors\BearerProcessor.cs" />
     <Compile Include="Provider\ResourceEndpoint\IResourceContext.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceContext.cs" />
+    <Compile Include="Provider\ResourceEndpoint\ResourceErrors.cs" />
     <Compile Include="Provider\Services\IServiceFactory.cs" />
     <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />

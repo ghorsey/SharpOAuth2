@@ -10,7 +10,7 @@ namespace SharpOAuth2.Provider
 {
     public static class Errors
     {
-        public static OAuthErrorResponseException<T> InvalidRequestException<T>(T context, string parameter, Uri uri = null) where T : IOAuthContext
+        public static OAuthErrorResponseException<T> InvalidRequestException<T>(T context, string parameter, Uri uri = null) where T : class
         {
             if (string.IsNullOrWhiteSpace(parameter))
                 throw new ArgumentException("parameter");
@@ -23,7 +23,7 @@ namespace SharpOAuth2.Provider
                 uri);
 
         }
-        public static OAuthErrorResponseException<T> UnsupportedResponseType<T>(T context, string responseType, Uri uri = null) where T : IOAuthContext
+        public static OAuthErrorResponseException<T> UnsupportedResponseType<T>(T context, string responseType, Uri uri = null) where T : class
         {
             if (string.IsNullOrWhiteSpace(responseType))
                 throw new ArgumentException("responseType");
@@ -36,23 +36,24 @@ namespace SharpOAuth2.Provider
                  uri);
         }
 
-        public static OAuthErrorResponseException<T> AccessDenied<T>(T context) where T : IOAuthContext
+        public static OAuthErrorResponseException<T> AccessDenied<T>(T context) where T : class
         {
             return new OAuthErrorResponseException<T>(context,
                         Parameters.ErrorParameters.ErrorValues.AccessDenied,
                         description: AuthorizationEndpointResources.ResourceOwnerDenied);
         }
 
-        public static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T : IOAuthContext
+        public static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T : class
         {
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.UnauthorizedClient,
                 description: string.Format(CultureInfo.CurrentUICulture, AuthorizationEndpointResources.InvalidClient, client.ClientId));
         }
 
-        public static OAuthErrorResponseException<T> InvalidClient<T>(T context) where T : IOAuthContext
+        public static OAuthErrorResponseException<IOAuthContext> InvalidClient(IOAuthContext context)
         {
-            return new OAuthErrorResponseException<T>(context,
+            
+            return new OAuthErrorResponseException<IOAuthContext>(context,
                 Parameters.ErrorParameters.ErrorValues.InvalidClient,
                 description: string.Format(CultureInfo.CurrentUICulture,
                 TokenEndpointResources.InvalidClientCredentials, context.Client.ClientId));

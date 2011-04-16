@@ -18,6 +18,10 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
                 processor.Process(context);
                 Assert.Fail("Did not produce an exception");
             }
+            catch (OAuthErrorResponseException<IOAuthContext> x)
+            {
+                Assert.AreEqual(errorParamter, x.Error);
+            }
             catch (OAuthErrorResponseException<ITokenContext> x)
             {
                 Assert.AreEqual(errorParamter, x.Error);

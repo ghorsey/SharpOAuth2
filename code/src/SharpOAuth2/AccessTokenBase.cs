@@ -7,16 +7,18 @@ namespace SharpOAuth2
 {
     public class AccessTokenBase : IToken
     {
+
+        public AccessTokenBase()
+        {
+            Created = DateTime.Now.ToEpoch();
+        }
         #region IToken Members
 
         public virtual string Token{ get; set; }
         public virtual string TokenType{ get; set; } 
         public virtual int ExpiresIn{ get; set; }
         public virtual string RefreshToken{ get; set; }
-        #endregion
-
-        #region IToken Members
-
+        public virtual long Created { get; private set; }
 
         public virtual IDictionary<string, object> ToResponseValues()
         {

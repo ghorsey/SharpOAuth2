@@ -41,17 +41,11 @@ namespace SharpOAuth2.Provider.ResourceEndpoint.Processors
 
             AccessTokenBase token = ServiceFactory.TokenService.FindToken(rawToken);
 
-            if( token == null)
-            {
-                context.Error = new ErrorResponse
-                {
-                    Error = Parameters.ErrorParameters.ErrorValues.InvalidToken,
-                    ErrorDescription = ResourceEndpointResources.InvalidToken
-                };
-                return;
-            }
+            if (token == null)
 
-            //todo: continue here
+
+                if (token.ExpiresIn > 0 && (token.Created + token.ExpiresIn) < DateTime.Now.ToEpoch())
+                    throw new Exception();
         }
 
     }

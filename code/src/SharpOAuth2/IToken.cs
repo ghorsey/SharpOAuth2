@@ -11,7 +11,7 @@ namespace SharpOAuth2
         string TokenType { get; set; }
         int ExpiresIn{ get; set; }
         string RefreshToken{ get; set; }
-
+        long Created { get; }
 
         IDictionary<string, object> ToResponseValues();
     }
