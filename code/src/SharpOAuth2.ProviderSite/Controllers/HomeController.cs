@@ -10,6 +10,7 @@ using SharpOAuthProvider.Domain.Repository;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuthProvider.Domain;
 using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Mvc;
 namespace SharpOAuth2.ProviderSite.Controllers
 {
     public class HomeController : Controller
@@ -21,13 +22,13 @@ namespace SharpOAuth2.ProviderSite.Controllers
         }
 
         [HttpPost]
-        public void Token()
+        public ActionResult Token()
         {
             TokenResponse response = ControllerContext.HttpContext.Request.ToTokenContext()
                 .GrantAuthorizationToken()
                 .CreateTokenResponse();
 
-            ControllerContext.HttpContext.Response.WriteTokenResponse(response);
+            return new TokenResponseActionResult(response);
         }
 
         [Authorize]
