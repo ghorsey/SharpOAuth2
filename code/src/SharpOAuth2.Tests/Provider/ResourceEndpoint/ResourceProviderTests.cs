@@ -117,7 +117,63 @@ namespace SharpOAuth2.Tests.Provider.ResourceEndpoint
 
             mckProvider.Verify();
         }
+        [Test]
+        public void TestValidScope()
+        {
+            ResourceContext context = new ResourceContext();
+            context.Token = new AccessTokenBase { Scope = new[] { "create" } };
 
+            ResourceProvider provider = new ResourceProvider();
+
+            provider.ValidateScope(context, new string[] { "CREATE" });
+        }
+
+        [Test]
+        public void TestInvalidMissingTokenScope()
+        {
+            ResourceContext context = new ResourceContext();
+
+            ResourceProvider provider = new ResourceProvider();
+
+            try
+            {
+                provider.ValidateScope(context, new string[] { "delete" });
+                Assert.Fail("No exception was thrown");
+            }
+            catch (OAuthErrorResponseException<IResourceContext> x)
+            {
+                Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.InvalidToken, x.Error);
+                Assert.AreEqual(401, x.HttpStatusCode);
+            }
+            catch (Exception x)
+            {
+                Assert.Fail("Unexpected exception: " + x.Message);
+            }
+        }
+
+        [Test]
+        public void TestInvalidScope()
+        {
+            ResourceContext context = new ResourceContext();
+            context.Token = new AccessTokenBase { Scope = new[] { "create" } };
+
+            ResourceProvider provider = new ResourceProvider();
+
+            try
+            {
+                provider.ValidateScope(context, new string[] { "delete" });
+                Assert.Fail("No exception was thrown");
+            }
+            catch (OAuthErrorResponseException<IResourceContext> x)
+            {
+                Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.InsufficientScope, x.Error);
+                Assert.AreEqual(403, x.HttpStatusCode);
+            }
+            catch (Exception x)
+            {
+                Assert.Fail("Unexpected exception: " + x.Message);
+            }
+        }
 
 
         private static void CommonErrorAssert(ResourceContext context, ResourceProvider provider, string error)

@@ -8,5 +8,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
     public interface IResourceProvider
     {
         void AccessProtectedResource(IResourceContext context);
+
+        void ValidateScope(IResourceContext context, string[] scope);
     }
 }

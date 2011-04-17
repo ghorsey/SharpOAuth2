@@ -4,13 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using SharpOAuth2.Provider.AuthorizationEndpoint;
-using SharpOAuth2.Fluent;
-using SharpOAuthProvider.Domain.Repository;
 using Microsoft.Practices.ServiceLocation;
-using SharpOAuthProvider.Domain;
-using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Fluent;
 using SharpOAuth2.Mvc;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
+using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.ResourceEndpoint;
+using SharpOAuthProvider.Domain;
+using SharpOAuthProvider.Domain.Repository;
+using SharpOAuth2.Provider;
+using Newtonsoft.Json;
 namespace SharpOAuth2.ProviderSite.Controllers
 {
     public class HomeController : Controller
@@ -78,6 +81,36 @@ namespace SharpOAuth2.ProviderSite.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ViewResourceOwnerData()
+        {
+            IResourceContext context = new ResourceContextBuilder().FromHttpRequest(ControllerContext.HttpContext.Request);
+
+            IResourceProvider provider = ServiceLocator.Current.GetInstance<IResourceProvider>();
+
+
+
+            object[] list = new object[]
+            {
+                new { FirstName = "Geoff", LastName="Horsey"},
+                new { FirstName = "John", LastName = "Doe"},
+                new { FirstName = "Jane", LastNmae ="Doe"}
+            };
+
+            try
+            {
+                provider.AccessProtectedResource(context);
+                provider.ValidateScope(context, new string[] { "view" });
+
+                return Json(list, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch(OAuthErrorResponseException<IResourceProvider> x)
+            {
+                throw new HttpException(x.HttpStatusCode, x.Message);
+            }
+
+        }
 
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
     <Compile Include="Provider\ResourceEndpoint\Processor\BearerProcessorTests.cs" />
+    <Compile Include="Provider\ResourceEndpoint\ResourceBuilderTests.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceProviderTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\AuthorizationCodeInspectorTest.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\InspectorTestBase.cs" />

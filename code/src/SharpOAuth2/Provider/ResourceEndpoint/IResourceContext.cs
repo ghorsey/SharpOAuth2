@@ -12,6 +12,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
         NameValueCollection Headers { get; set; }
         NameValueCollection QueryString { get; set; }
         NameValueCollection Form { get; set; }
+        string Realm { get; set; }
 
         IToken Token { get; set; }
     }

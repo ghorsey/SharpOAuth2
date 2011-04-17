@@ -9,7 +9,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
     public class ResourceContext : IResourceContext
     {
         #region IResourceContext Members
-
+        public string Realm { get; set; }
         public ErrorResponse Error{ get; set; }
         public NameValueCollection Headers{ get; set; }
         public NameValueCollection QueryString{ get; set; }

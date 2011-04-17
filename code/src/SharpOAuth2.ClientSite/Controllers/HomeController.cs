@@ -7,6 +7,7 @@ using SharpOAuth2.ClientSite.Models.Home;
 using System.Net;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace SharpOAuth2.ClientSite.Controllers
 {
@@ -49,12 +50,39 @@ namespace SharpOAuth2.ClientSite.Controllers
                 WebResponse response = request.GetResponse();
                 
                 using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                {
                     accessToken = sr.ReadToEnd();
-                }
+
+                Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(accessToken);
+                Session["Token"] = dictionary;
+
+                return RedirectToAction("ViewResourceData");
             }
 
-            return View("Callback", new CallbackModel(accessToken, !string.IsNullOrWhiteSpace(error), error, error_description));
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                return View("Callback", new CallbackModel(accessToken, !string.IsNullOrWhiteSpace(error), error, error_description));
+            }
+            else
+            {
+                return RedirectToAction("ViewData");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ViewResourceData()
+        {
+            IDictionary<string, object> token = (IDictionary<string, object>)Session["Token"];
+            WebRequest request = WebRequest.Create("http://localhost:15079/Home/ViewResourceOwnerData");
+            request.Method = "GET";
+            request.Headers["Authorization"] = "Bearer " + token["access_token"];
+
+            WebResponse response = request.GetResponse();
+
+            string result = string.Empty;
+            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                result = sr.ReadToEnd();
+
+            return View("ViewResourceData", (object)result);
         }
     }
 }

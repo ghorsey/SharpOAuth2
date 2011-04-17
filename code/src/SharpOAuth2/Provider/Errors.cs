@@ -83,5 +83,15 @@ namespace SharpOAuth2.Provider
                 Parameters.ErrorParameters.ErrorValues.InvalidToken,
                 httpStatusCode: 401);
         }
+
+        internal static OAuthErrorResponseException<IResourceContext> InsufficientScope(IResourceContext context, string requiredScope)
+        {
+            return new OAuthErrorResponseException<IResourceContext>(context,
+                Parameters.ErrorParameters.ErrorValues.InsufficientScope,
+                string.Format(CultureInfo.CurrentUICulture,
+                ResourceEndpointResources.InsufficientScope, requiredScope),
+                httpStatusCode: 403);
+ 
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
             }
             return result;
         }
-        private string SerializeErrorResponse(IDictionary<string, object> response)
+        private string SerializeResponse(IDictionary<string, object> response)
         {
             IDictionary<string, object> toSerialize = RemoveEmptyOrNullResponseValues(response);
 
@@ -39,7 +39,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
                 IDictionary<string, object> errorResults = context.Error.ToResponseValues();
                 if (context.Error.Error == Parameters.ErrorParameters.ErrorValues.InvalidClient)
                     errorResponse.HttpStatusCode = 401;
-                errorResponse.Body = SerializeErrorResponse(errorResults);
+                errorResponse.Body = SerializeResponse(errorResults);
 
                 return errorResponse;
             }
@@ -47,7 +47,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
                 throw new OAuthFatalException(TokenEndpointResources.ContextDoesNotContainToken);
 
             TokenResponse response = new TokenResponse { HttpStatusCode = 200 };
-            response.Body = SerializeErrorResponse(context.Token.ToResponseValues());
+            response.Body = SerializeResponse(context.Token.ToResponseValues());
             return response;
         }
 

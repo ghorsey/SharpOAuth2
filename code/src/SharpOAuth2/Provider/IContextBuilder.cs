@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SharpOAuth2.Provider
 {
-    public interface IContextBuilder<T> where T : IOAuthContext
+    public interface IContextBuilder<T> where T : class
     {
         T FromUri(string url);
         T FromUri(Uri uri);

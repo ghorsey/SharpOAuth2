@@ -61,6 +61,15 @@ namespace SharpOAuth2.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request does not have access to the required scope &apos;{0}&apos;.
+        /// </summary>
+        public static string InsufficientScope {
+            get {
+                return ResourceManager.GetString("InsufficientScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The access token provided is expired, revoked, malformed, or invalid for other reasons.
         /// </summary>
         public static string InvalidToken {

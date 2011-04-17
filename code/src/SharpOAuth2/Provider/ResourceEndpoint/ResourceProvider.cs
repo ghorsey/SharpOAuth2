@@ -35,6 +35,19 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
 
         }
 
+
+        public void ValidateScope(IResourceContext context, string[] scope)
+        {
+            if (context.Token == null)
+                throw Errors.InvalidToken(context);
+
+            foreach (string scopeItem in scope)
+            {
+                if (context.Token.Scope.Where(x => x.ToUpperInvariant() == scopeItem.ToUpperInvariant()).Count() != 1)
+                    throw Errors.InsufficientScope(context, string.Join(" ", scope));
+            }
+        }
+
         #endregion
     }
 }
