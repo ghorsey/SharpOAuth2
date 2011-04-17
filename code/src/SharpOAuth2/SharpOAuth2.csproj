@@ -73,10 +73,11 @@
     <Compile Include="Provider\ContextProcessor.cs" />
     <Compile Include="Provider\IOAuthContext.cs" />
     <Compile Include="Provider\IContextInspector.cs" />
+    <Compile Include="Provider\ResourceEndpoint\IResourceProvider.cs" />
     <Compile Include="Provider\ResourceEndpoint\Processors\BearerProcessor.cs" />
     <Compile Include="Provider\ResourceEndpoint\IResourceContext.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceContext.cs" />
-    <Compile Include="Provider\ResourceEndpoint\ResourceErrors.cs" />
+    <Compile Include="Provider\ResourceEndpoint\ResourceProvider.cs" />
     <Compile Include="Provider\Services\IServiceFactory.cs" />
     <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />

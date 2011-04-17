@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpOAuth2
 {
-    public static class Parameters
+    internal static class Parameters
     {
         public const string ClientId = "client_id";
         public const string ClientSecret = "client_secret";

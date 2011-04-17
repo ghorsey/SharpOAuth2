@@ -63,9 +63,9 @@ namespace SharpOAuthProvider.Domain.Service
             {
                 ExpiresIn = 120,
                 Token = Guid.NewGuid().ToString(),
-                TokenType = "bearer",
                 Grant = (AuthorizationGrant)grant
             };
+            token.Scope = grant.Scope;
 
             TokenRepo.AddAccessToken(token);
             return token;

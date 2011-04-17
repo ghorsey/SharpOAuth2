@@ -5,7 +5,8 @@ using System.Text;
 
 namespace SharpOAuth2.Provider.ResourceEndpoint
 {
-    public class ResourceErrors
+    public interface IResourceProvider
     {
+        void AccessProtectedResource(IResourceContext context);
     }
 }

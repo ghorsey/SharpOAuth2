@@ -11,6 +11,7 @@ namespace SharpOAuth2.Provider
         public T Context{ get; private set; }
         public string Error { get; private set; }
         public Uri ErrorUri { get; private set; }
+        public int HttpStatusCode { get; private set; }
 
         public OAuthErrorResponseException(T context, string error)
             : this()
@@ -19,12 +20,13 @@ namespace SharpOAuth2.Provider
             Error = error;
         }
 
-        public OAuthErrorResponseException(T context, string error, string description = "", Uri errorUri = null)
+        public OAuthErrorResponseException(T context, string error, string description = "", int httpStatusCode = 400, Uri errorUri = null)
             : this( description )
         {
             ErrorUri = errorUri;
             Error = error;
             Context = context;
+            HttpStatusCode = httpStatusCode;
         }
         public OAuthErrorResponseException(T context, string error, string description, Exception inner, Uri errorUri = null)
             : this(description, inner)

@@ -68,5 +68,14 @@ namespace SharpOAuth2.Globalization {
                 return ResourceManager.GetString("InvalidToken", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported token_type.
+        /// </summary>
+        public static string UnsupportedTokenType {
+            get {
+                return ResourceManager.GetString("UnsupportedTokenType", resourceCulture);
+            }
+        }
     }
 }

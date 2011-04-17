@@ -120,4 +120,7 @@
   <data name="InvalidToken" xml:space="preserve">
     <value>The access token provided is expired, revoked, malformed, or invalid for other reasons</value>
   </data>
+  <data name="UnsupportedTokenType" xml:space="preserve">
+    <value>Unsupported token_type</value>
+  </data>
 </root>

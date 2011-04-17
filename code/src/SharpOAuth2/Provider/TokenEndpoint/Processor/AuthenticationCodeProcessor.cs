@@ -31,7 +31,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             if (!ServiceFactory.TokenService.ValidateRedirectUri(context, grant))
                 throw Errors.InvalidGrant(context);
 
-            if (grant.ExpiresIn > 0 && (grant.Created + grant.ExpiresIn) < DateTime.Now.ToEpoch())
+            if (grant.ExpiresIn > 0 && (grant.IssuedOn + grant.ExpiresIn) < DateTime.Now.ToEpoch())
                 throw Errors.InvalidGrant(context);
 
             if (!ServiceFactory.ClientService.AuthenticateClient(context))

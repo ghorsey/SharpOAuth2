@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SharpOAuth2.Provider.Services;
 using SharpOAuth2.Globalization;
+using System.Collections.Specialized;
 
 namespace SharpOAuth2.Provider.ResourceEndpoint.Processors
 {
@@ -13,15 +14,15 @@ namespace SharpOAuth2.Provider.ResourceEndpoint.Processors
 
         private string ParseBearerToken(IResourceContext context)
         {
-            if (!string.IsNullOrWhiteSpace(context.QueryString[Parameters.BearerTokenValues.BearerTokenRequest]))
+            if (!string.IsNullOrWhiteSpace((context.QueryString ?? new NameValueCollection())[Parameters.BearerTokenValues.BearerTokenRequest]))
                 return context.QueryString[Parameters.BearerTokenValues.BearerTokenRequest];
-            if (!string.IsNullOrWhiteSpace(context.Form[Parameters.BearerTokenValues.BearerTokenRequest]))
+            if (!string.IsNullOrWhiteSpace((context.Form ?? new NameValueCollection())[Parameters.BearerTokenValues.BearerTokenRequest]))
                 return context.Form[Parameters.BearerTokenValues.BearerTokenRequest];
 
-            if( string.IsNullOrWhiteSpace(context.Headers[Parameters.HttpAuthorizationHeader]))
+            if(string.IsNullOrWhiteSpace((context.Headers ?? new NameValueCollection())[Parameters.HttpAuthorizationHeader]))
                 return string.Empty;
 
-            string value =context.Headers[Parameters.HttpAuthorizationHeader]; 
+            string value = context.Headers[Parameters.HttpAuthorizationHeader]; 
             string type = value.Substring(0, value.IndexOf(" ")).ToUpperInvariant();
             if( type != "BEARER")
                 return string.Empty;
@@ -41,11 +42,10 @@ namespace SharpOAuth2.Provider.ResourceEndpoint.Processors
 
             AccessTokenBase token = ServiceFactory.TokenService.FindToken(rawToken);
 
-            if (token == null)
+            
 
 
-                if (token.ExpiresIn > 0 && (token.Created + token.ExpiresIn) < DateTime.Now.ToEpoch())
-                    throw new Exception();
+            context.Token = token;
         }
 
     }

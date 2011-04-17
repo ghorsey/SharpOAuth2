@@ -10,7 +10,7 @@ namespace SharpOAuth2
 
         public AccessTokenBase()
         {
-            Created = DateTime.Now.ToEpoch();
+            IssuedOn = DateTime.Now.ToEpoch();
         }
         #region IToken Members
 
@@ -18,7 +18,8 @@ namespace SharpOAuth2
         public virtual string TokenType{ get; set; } 
         public virtual int ExpiresIn{ get; set; }
         public virtual string RefreshToken{ get; set; }
-        public virtual long Created { get; private set; }
+        public virtual long IssuedOn { get; set; }
+        public virtual string[] Scope { get; set; }
 
         public virtual IDictionary<string, object> ToResponseValues()
         {

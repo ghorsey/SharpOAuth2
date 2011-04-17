@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\SharpOAuth2.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CuttingEdge.ServiceLocation">
       <HintPath>..\..\lib\SimpleServiceLocator\CuttingEdge.ServiceLocation.dll</HintPath>
@@ -64,6 +70,8 @@
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\ErrorsTests.cs" />
+    <Compile Include="Provider\ResourceEndpoint\Processor\BearerProcessorTests.cs" />
+    <Compile Include="Provider\ResourceEndpoint\ResourceProviderTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\AuthorizationCodeInspectorTest.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\InspectorTestBase.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\RefreshAccessTokenInspectorTests.cs" />
@@ -83,8 +91,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\SharpOAuth2.snk">
+      <Link>SharpOAuth2.snk</Link>
+    </None>
     <None Include="..\SharpOAuth2\App.config">
-      <Link>App.config</Link>
+      <Link>Provider\App.config</Link>
     </None>
   </ItemGroup>
   <ItemGroup />

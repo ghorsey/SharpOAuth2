@@ -5,12 +5,13 @@ using System.Text;
 using System.Globalization;
 using SharpOAuth2.Globalization;
 using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.ResourceEndpoint;
 
 namespace SharpOAuth2.Provider
 {
-    public static class Errors
+    internal static class Errors
     {
-        public static OAuthErrorResponseException<T> InvalidRequestException<T>(T context, string parameter, Uri uri = null) where T : class
+        internal static OAuthErrorResponseException<T> InvalidRequestException<T>(T context, string parameter, Uri uri = null) where T : class
         {
             if (string.IsNullOrWhiteSpace(parameter))
                 throw new ArgumentException("parameter");
@@ -20,10 +21,10 @@ namespace SharpOAuth2.Provider
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.InvalidRequest,
                 string.Format(CultureInfo.CurrentUICulture, ErrorResponseResources.InvalidRequest, parameter),
-                uri);
+                errorUri: uri);
 
         }
-        public static OAuthErrorResponseException<T> UnsupportedResponseType<T>(T context, string responseType, Uri uri = null) where T : class
+        internal static OAuthErrorResponseException<T> UnsupportedResponseType<T>(T context, string responseType, Uri uri = null) where T : class
         {
             if (string.IsNullOrWhiteSpace(responseType))
                 throw new ArgumentException("responseType");
@@ -33,24 +34,24 @@ namespace SharpOAuth2.Provider
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, 
                 string.Format(CultureInfo.CurrentUICulture, ErrorResponseResources.InvalidResponseType, responseType),
-                 uri);
+                 errorUri: uri);
         }
 
-        public static OAuthErrorResponseException<T> AccessDenied<T>(T context) where T : class
+        internal static OAuthErrorResponseException<T> AccessDenied<T>(T context) where T : class
         {
             return new OAuthErrorResponseException<T>(context,
                         Parameters.ErrorParameters.ErrorValues.AccessDenied,
                         description: AuthorizationEndpointResources.ResourceOwnerDenied);
         }
 
-        public static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T : class
+        internal static OAuthErrorResponseException<T> UnauthorizedClient<T>(T context, IClient client) where T : class
         {
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.UnauthorizedClient,
                 description: string.Format(CultureInfo.CurrentUICulture, AuthorizationEndpointResources.InvalidClient, client.ClientId));
         }
 
-        public static OAuthErrorResponseException<IOAuthContext> InvalidClient(IOAuthContext context)
+        internal static OAuthErrorResponseException<IOAuthContext> InvalidClient(IOAuthContext context)
         {
             
             return new OAuthErrorResponseException<IOAuthContext>(context,
@@ -58,7 +59,7 @@ namespace SharpOAuth2.Provider
                 description: string.Format(CultureInfo.CurrentUICulture,
                 TokenEndpointResources.InvalidClientCredentials, context.Client.ClientId));
         }
-        public static OAuthErrorResponseException<ITokenContext> InvalidGrant(ITokenContext context) 
+        internal static OAuthErrorResponseException<ITokenContext> InvalidGrant(ITokenContext context) 
         {
             return new OAuthErrorResponseException<ITokenContext>(context,
                 Parameters.ErrorParameters.ErrorValues.InvalidGrant,
@@ -67,13 +68,20 @@ namespace SharpOAuth2.Provider
                 context.AuthorizationCode));
         }
 
-        public static OAuthErrorResponseException<ITokenContext> UnsupportedGrantType(ITokenContext context)
+        internal static OAuthErrorResponseException<ITokenContext> UnsupportedGrantType(ITokenContext context)
         {
             return new OAuthErrorResponseException<ITokenContext>(context,
                 Parameters.ErrorParameters.ErrorValues.UnsupportedGrantType,
                 description: string.Format(CultureInfo.CurrentUICulture,
                 TokenEndpointResources.UnsupportedGrantType,
                 context.GrantType));
+        }
+
+        internal static Exception InvalidToken(IResourceContext context)
+        {
+            return new OAuthErrorResponseException<IResourceContext>(context,
+                Parameters.ErrorParameters.ErrorValues.InvalidToken,
+                httpStatusCode: 401);
         }
     }
 }

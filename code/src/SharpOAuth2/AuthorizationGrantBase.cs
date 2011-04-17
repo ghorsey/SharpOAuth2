@@ -16,7 +16,7 @@ namespace SharpOAuth2
         public virtual int ExpiresIn { get; set; }
         public virtual string RefreshToken { get; set; }
         public virtual string[] Scope { get; set; }
-        public virtual long Created { get; private set; }
+        public virtual long IssuedOn { get; private set; }
         public virtual bool IsApproved { get; set; }
         public virtual ClientBase Client { get; set; }
         public virtual Uri RedirectUri { get; set; }
@@ -25,7 +25,7 @@ namespace SharpOAuth2
 
         public AuthorizationGrantBase()
         {
-            Created = DateTime.Now.ToEpoch();
+            IssuedOn = DateTime.Now.ToEpoch();
         }
 
         #region IToken Members

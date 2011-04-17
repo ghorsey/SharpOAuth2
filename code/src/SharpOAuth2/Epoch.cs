@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharpOAuth2
 {
-    public static class Epoch
+    internal static class Epoch
     {
         public static long ToEpoch(this DateTime time)
         {
