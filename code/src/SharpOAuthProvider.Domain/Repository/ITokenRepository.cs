@@ -10,10 +10,10 @@ namespace SharpOAuthProvider.Domain.Repository
     {
         void AddAccessToken(AccessToken token);
         void AddAuthorizationGrant(AuthorizationGrant grant);
-        AuthorizationGrant LoadAuthroizationGrant(string code);
 
-        AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode);
-
+        AuthorizationGrant FindAuthorizationGrant(string authorizationCode);
+        AuthorizationGrant FindAuthorizationGrant(string clientId, string resourceOwnerId);
         AccessTokenBase FindToken(string token);
+
     }
 }

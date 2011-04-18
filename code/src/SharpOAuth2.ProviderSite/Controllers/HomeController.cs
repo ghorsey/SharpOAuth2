@@ -37,9 +37,19 @@ namespace SharpOAuth2.ProviderSite.Controllers
         [Authorize]
         public ActionResult Authorize()
         {
-            IAuthorizationContext authContext = ControllerContext.HttpContext.Request.ToAuthorizationContext();
+            IAuthorizationContext authContext = ControllerContext.HttpContext.Request.ToAuthorizationContext()
+                .SetResourceOwner(User.Identity.Name);
+
+
+            if (authContext.IsAccessApproved())
+                return Redirect(authContext.SetApproval(true)
+                    .CreateAuthorizationGrant()
+                    .CreateAuthorizationResponse().AbsoluteUri);
+
             Session["context"] = authContext;
             IClientRepository clientRepo = ServiceLocator.Current.GetInstance<IClientRepository>();
+
+
 
             Client client = clientRepo.FindClient(authContext.Client.ClientId);
             ViewBag.ClientName = client.Name;
@@ -50,7 +60,7 @@ namespace SharpOAuth2.ProviderSite.Controllers
         public ActionResult HandleAuthorization( string authButton)
         {
             IAuthorizationContext ctx = (IAuthorizationContext)Session["context"];
-            IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
+            //IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
 
             bool isAuthorized = (authButton == "GRANT");
 

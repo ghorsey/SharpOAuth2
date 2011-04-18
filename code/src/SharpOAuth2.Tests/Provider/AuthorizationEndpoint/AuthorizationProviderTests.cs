@@ -173,6 +173,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
             context.ResponseType = "unk";
+            context.ResourceOwnerId = "owner-id";
 
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
 
@@ -211,6 +212,25 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnsupportedResponseType, context.Error.Error);
+
+        }
+        [Test]
+        public void TestCheckingIfOwnerAlreadyApprovedClient()
+        {
+            AuthorizationContext context = MakeCommonAuthorizationContext();
+            context.ResourceOwnerId = "1234";
+
+
+            Mock<IClientService> mckClientService = MakeClientService(context, true, true);
+            mckClientService.Setup(x=>x.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerId)).Returns(true);
+            Mock<ITokenService> mckTokenService = MakeTokenService(context);
+            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
+
+            SetUp(mckServiceFactory.Object);
+
+            IAuthorizationProvider provider = new AuthorizationProvider(mckServiceFactory.Object);
+
+            Assert.IsTrue(provider.IsAccessApproved(context));
 
         }
 

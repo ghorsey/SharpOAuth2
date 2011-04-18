@@ -20,6 +20,11 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         }
         private void InspectRequest(IAuthorizationContext context)
         {
+            AssertNoAuthorizationToken(context);
+            AssertIsClient(context);
+            AssertRedirectUriIsValid(context);
+            AssertResourceOwnerIdIsNotBlank(context);
+
             new SpecificationInspector().Inspect(context); // always run the known inspectors
             IEnumerable<IContextInspector<IAuthorizationContext>> inspectors = ServiceLocator.Current.GetAllInstances<IContextInspector<IAuthorizationContext>>();
 
@@ -56,10 +61,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             try
             {
                 InspectRequest(context);
-                AssertNoAuthorizationToken(context);
-                AssertIsClient(context);
-                AssertRedirectUriIsValid(context);
-                AssertResourceOwnerIdIsNotBlank(context);
+               
 
                 IEnumerable<ContextProcessor<IAuthorizationContext>> processors = ServiceLocator.Current.GetAllInstances<ContextProcessor<IAuthorizationContext>>();
 
@@ -88,7 +90,18 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
             }
         }
 
-        
+        #endregion
+
+        #region IAuthorizationProvider Members
+
+
+        public bool IsAccessApproved(IAuthorizationContext context)
+        {
+            InspectRequest(context);
+
+            return ServiceFactory.ClientService.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerId);
+        }
+
         #endregion
     }
 }

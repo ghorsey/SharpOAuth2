@@ -6,16 +6,19 @@ using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuthProvider.Domain.Repository;
 using SharpOAuth2.Provider.Services;
 using SharpOAuth2.Provider;
+using SharpOAuth2;
 
 namespace SharpOAuthProvider.Domain.Service
 {
     public class ClientService : IClientService
     {
         readonly IClientRepository ClientRepo;
+        readonly ITokenRepository TokenRepo;
 
-        public ClientService(IClientRepository repo)
+        public ClientService(IClientRepository repo, ITokenRepository tokenRepo)
         {
             ClientRepo = repo;
+            TokenRepo = tokenRepo;
         }
 
         #region IClientService Members
@@ -43,6 +46,15 @@ namespace SharpOAuthProvider.Domain.Service
         public SharpOAuth2.ClientBase FindClient(string clientId)
         {
             return ClientRepo.FindClient(clientId);
+        }
+
+        public bool IsAccessGranted(SharpOAuth2.IClient client, string[] scope, string resourceOwnerId)
+        {
+            AuthorizationGrant grant = TokenRepo.FindAuthorizationGrant(client.ClientId, resourceOwnerId);
+            if (grant == null) return false;
+            if (!grant.IsApproved) return false;
+
+            return  scope.Where(x => !grant.Scope.Contains(x.ToLower())).Count() == 0;
         }
 
         #endregion

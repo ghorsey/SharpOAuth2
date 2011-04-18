@@ -13,6 +13,7 @@ namespace SharpOAuth2.Fluent
     public static class FluentAuthorizationContext
     {
         readonly static ILog Log = LogManager.GetCurrentClassLogger();
+
         private static IContextBuilder<IAuthorizationContext> GetBuilder()
         {
             IContextBuilder<IAuthorizationContext> builder;
@@ -28,12 +29,18 @@ namespace SharpOAuth2.Fluent
             return builder;
         }
 
+        private static IAuthorizationProvider _provider;
         private static IAuthorizationProvider GetProvider()
         {
+            if (_provider != null)
+                return _provider;
             try
             {
-                IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
-                return provider;
+                lock (_provider)
+                {
+                    _provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
+                }
+                return _provider;
             }
             catch (Exception x)
             {
@@ -42,18 +49,25 @@ namespace SharpOAuth2.Fluent
             }
         }
 
+        static IAuthorizationResponseBuilder _responseBuilder;
         private static IAuthorizationResponseBuilder GetResponseBuilder()
         {
-            try
+            if (_responseBuilder != null)
+                return _responseBuilder;
+
+            lock (_responseBuilder)
             {
-                IAuthorizationResponseBuilder builder = ServiceLocator.Current.GetInstance<IAuthorizationResponseBuilder>();
-                return builder;
+                try
+                {
+                    _responseBuilder = ServiceLocator.Current.GetInstance<IAuthorizationResponseBuilder>();
+                }
+                catch (Exception x)
+                {
+                    Log.Info("Failed to inject IAuthorizationResponseBuilder", x);
+                    _responseBuilder = new AuthorizationResponseBuilder();
+                }
             }
-            catch (Exception x)
-            {
-                Log.Info("Failed to inject IAuthorizationResponseBuilder", x);
-                return new AuthorizationResponseBuilder();
-            }
+            return _responseBuilder;
         }
         public static IAuthorizationContext ToAuthorizationContext(this HttpRequest reqeust)
         {
@@ -95,7 +109,11 @@ namespace SharpOAuth2.Fluent
         {
             return GetResponseBuilder().CreateResponse(context);
         }
-       
+
+        public static bool IsAccessApproved(this IAuthorizationContext context)
+        {
+            return GetProvider().IsAccessApproved(context);
+        }
 
 
     }

@@ -17,14 +17,7 @@ namespace SharpOAuthProvider.Domain.Repository
             _grants[grant.Token] = grant;
         }
 
-        public AuthorizationGrant LoadAuthroizationGrant(string code)
-        {
-            if (!_grants.ContainsKey(code)) return null;
-
-            return _grants[code];
-        }
-
-        public SharpOAuth2.AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode)
+        public AuthorizationGrant FindAuthorizationGrant(string authorizationCode)
         {
             if (!_grants.ContainsKey(authorizationCode)) return null;
             return _grants[authorizationCode];
@@ -42,6 +35,15 @@ namespace SharpOAuthProvider.Domain.Repository
                 return null;
 
             return _tokens[token];
+        }
+
+        public AuthorizationGrant FindAuthorizationGrant(string clientId, string resourceOwnerId)
+        {
+            return (from x in _grants
+                    where x.Value.Client.ClientId.ToUpperInvariant() == clientId.ToUpperInvariant() &&
+                    x.Value.ResourceOwnerId.ToUpperInvariant() == resourceOwnerId.ToUpperInvariant()
+                    orderby x.Value.IssuedOn descending
+                    select x.Value).FirstOrDefault();
         }
 
         #endregion

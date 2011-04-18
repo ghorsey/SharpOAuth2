@@ -38,5 +38,7 @@ namespace SharpOAuth2.Provider.Services
         bool IsClient(IOAuthContext context);
 
         ClientBase FindClient(string clientId);
+
+        bool IsAccessGranted(IClient client, string[] scope, string resourceOwnerId);
     }
 }
