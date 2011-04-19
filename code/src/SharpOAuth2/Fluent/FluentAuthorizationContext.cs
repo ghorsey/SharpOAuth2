@@ -13,7 +13,7 @@ namespace SharpOAuth2.Fluent
     public static class FluentAuthorizationContext
     {
         readonly static ILog Log = LogManager.GetCurrentClassLogger();
-
+        readonly static object Lck = new object();
         private static IContextBuilder<IAuthorizationContext> GetBuilder()
         {
             IContextBuilder<IAuthorizationContext> builder;
@@ -36,7 +36,7 @@ namespace SharpOAuth2.Fluent
                 return _provider;
             try
             {
-                lock (_provider)
+                lock (Lck)
                 {
                     _provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
                 }
@@ -55,7 +55,7 @@ namespace SharpOAuth2.Fluent
             if (_responseBuilder != null)
                 return _responseBuilder;
 
-            lock (_responseBuilder)
+            lock (Lck)
             {
                 try
                 {
