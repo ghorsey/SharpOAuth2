@@ -27,13 +27,13 @@ Provider
 Things To Do
 --Implicit Grant
 --Client Credentials
---Resource Owner Password Credentials
 --Refresh an Access Token
 Done
 --Accessing Protected Resources
 --Issuing Access Token
 --Issue Authorization Code (response_type=authorization_code)
 --Building authorization response URL (authorization & token response_types)
+--Resource Owner Password Credentials
 
 Client
 TTD

@@ -37,8 +37,22 @@ namespace SharpOAuth2.Provider.Services
         /// </returns>
         bool IsClient(IOAuthContext context);
 
+        /// <summary>
+        /// Finds the client.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <returns></returns>
         ClientBase FindClient(string clientId);
 
+        /// <summary>
+        /// Determines whether the resource owner has granted the client the specified scope.
+        /// </summary>
+        /// <param name="client">The client requesting access.</param>
+        /// <param name="scope">The scope the client is requesting.</param>
+        /// <param name="resourceOwnerId">The resource owner that the client is requesting access from.</param>
+        /// <returns>
+        /// 	<c>true</c> if the access is granted for the specified client; otherwise, <c>false</c>.
+        /// </returns>
         bool IsAccessGranted(IClient client, string[] scope, string resourceOwnerId);
     }
 }

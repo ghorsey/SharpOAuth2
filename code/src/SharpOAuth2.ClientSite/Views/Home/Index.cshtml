@@ -4,4 +4,28 @@
 
 <h2>Index</h2>
 
-<a href="http://localhost:15079/Home/Authorize?response_type=code&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Grant Access</a>
+<ul>
+    <li>
+        <h3>Authorization Code</h3>
+        <a href="http://localhost:15079/Home/Authorize?response_type=code&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Redirect flow</a>
+    </li>
+    <li>
+        <h3>Resource Owner Password Credentials</h3>
+        @using (Html.BeginForm("ResourceOwnerPassword", "Home"))
+        {
+            <ul>
+                <li>
+                    <label for="username">Username (geoff):</label>
+                    <input type="text" name="username" id="username" />
+                </li>
+                <li>
+                    <label for="password">Password (password):</label>
+                    <input type="password" id="password" name="password" />
+                </li>
+                <li>
+                    <button type="submit">Submit</button>
+                </li>
+            </ul>
+        }
+    </li>
+</ul>

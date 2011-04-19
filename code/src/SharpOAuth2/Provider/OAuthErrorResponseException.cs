@@ -18,6 +18,7 @@ namespace SharpOAuth2.Provider
         {
             Context = context;
             Error = error;
+            HttpStatusCode = 400;
         }
 
         public OAuthErrorResponseException(T context, string error, string description = "", int httpStatusCode = 400, Uri errorUri = null)
@@ -34,14 +35,15 @@ namespace SharpOAuth2.Provider
             ErrorUri = errorUri;
             Error = error;
             Context = context;
+            HttpStatusCode = 400;
         }
 
-        private OAuthErrorResponseException() { }
-        private OAuthErrorResponseException(string message) : base(message) { }
-        private OAuthErrorResponseException(string message, Exception inner) : base(message, inner) { }
+        private OAuthErrorResponseException() { HttpStatusCode = 400; }
+        private OAuthErrorResponseException(string message) : base(message) { HttpStatusCode = 400; }
+        private OAuthErrorResponseException(string message, Exception inner) : base(message, inner) { HttpStatusCode = 400; }
         protected OAuthErrorResponseException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) { }
+            : base(info, context) { HttpStatusCode = 400; }
     }
 }

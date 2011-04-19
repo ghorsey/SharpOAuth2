@@ -56,6 +56,7 @@ namespace SharpOAuth2.Provider
             
             return new OAuthErrorResponseException<IOAuthContext>(context,
                 Parameters.ErrorParameters.ErrorValues.InvalidClient,
+                httpStatusCode: 401,
                 description: string.Format(CultureInfo.CurrentUICulture,
                 TokenEndpointResources.InvalidClientCredentials, context.Client.ClientId));
         }

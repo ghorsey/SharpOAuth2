@@ -79,6 +79,7 @@
     <Compile Include="Provider\ResourceEndpoint\IResourceContext.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceContext.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceProvider.cs" />
+    <Compile Include="Provider\Services\IResourceOwnerService.cs" />
     <Compile Include="Provider\Services\IServiceFactory.cs" />
     <Compile Include="Provider\Services\ITokenService.cs" />
     <Compile Include="Provider\ErrorResponse.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenProvider.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenResponseBuilder.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processor\ResourceOwnerPasswordCredentialProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenWriter.cs" />
     <Compile Include="Provider\TokenEndpoint\Processor\AuthenticationCodeProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContext.cs" />

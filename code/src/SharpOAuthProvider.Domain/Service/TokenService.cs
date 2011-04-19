@@ -83,8 +83,20 @@ namespace SharpOAuthProvider.Domain.Service
             return TokenRepo.FindToken(token);
         }
 
-        #endregion
+        public IToken MakeAccessToken(string resourceOwnerUsername)
+        {
+            AccessToken token = new AccessToken
+            {
+                ExpiresIn = 120,
+                Token = Guid.NewGuid().ToString(),
+                RefreshToken = Guid.NewGuid().ToString(),
+                Scope = new string[] { "create", "delete", "view" },
+                ResourceOwnerUsername = resourceOwnerUsername
+            };
+            TokenRepo.AddAccessToken(token);
+            return token;
+        }
 
-     
+        #endregion
     }
 }

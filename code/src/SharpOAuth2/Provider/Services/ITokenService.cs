@@ -20,5 +20,7 @@ namespace SharpOAuth2.Provider.Services
         bool ValidateRedirectUri(IOAuthContext context, AuthorizationGrantBase grant);
 
         AccessTokenBase FindToken(string token);
+
+        IToken MakeAccessToken(string resourceOwnerUsername);
     }
 }

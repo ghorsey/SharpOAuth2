@@ -48,16 +48,26 @@ namespace SharpOAuth2.ProviderSite
             AreaRegistration.RegisterAllAreas();
 
             IKernel kernel = new StandardKernel();
+            // Repos
             kernel.Bind<IClientRepository>().To<InMemoryClientRepository>();
             kernel.Bind<ITokenRepository>().To<InMemoryTokenRepository>();
+
+            // Services
             kernel.Bind<IClientService>().To<ClientService>();
             kernel.Bind<ITokenService>().To<TokenService>();
+            kernel.Bind<IResourceOwnerService>().To<ResourceOwnerService>();
             kernel.Bind<IServiceFactory>().To<ServiceFactory>();
+
+            // Providers
             kernel.Bind<IAuthorizationProvider>().To<AuthorizationProvider>();
             kernel.Bind<ITokenProvider>().To<TokenProvider>();
-            kernel.Bind<ContextProcessor<ITokenContext>>().To<AuthenticationCodeProcessor>();
-            
             kernel.Bind<IResourceProvider>().To<ResourceProvider>();
+
+            // Token Processors
+            kernel.Bind<ContextProcessor<ITokenContext>>().To<AuthenticationCodeProcessor>();
+            kernel.Bind<ContextProcessor<ITokenContext>>().To<ResourceOwnerPasswordCredentialProcessor>();
+
+            // Resource Processors
             kernel.Bind<ContextProcessor<IResourceContext>>().To<BearerProcessor>();
 
             // add supported response types

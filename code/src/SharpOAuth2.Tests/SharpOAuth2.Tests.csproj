@@ -80,6 +80,7 @@
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\AuthenticationCodeProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ProcessorTestBase.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processors\ResourceOwnerPasswordCredentialProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenProviderTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenResponseBuilderTests.cs" />
