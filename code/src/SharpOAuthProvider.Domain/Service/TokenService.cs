@@ -97,6 +97,21 @@ namespace SharpOAuthProvider.Domain.Service
             return token;
         }
 
+        public AccessTokenBase MakeAccessToken(ClientBase client)
+        {
+            AccessToken token = new AccessToken
+            {
+                ExpiresIn = 120,
+                Token = Guid.NewGuid().ToString(),
+                Scope = new string[] { "create-member" },
+                Client = (Client)client
+            };
+
+            TokenRepo.AddAccessToken(token);
+
+            return token;
+        }
+
         #endregion
     }
 }

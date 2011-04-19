@@ -25,7 +25,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
         }
         #region ITokenProvider Members
 
-        public void GrantAuthorizationToken(ITokenContext context)
+        public void GrantAccessToken(ITokenContext context)
         {
             try
             {

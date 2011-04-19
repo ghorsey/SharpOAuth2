@@ -20,6 +20,38 @@ namespace SharpOAuth2.ClientSite.Controllers
         {
             return View("Index");
         }
+
+        [HttpGet]
+        public ActionResult ClientCredentials()
+        {
+            //TODO: This is all ugly and need refactoring when I build the oauth client routines
+            string accessToken = "";
+
+            StringBuilder postData = new StringBuilder();
+
+            postData.Append("grant_type=client_credentials");
+            postData.Append("&client_id=12345");
+            postData.Append("&client_secret=secret");
+
+            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
+
+            WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
+
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+            Stream reqStream = request.GetRequestStream();
+            reqStream.Write(data, 0, data.Length);
+            reqStream.Close();
+
+            WebResponse response = request.GetResponse();
+
+            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                accessToken = sr.ReadToEnd();
+
+            return View("ClientCredentials", (object)accessToken);
+        }
+
         public ActionResult ResourceOwnerPassword(string username, string password)
         {
             //TODO: This is all ugly and need refactoring when I build the oauth client routines
@@ -53,8 +85,6 @@ namespace SharpOAuth2.ClientSite.Controllers
             Session["Token"] = dictionary;
 
             return RedirectToAction("ViewResourceData");
-
-
         }
         public ActionResult Callback(string code, string error, string error_description)
         {

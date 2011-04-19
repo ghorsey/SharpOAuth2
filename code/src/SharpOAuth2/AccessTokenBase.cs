@@ -11,6 +11,7 @@ namespace SharpOAuth2
         public AccessTokenBase()
         {
             IssuedOn = DateTime.Now.ToEpoch();
+            Parameters = new Dictionary<string, object>();
         }
         #region IToken Members
 
@@ -20,15 +21,19 @@ namespace SharpOAuth2
         public virtual string RefreshToken{ get; set; }
         public virtual long IssuedOn { get; set; }
         public virtual string[] Scope { get; set; }
+        public virtual IDictionary<string, object> Parameters { get; private set; }
 
         public virtual IDictionary<string, object> ToResponseValues()
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
 
-            dictionary[Parameters.AccessToken] = Token;
-            dictionary[Parameters.AccessTokenExpiresIn] = ExpiresIn;
-            dictionary[Parameters.RefreshToken] = RefreshToken;
-            dictionary[Parameters.AccessTokenType] = TokenType;
+            dictionary[SharpOAuth2.Parameters.AccessToken] = Token;
+            dictionary[SharpOAuth2.Parameters.AccessTokenExpiresIn] = ExpiresIn;
+            dictionary[SharpOAuth2.Parameters.RefreshToken] = RefreshToken;
+            dictionary[SharpOAuth2.Parameters.AccessTokenType] = TokenType;
+
+            foreach (var itm in Parameters)
+                dictionary.Add(itm.Key, itm.Value);
 
             return dictionary;
         }

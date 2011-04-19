@@ -12,7 +12,7 @@ namespace SharpOAuthProvider.Domain.Repository
         static InMemoryClientRepository()
         {
             _clients = new Dictionary<string, Client>();
-            _clients.Add("12345", new Client { Name="Sample Provider", ClientId = "12345", ClientSecret = "secret", RedirectUri = new Uri("http://localhost:15075/Home/Callback", UriKind.Absolute) });
+            _clients.Add("12345", new Client { Name="Sample Client", ClientId = "12345", ClientSecret = "secret", RedirectUri = new Uri("http://localhost:15075/Home/Callback", UriKind.Absolute) });
         }
 
         #region IClientRepository Members

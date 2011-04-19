@@ -41,7 +41,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint
 
             TokenProvider provider = new TokenProvider();
 
-            provider.GrantAuthorizationToken(context);
+            provider.GrantAccessToken(context);
         }
 
 
@@ -69,7 +69,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint
 
             TokenProvider provider = new TokenProvider();
 
-            provider.GrantAuthorizationToken(context);
+            provider.GrantAccessToken(context);
         }
     }
 }

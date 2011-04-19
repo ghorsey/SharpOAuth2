@@ -79,6 +79,7 @@
     <Compile Include="Provider\TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Inspectors\SpecificationInspectorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\AuthenticationCodeProcessorTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processors\ClientCredentialsProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ProcessorTestBase.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ResourceOwnerPasswordCredentialProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />

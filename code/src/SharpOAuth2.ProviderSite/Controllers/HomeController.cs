@@ -28,7 +28,7 @@ namespace SharpOAuth2.ProviderSite.Controllers
         public ActionResult Token()
         {
             TokenResponse response = ControllerContext.HttpContext.Request.ToTokenContext()
-                .GrantAuthorizationToken()
+                .GrantAccessToken()
                 .CreateTokenResponse();
 
             return new TokenResponseActionResult(response);

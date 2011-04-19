@@ -103,6 +103,7 @@
     <Compile Include="Provider\TokenEndpoint\ITokenContext.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenProvider.cs" />
     <Compile Include="Provider\TokenEndpoint\ITokenResponseBuilder.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processor\ClientCredentialsProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\Processor\ResourceOwnerPasswordCredentialProcessor.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenWriter.cs" />
     <Compile Include="Provider\TokenEndpoint\Processor\AuthenticationCodeProcessor.cs" />

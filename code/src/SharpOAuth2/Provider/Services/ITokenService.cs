@@ -22,5 +22,7 @@ namespace SharpOAuth2.Provider.Services
         AccessTokenBase FindToken(string token);
 
         IToken MakeAccessToken(string resourceOwnerUsername);
+
+        AccessTokenBase MakeAccessToken(ClientBase client);
     }
 }

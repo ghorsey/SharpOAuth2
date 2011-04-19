@@ -70,11 +70,11 @@ namespace SharpOAuth2.Fluent
             return builder.FromHttpRequest(request);
         }
 
-        public static ITokenContext GrantAuthorizationToken(this ITokenContext context)
+        public static ITokenContext GrantAccessToken(this ITokenContext context)
         {
             ITokenProvider provider = GetProvider();
 
-            provider.GrantAuthorizationToken(context);
+            provider.GrantAccessToken(context);
             return context;
         }
 

@@ -7,6 +7,6 @@ namespace SharpOAuth2.Provider.TokenEndpoint
 {
     public interface ITokenProvider
     {
-        void GrantAuthorizationToken(ITokenContext context);
+        void GrantAccessToken(ITokenContext context);
     }
 }

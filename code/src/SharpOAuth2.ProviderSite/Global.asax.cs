@@ -63,11 +63,14 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<ITokenProvider>().To<TokenProvider>();
             kernel.Bind<IResourceProvider>().To<ResourceProvider>();
 
+
             // Token Processors
             kernel.Bind<ContextProcessor<ITokenContext>>().To<AuthenticationCodeProcessor>();
             kernel.Bind<ContextProcessor<ITokenContext>>().To<ResourceOwnerPasswordCredentialProcessor>();
+            kernel.Bind<ContextProcessor<ITokenContext>>().To<ClientCredentialsProcessor>();
 
             // Resource Processors
+            //TODO: Build Mac Processor
             kernel.Bind<ContextProcessor<IResourceContext>>().To<BearerProcessor>();
 
             // add supported response types
