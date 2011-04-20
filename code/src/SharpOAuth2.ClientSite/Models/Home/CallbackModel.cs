@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace SharpOAuth2.ClientSite.Models.Home
 {
     public class CallbackModel

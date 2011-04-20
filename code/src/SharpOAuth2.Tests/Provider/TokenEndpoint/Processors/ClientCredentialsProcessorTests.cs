@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpOAuth2.Provider.TokenEndpoint;
-using SharpOAuth2.Provider;
-using SharpOAuth2.Provider.Services;
-using NUnit.Framework;
-using SharpOAuth2.Provider.TokenEndpoint.Processor;
 using Moq;
+using NUnit.Framework;
+using SharpOAuth2.Provider.Domain;
+using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.TokenEndpoint.Processor;
 
 namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
 {

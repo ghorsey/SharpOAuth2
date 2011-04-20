@@ -81,6 +81,7 @@
     <Compile Include="Provider\TokenEndpoint\Processors\AuthenticationCodeProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ClientCredentialsProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ProcessorTestBase.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processors\RefreshAccessTokenTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\ResourceOwnerPasswordCredentialProcessorTests.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenContextBuilderTest.cs" />
     <Compile Include="Provider\TokenEndpoint\TokenProviderTests.cs" />
@@ -88,9 +89,9 @@
     <Compile Include="Provider\TokenEndpoint\TokenResponseWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">
+    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.Provider.csproj">
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
-      <Name>SharpOAuth2</Name>
+      <Name>SharpOAuth2.Provider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

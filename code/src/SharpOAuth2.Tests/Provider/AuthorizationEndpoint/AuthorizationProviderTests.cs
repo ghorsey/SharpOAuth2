@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using SharpOAuth2.Provider.AuthorizationEndpoint;
-using Moq;
-using Microsoft.Practices.ServiceLocation;
 using CuttingEdge.ServiceLocation;
-using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
+using Microsoft.Practices.ServiceLocation;
+using Moq;
+using NUnit.Framework;
 using SharpOAuth2.Provider;
-using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
+using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;
+using SharpOAuth2.Provider.Domain;
+using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {

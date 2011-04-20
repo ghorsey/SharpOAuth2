@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpOAuthProvider.Domain.Repository;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
-using SharpOAuth2;
+using SharpOAuth2.Provider.Domain;
+using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Services;
+using SharpOAuthProvider.Domain.Repository;
 
 namespace SharpOAuthProvider.Domain.Service
 {
@@ -34,7 +32,7 @@ namespace SharpOAuthProvider.Domain.Service
             return grant;
         }
 
-        public void ApproveAuthorizationGrant(SharpOAuth2.AuthorizationGrantBase authorizationGrant, bool isApproved)
+        public void ApproveAuthorizationGrant(AuthorizationGrantBase authorizationGrant, bool isApproved)
         {
             AuthorizationGrant grant = (AuthorizationGrant)authorizationGrant;
             grant.IsUsed = false;
@@ -72,7 +70,7 @@ namespace SharpOAuthProvider.Domain.Service
 
         }
 
-        public bool ValidateRedirectUri(SharpOAuth2.Provider.IOAuthContext context, AuthorizationGrantBase grant)
+        public bool ValidateRedirectUri(IOAuthContext context, AuthorizationGrantBase grant)
         {
             return grant.RedirectUri.Equals(context.RedirectUri);
         }

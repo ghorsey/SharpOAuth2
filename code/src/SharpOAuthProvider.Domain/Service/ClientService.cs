@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpOAuth2.Provider.AuthorizationEndpoint;
-using SharpOAuthProvider.Domain.Repository;
+﻿using System.Linq;
+using SharpOAuth2.Provider.Domain;
+using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Services;
-using SharpOAuth2.Provider;
-using SharpOAuth2;
+using SharpOAuthProvider.Domain.Repository;
 
 namespace SharpOAuthProvider.Domain.Service
 {
@@ -43,12 +39,12 @@ namespace SharpOAuthProvider.Domain.Service
         }
 
 
-        public SharpOAuth2.ClientBase FindClient(string clientId)
+        public ClientBase FindClient(string clientId)
         {
             return ClientRepo.FindClient(clientId);
         }
 
-        public bool IsAccessGranted(SharpOAuth2.IClient client, string[] scope, string resourceOwnerId)
+        public bool IsAccessGranted(IClient client, string[] scope, string resourceOwnerId)
         {
             AuthorizationGrant grant = TokenRepo.FindAuthorizationGrant(client.ClientId, resourceOwnerId);
             if (grant == null) return false;

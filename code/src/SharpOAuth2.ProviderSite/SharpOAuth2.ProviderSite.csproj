@@ -138,9 +138,9 @@
       <Project>{2646B9F8-5016-4F27-802D-C1C01D60AC73}</Project>
       <Name>SharpOAuth2.Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">
+    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.Provider.csproj">
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
-      <Name>SharpOAuth2</Name>
+      <Name>SharpOAuth2.Provider</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpOAuthProvider.Domain\SharpOAuthProvider.Domain.csproj">
       <Project>{0207FD36-B7E8-4B35-AAF4-B01A4E4E9286}</Project>

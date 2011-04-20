@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.csproj">
+    <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.Provider.csproj">
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
-      <Name>SharpOAuth2</Name>
+      <Name>SharpOAuth2.Provider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

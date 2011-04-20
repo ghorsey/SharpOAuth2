@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using System.Web;
-using SharpOAuth2.Provider.AuthorizationEndpoint;
-using Moq;
 using System.Collections.Specialized;
-using System.Net;
-using System.IO;
-using SharpOAuth2.Provider;
+using System.Web;
+using Moq;
+using NUnit.Framework;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
+using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 {

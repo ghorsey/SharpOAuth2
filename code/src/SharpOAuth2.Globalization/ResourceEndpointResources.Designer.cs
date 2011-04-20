@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SharpOAuth2.Globalization {
+namespace SharpOAuth2.Provider.Globalization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SharpOAuth2.Globalization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SharpOAuth2.Globalization.ResourceEndpointResources", typeof(ResourceEndpointResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SharpOAuth2.Provider.Globalization.ResourceEndpointResources", typeof(ResourceEndpointResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpOAuth2;
+﻿using SharpOAuth2.Provider.Domain;
 
 namespace SharpOAuthProvider.Domain
 {

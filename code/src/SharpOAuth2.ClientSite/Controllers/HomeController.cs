@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SharpOAuth2.ClientSite.Models.Home;
+using System.IO;
 using System.Net;
 using System.Text;
-using System.IO;
+using System.Web.Mvc;
 using Newtonsoft.Json;
+using SharpOAuth2.ClientSite.Models.Home;
 
 namespace SharpOAuth2.ClientSite.Controllers
 {

@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.Practices.ServiceLocation;
-using SharpOAuth2.Fluent;
 using SharpOAuth2.Mvc;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
-using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.Fluent;
+using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.ResourceEndpoint;
+using SharpOAuth2.Provider.TokenEndpoint;
 using SharpOAuthProvider.Domain;
 using SharpOAuthProvider.Domain.Repository;
-using SharpOAuth2.Provider;
-using Newtonsoft.Json;
+
 namespace SharpOAuth2.ProviderSite.Controllers
 {
     public class HomeController : Controller

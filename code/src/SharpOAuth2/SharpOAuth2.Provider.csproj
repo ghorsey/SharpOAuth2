@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31316DF7-5293-4235-B299-1C172A9BFF79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpOAuth2.Provider</RootNamespace>
+    <AssemblyName>SharpOAuth2.Provider</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\SharpOAuth2.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Common.Logging\v2.0.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\lib\CommonServiceLocator\v1.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Json.Net\40r1\Bin\Net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\AuthorizationGrantBase.cs" />
+    <Compile Include="Utility\Epoch.cs" />
+    <Compile Include="Fluent\FluentAuthorizationContext.cs" />
+    <Compile Include="Fluent\FluentTokenContext.cs" />
+    <Compile Include="AuthorizationEndpoint\AuthorizationContext.cs" />
+    <Compile Include="AuthorizationEndpoint\AuthorizationContextBuilder.cs" />
+    <Compile Include="AuthorizationEndpoint\AuthorizationProvider.cs" />
+    <Compile Include="AuthorizationEndpoint\AuthorizationResponseBuilder.cs" />
+    <Compile Include="AuthorizationEndpoint\IAuthorizationProvider.cs" />
+    <Compile Include="AuthorizationEndpoint\IAuthorizationResponseBuilder.cs" />
+    <Compile Include="AuthorizationEndpoint\Processor\AuthorizationCodeProcessor.cs" />
+    <Compile Include="Utility\ContextBuilderHelpers.cs" />
+    <Compile Include="Framework\ContextProcessor.cs" />
+    <Compile Include="Framework\IOAuthContext.cs" />
+    <Compile Include="Framework\IContextInspector.cs" />
+    <Compile Include="ResourceEndpoint\ResourceContextBuilder.cs" />
+    <Compile Include="ResourceEndpoint\IResourceProvider.cs" />
+    <Compile Include="ResourceEndpoint\Processors\BearerProcessor.cs" />
+    <Compile Include="ResourceEndpoint\IResourceContext.cs" />
+    <Compile Include="ResourceEndpoint\ResourceContext.cs" />
+    <Compile Include="ResourceEndpoint\ResourceProvider.cs" />
+    <Compile Include="Services\IResourceOwnerService.cs" />
+    <Compile Include="Services\IServiceFactory.cs" />
+    <Compile Include="Services\ITokenService.cs" />
+    <Compile Include="Framework\ErrorResponse.cs" />
+    <Compile Include="Framework\IContextBuilder.cs" />
+    <Compile Include="Framework\OAuthFatalException.cs" />
+    <Compile Include="Services\IClientService.cs" />
+    <Compile Include="Framework\Errors.cs" />
+    <Compile Include="AuthorizationEndpoint\Inspectors\SpecificationInspector.cs" />
+    <Compile Include="Domain\ClientBase.cs" />
+    <Compile Include="AuthorizationEndpoint\IAuthorizationContext.cs" />
+    <Compile Include="Framework\IClient.cs" />
+    <Compile Include="Framework\IToken.cs" />
+    <Compile Include="Framework\Parameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\OAuthErrorResponseException.cs" />
+    <Compile Include="Domain\AccessTokenBase.cs" />
+    <Compile Include="TokenEndpoint\Inspectors\AuthorizationCodeInspector.cs" />
+    <Compile Include="TokenEndpoint\Inspectors\RefreshAccessTokenInspector.cs" />
+    <Compile Include="TokenEndpoint\Inspectors\ResourceOwnerPasswordCredentialInspector.cs" />
+    <Compile Include="TokenEndpoint\Inspectors\SpecificationInspector.cs" />
+    <Compile Include="TokenEndpoint\ITokenContext.cs" />
+    <Compile Include="TokenEndpoint\ITokenProvider.cs" />
+    <Compile Include="TokenEndpoint\ITokenResponseBuilder.cs" />
+    <Compile Include="TokenEndpoint\Processor\ClientCredentialsProcessor.cs" />
+    <Compile Include="TokenEndpoint\Processor\ResourceOwnerPasswordCredentialProcessor.cs" />
+    <Compile Include="TokenEndpoint\TokenWriter.cs" />
+    <Compile Include="TokenEndpoint\Processor\AuthenticationCodeProcessor.cs" />
+    <Compile Include="TokenEndpoint\TokenContext.cs" />
+    <Compile Include="TokenEndpoint\TokenContextBuilder.cs" />
+    <Compile Include="TokenEndpoint\TokenProvider.cs" />
+    <Compile Include="TokenEndpoint\TokenResponse.cs" />
+    <Compile Include="TokenEndpoint\TokenResponseBuilder.cs" />
+    <Compile Include="TokenEndpoint\TokenResponseWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SharpOAuth2.snk">
+      <Link>SharpOAuth2.snk</Link>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpOAuth2.Globalization\SharpOAuth2.Provider.Globalization.csproj">
+      <Project>{799D94B8-6301-46C2-AFEF-D783429EDF24}</Project>
+      <Name>SharpOAuth2.Provider.Globalization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

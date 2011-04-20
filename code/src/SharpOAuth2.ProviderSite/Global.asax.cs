@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Ninject;
-using SharpOAuthProvider.Domain.Repository;
-using SharpOAuthProvider.Domain;
-using SharpOAuthProvider.Domain.Service;
-using SharpOAuth2.Provider.AuthorizationEndpoint;
 using CommonServiceLocator.NinjectAdapter;
 using Microsoft.Practices.ServiceLocation;
-using SharpOAuth2.Provider.Services;
-using SharpOAuth2.Provider;
+using Ninject;
+using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;
-using SharpOAuth2.Provider.TokenEndpoint;
-using SharpOAuth2.Provider.TokenEndpoint.Processor;
+using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.ResourceEndpoint;
 using SharpOAuth2.Provider.ResourceEndpoint.Processors;
+using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider.TokenEndpoint;
+using SharpOAuth2.Provider.TokenEndpoint.Processor;
+using SharpOAuthProvider.Domain.Repository;
+using SharpOAuthProvider.Domain.Service;
 
 namespace SharpOAuth2.ProviderSite
 {

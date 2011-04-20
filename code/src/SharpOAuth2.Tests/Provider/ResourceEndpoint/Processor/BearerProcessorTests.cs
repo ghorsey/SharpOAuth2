@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using SharpOAuth2.Provider.ResourceEndpoint;
-using System.Collections.Specialized;
-using SharpOAuth2.Provider.ResourceEndpoint.Processors;
+﻿using System.Collections.Specialized;
 using Moq;
+using NUnit.Framework;
+using SharpOAuth2.Provider.Domain;
+using SharpOAuth2.Provider.ResourceEndpoint;
+using SharpOAuth2.Provider.ResourceEndpoint.Processors;
 using SharpOAuth2.Provider.Services;
 
 namespace SharpOAuth2.Tests.Provider.ResourceEndpoint.Processor

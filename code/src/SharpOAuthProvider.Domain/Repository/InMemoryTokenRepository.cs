@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using SharpOAuth2.Provider.Domain;
 
 namespace SharpOAuthProvider.Domain.Repository
 {
@@ -29,7 +28,7 @@ namespace SharpOAuthProvider.Domain.Repository
             _tokens[token.Token] = token;
         }
 
-        public SharpOAuth2.AccessTokenBase FindToken(string token)
+        public AccessTokenBase FindToken(string token)
         {
             if (!_tokens.ContainsKey(token))
                 return null;
