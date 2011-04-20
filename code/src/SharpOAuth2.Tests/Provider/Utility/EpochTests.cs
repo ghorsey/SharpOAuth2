@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using SharpOAuth2.Provider.Utility;
 
-namespace SharpOAuth2.Tests
+namespace SharpOAuth2.Tests.Provider.Utility
 {
     [TestFixture]
     public class EpochTests

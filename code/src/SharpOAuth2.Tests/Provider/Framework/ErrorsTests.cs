@@ -3,7 +3,7 @@ using NUnit.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.Framework;
 
-namespace SharpOAuth2.Tests.Provider
+namespace SharpOAuth2.Tests.Provider.Framework
 {
     [TestFixture]
     public class ErrorsTests

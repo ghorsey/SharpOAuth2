@@ -62,14 +62,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EpochTests.cs" />
-    <Compile Include="ParametersTests.cs" />
+    <Compile Include="Provider\Utility\EpochTests.cs" />
+    <Compile Include="Provider\Framework\ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationContextBuilderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationProviderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\AuthorizationResponseBuilderTests.cs" />
     <Compile Include="Provider\AuthorizationEndpoint\Inspectors\SpecificationInspectorTests.cs" />
-    <Compile Include="Provider\ErrorsTests.cs" />
+    <Compile Include="Provider\Framework\ErrorsTests.cs" />
     <Compile Include="Provider\ResourceEndpoint\Processor\BearerProcessorTests.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceBuilderTests.cs" />
     <Compile Include="Provider\ResourceEndpoint\ResourceProviderTests.cs" />
