@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\README = ..\..\README
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Mvc", "SharpOAuth2.Mvc\SharpOAuth2.Mvc.csproj", "{2646B9F8-5016-4F27-802D-C1C01D60AC73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpOAuth2.Provider.Mvc", "SharpOAuth2.Mvc\SharpOAuth2.Provider.Mvc.csproj", "{2646B9F8-5016-4F27-802D-C1C01D60AC73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

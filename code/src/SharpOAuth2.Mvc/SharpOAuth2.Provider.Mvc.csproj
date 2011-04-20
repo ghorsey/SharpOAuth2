@@ -8,8 +8,8 @@
     <ProjectGuid>{2646B9F8-5016-4F27-802D-C1C01D60AC73}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpOAuth2.Mvc</RootNamespace>
-    <AssemblyName>SharpOAuth2.Mvc</AssemblyName>
+    <RootNamespace>SharpOAuth2.Provider.Mvc</RootNamespace>
+    <AssemblyName>SharpOAuth2.Provider.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

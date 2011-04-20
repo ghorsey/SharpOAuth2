@@ -22,7 +22,7 @@
 
 using SharpOAuth2.Provider.Fluent;
 using SharpOAuth2.Provider.TokenEndpoint;
-namespace SharpOAuth2.Mvc
+namespace SharpOAuth2.Provider.Mvc
 {
     public class TokenResponseActionResult : System.Web.Mvc.ActionResult
     {
