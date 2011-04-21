@@ -49,6 +49,7 @@
     <Compile Include="IToken.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\UriHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">

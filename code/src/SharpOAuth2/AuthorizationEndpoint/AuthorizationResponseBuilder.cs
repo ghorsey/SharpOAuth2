@@ -26,34 +26,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
-using System.Text;
 using System.Web;
 using SharpOAuth2.Framework;
+using SharpOAuth2.Framework.Utility;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationResponseBuilder : IAuthorizationResponseBuilder
     {
-        private string ReconstructQuery(NameValueCollection queryComponents)
-        {
-            StringBuilder output = new StringBuilder();
-            TextWriter writer = new StringWriter(output);
-           
-            string queryComponentFormat = "{0}={1}";
-            for (int i = 0; i < queryComponents.Count; i++)
-            {
-                if (string.IsNullOrWhiteSpace(queryComponents[i]))
-                    continue;
-
-                if (i > 0)
-                    writer.Write("&");
-
-                writer.Write(queryComponentFormat, queryComponents.Keys[i], Uri.EscapeDataString(queryComponents[i]));   
-            }
-
-            return output.ToString();
-        }
+        
 
         #region IAuthorizationResponseBuilder Members
 
@@ -97,9 +78,9 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         private void SetModifiedContext(IAuthorizationContext context, UriBuilder builder, NameValueCollection components)
         {
             if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
-                builder.Fragment = ReconstructQuery(components);
+                builder.Fragment = UriHelper.ReconstructQueryString(components);
             else
-                builder.Query = ReconstructQuery(components);
+                builder.Query = UriHelper.ReconstructQueryString(components);
         }
 
         private NameValueCollection GetContextToModify(IAuthorizationContext context)

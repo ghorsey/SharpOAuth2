@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using SharpOAuth2.ClientSite.Models.Home;
+using SharpOAuth2.Client.Authorization;
 
 namespace SharpOAuth2.ClientSite.Controllers
 {
@@ -21,12 +22,30 @@ namespace SharpOAuth2.ClientSite.Controllers
         [HttpGet]
         public ActionResult ImplicitFlow()
         {
-            return Redirect("http://localhost:15079/Home/Authorize?response_type=token&client_id=12345&scope=" + Uri.EscapeDataString("view edit") + "&redirect_uri=" + Uri.EscapeDataString("http://localhost:15075/Home/Callback"));
+            AuthorizationRequest request = new AuthorizationRequest
+            {
+                ClientId = "12345",
+                ResponseType = "token",
+                Scope = new string[] { "view", "edit" },
+                Endpoint = new Uri("http://localhost:15079/Home/Authorize"),
+                RedirectUri = new Uri("http://localhost:15075/Home/Callback")
+            };
+            
+            return Redirect(request.ToAbsoluteUri());
         }
         [HttpGet]
         public ActionResult RedirectFlow()
         {
-            return Redirect("http://localhost:15079/Home/Authorize?response_type=code&client_id=12345&scope=" + Uri.EscapeDataString("view edit") + "&redirect_uri=" + Uri.EscapeDataString("http://localhost:15075/Home/Callback"));
+            AuthorizationRequest request = new AuthorizationRequest
+            {
+                ClientId = "12345",
+                ResponseType = "code",
+                RedirectUri = new Uri("http://localhost:15075/Home/Callback"),
+                Endpoint = new Uri("http://localhost:15079/Home/Authorize"),
+                Scope = new string[] { "view", "edit" }
+            };
+
+            return Redirect(request.ToAbsoluteUri());
         }
 
         #endregion

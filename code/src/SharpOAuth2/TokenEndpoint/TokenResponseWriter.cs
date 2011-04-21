@@ -35,6 +35,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
 
         public override void WriteResponse(TokenResponse tokenResponse)
         {
+            //todo: need to write the WWW-Authenticate Header when authorization fails
             Destination.AddHeader("Cache-Control", "no-store");
             Destination.ContentType = tokenResponse.ContentType;
             Destination.StatusCode = tokenResponse.HttpStatusCode;
