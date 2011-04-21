@@ -27,7 +27,7 @@ namespace SharpOAuthProvider.Domain.Service
             grant.Client = client;
             grant.ExpiresIn = 120; // 2 minutes
             grant.Scope = context.Scope;
-            grant.ResourceOwnerId = context.ResourceOwnerId;
+            grant.ResourceOwnerId = context.ResourceOwnerUsername;
             grant.Token = Guid.NewGuid().ToString();
             return grant;
         }
@@ -110,19 +110,24 @@ namespace SharpOAuthProvider.Domain.Service
             return token;
         }
 
-        #endregion
-
-        #region ITokenService Members
-
-
-        public bool ValidateRefreshTokenForClient(string refreshToken, ClientBase client)
+        public IToken IssueAccessToken(RefreshTokenBase refreshToken)
         {
-            throw new NotImplementedException();
+            AccessToken token = new AccessToken
+            {
+                ExpiresIn = 120,
+                Token = Guid.NewGuid().ToString(),
+                RefreshToken = refreshToken.Token,
+                ResourceOwnerUsername = refreshToken.ResourceOwnerUsername,
+                Scope = refreshToken.Scope,
+                TokenType = "bearer"
+            };
+            TokenRepo.AddAccessToken(token);
+            return token;
         }
 
-        public IToken IssueAccessToken(string refreshToken, ClientBase client)
+        public RefreshTokenBase FindRefreshToken(string refreshToken)
         {
-            throw new NotImplementedException();
+            return TokenRepo.FindRefreshToken(refreshToken);
         }
 
         #endregion

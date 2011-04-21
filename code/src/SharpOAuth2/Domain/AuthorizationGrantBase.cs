@@ -43,6 +43,7 @@ namespace SharpOAuth2.Provider.Domain
         public virtual bool IsApproved { get; set; }
         public virtual ClientBase Client { get; set; }
         public virtual Uri RedirectUri { get; set; }
+        public virtual string ResourceOwnerUsername { get; set; }
         public virtual IDictionary<string, object> Parameters { get { throw new NotSupportedException(); } }
         #endregion
 

@@ -23,15 +23,14 @@
  */
 #endregion
 
-using SharpOAuth2.Provider.Framework;
-namespace SharpOAuth2.Provider.AuthorizationEndpoint
+
+namespace SharpOAuth2.Provider.Domain
 {
-    public interface IAuthorizationContext : IOAuthContext
+    public class RefreshTokenBase
     {
-        
-        string ResponseType { get; set; }   
-        string State { get; set; }
-        bool IsApproved { get; set; }
-        string ResourceOwnerUsername { get; set; }
+        public virtual string Token { get; set; }
+        public virtual string ClientId { get; set; }
+        public virtual string ResourceOwnerUsername { get; set; }
+        public virtual string[] Scope { get; set; }
     }
 }

@@ -59,7 +59,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Processor
                 IsApproved = true,
                 RedirectUri = new Uri("http://www.mysite.com/callback"),
                 Scope = new string[] { "create", "delete"},
-                ResourceOwnerId = "owner"
+                ResourceOwnerUsername = "owner"
             };
 
             Mock<IClientService> mckClientService = new Mock<IClientService>();

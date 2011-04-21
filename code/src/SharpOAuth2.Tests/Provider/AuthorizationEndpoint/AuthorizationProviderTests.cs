@@ -80,7 +80,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
             context.IsApproved = true;
-            context.ResourceOwnerId = "1234";
+            context.ResourceOwnerUsername = "1234";
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
             Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
@@ -93,6 +93,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             provider.CreateAuthorizationGrant(context);
 
             Assert.IsNotNull(context.Token);
+            Assert.AreEqual("1234", ((AuthorizationGrantBase)context.Token).ResourceOwnerUsername);
             Assert.IsTrue(context.IsApproved);
             mckTokenService.VerifyAll();
             mckClientService.VerifyAll();
@@ -103,7 +104,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
             context.IsApproved = false;
-            context.ResourceOwnerId = "12345";
+            context.ResourceOwnerUsername = "12345";
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
             Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
@@ -172,7 +173,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
             context.ResponseType = "unk";
-            context.ResourceOwnerId = "owner-id";
+            context.ResourceOwnerUsername = "owner-id";
 
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
 
@@ -193,7 +194,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         public void TestCreatingAuthorizationRequestImplicitFlow()
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
-            context.ResourceOwnerId = "1234";
+            context.ResourceOwnerUsername = "1234";
             context.ResponseType = Parameters.ResponseTypeValues.AccessToken;
 
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
@@ -217,11 +218,11 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         public void TestCheckingIfOwnerAlreadyApprovedClient()
         {
             AuthorizationContext context = MakeCommonAuthorizationContext();
-            context.ResourceOwnerId = "1234";
+            context.ResourceOwnerUsername = "1234";
 
 
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
-            mckClientService.Setup(x=>x.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerId)).Returns(true);
+            mckClientService.Setup(x=>x.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerUsername)).Returns(true);
             Mock<ITokenService> mckTokenService = MakeTokenService(context);
             Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckTokenService);
 

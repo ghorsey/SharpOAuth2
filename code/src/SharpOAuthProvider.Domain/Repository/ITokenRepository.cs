@@ -10,6 +10,6 @@ namespace SharpOAuthProvider.Domain.Repository
         AuthorizationGrant FindAuthorizationGrant(string authorizationCode);
         AuthorizationGrant FindAuthorizationGrant(string clientId, string resourceOwnerId);
         AccessTokenBase FindToken(string token);
-
+        RefreshTokenBase FindRefreshToken(string refreshToken);
     }
 }

@@ -11,13 +11,16 @@
     </li>
     <li>
         <h3>Implicit Grant</h3>
-        <a href="http://localhost:15079/Home/Authorize?response_type=token&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Redirect flow</a>
+        <a href="http://localhost:15079/Home/Authorize?response_type=token&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Implicit flow</a>
     </li>
     <li>
         <h3>Client Credentials</h3>
         @Html.ActionLink("Issue Client Access Token", "ClientCredentials")
     </li>
-
+    <li>
+        <h3>Refresh Token</h3>
+        @Html.ActionLink("Refresh a token", "RefreshToken")
+    </li>
     <li>
         <h3>Resource Owner Password Credentials</h3>
         @using (Html.BeginForm("ResourceOwnerPassword", "Home"))

@@ -56,7 +56,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         }
         private void AssertResourceOwnerIdIsNotBlank(IAuthorizationContext context)
         {
-            if (string.IsNullOrWhiteSpace(context.ResourceOwnerId))
+            if (string.IsNullOrWhiteSpace(context.ResourceOwnerUsername))
                 throw new OAuthFatalException(AuthorizationEndpointResources.ResourceOwnerNotIncluded);
         }
         private void AssertNoAuthorizationToken(IAuthorizationContext context)
@@ -94,6 +94,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
                     if (!processor.IsSatisfiedBy(context)) continue;
                     processor.Process(context);
                     handled = true;
+                    break;
                 }
 
                 if (!handled)
@@ -122,7 +123,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         {
             InspectRequest(context);
 
-            return ServiceFactory.ClientService.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerId);
+            return ServiceFactory.ClientService.IsAccessGranted(context.Client, context.Scope, context.ResourceOwnerUsername);
         }
 
         #endregion

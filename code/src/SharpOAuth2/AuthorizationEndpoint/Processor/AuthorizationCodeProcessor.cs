@@ -44,6 +44,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
             grant.Scope = context.Scope;
             grant.RedirectUri = context.RedirectUri;
             grant.IsApproved = context.IsApproved;
+            grant.ResourceOwnerUsername = context.ResourceOwnerUsername;
             ServiceFactory.TokenService.ApproveAuthorizationGrant(grant, context.IsApproved);
             context.Token = grant;
         }

@@ -111,7 +111,7 @@ namespace SharpOAuth2.Provider.Fluent
 
         public static IAuthorizationContext SetResourceOwner( this IAuthorizationContext context, string resourceOwnerId)
         {
-            context.ResourceOwnerId = resourceOwnerId;
+            context.ResourceOwnerUsername = resourceOwnerId;
             return context;
         }
 

@@ -34,16 +34,17 @@ namespace SharpOAuth2.Provider.Services
         AuthorizationGrantBase IssueAuthorizationGrant(IAuthorizationContext context);
         IToken IssueAccessToken(string resourceOwnerUsername);
         IToken IssueAccessToken(ClientBase client);
-        IToken IssueAccessToken(string refreshToken, ClientBase client);
+        IToken IssueAccessToken(RefreshTokenBase refreshToken);
         IToken IssueAccessToken(AuthorizationGrantBase grant);
 
         void ApproveAuthorizationGrant(AuthorizationGrantBase authorizationGrant, bool isApproved);
 
         AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode);
         AccessTokenBase FindToken(string token);
-        bool ValidateRefreshTokenForClient(string refreshToken, ClientBase client);
         bool ValidateRedirectUri(IOAuthContext context, AuthorizationGrantBase grant);
 
         void ConsumeGrant(AuthorizationGrantBase grant);
+
+        RefreshTokenBase FindRefreshToken(string refreshToken);
     }
 }

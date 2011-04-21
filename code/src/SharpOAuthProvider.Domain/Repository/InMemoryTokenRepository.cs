@@ -6,43 +6,63 @@ namespace SharpOAuthProvider.Domain.Repository
 {
     public class InMemoryTokenRepository : ITokenRepository
     {
-        static readonly IDictionary<string, AuthorizationGrant> _grants = new Dictionary<string, AuthorizationGrant>();
-        static readonly IDictionary<string, AccessToken> _tokens = new Dictionary<string, AccessToken>();
+        static readonly IDictionary<string, AuthorizationGrant> GrantRepo = new Dictionary<string, AuthorizationGrant>();
+        static readonly IDictionary<string, AccessToken> TokensRepo = new Dictionary<string, AccessToken>();
+        static readonly IDictionary<string, RefreshTokenBase> RefreshTokenRepo = new Dictionary<string, RefreshTokenBase>();
+        static InMemoryTokenRepository()
+        {
+            RefreshTokenRepo["refresh"] = new RefreshTokenBase
+            {
+                ClientId = "12345",
+                ResourceOwnerUsername ="Geoff",
+                Scope = new string[] { "create", "view", "delete"},
+                Token = "refresh"
+            };
+        }
 
         #region ITokenRepository Members
 
         public void AddAuthorizationGrant(AuthorizationGrant grant)
         {
-            _grants[grant.Token] = grant;
+            GrantRepo[grant.Token] = grant;
         }
 
         public AuthorizationGrant FindAuthorizationGrant(string authorizationCode)
         {
-            if (!_grants.ContainsKey(authorizationCode)) return null;
-            return _grants[authorizationCode];
+            if (!GrantRepo.ContainsKey(authorizationCode)) return null;
+            return GrantRepo[authorizationCode];
         }
 
 
         public void AddAccessToken(AccessToken token)
         {
-            _tokens[token.Token] = token;
+            TokensRepo[token.Token] = token;
         }
 
         public AccessTokenBase FindToken(string token)
         {
-            if (!_tokens.ContainsKey(token))
+            if (!TokensRepo.ContainsKey(token))
                 return null;
 
-            return _tokens[token];
+            return TokensRepo[token];
         }
 
         public AuthorizationGrant FindAuthorizationGrant(string clientId, string resourceOwnerId)
         {
-            return (from x in _grants
+            return (from x in GrantRepo
                     where x.Value.Client.ClientId.ToUpperInvariant() == clientId.ToUpperInvariant() &&
                     x.Value.ResourceOwnerId.ToUpperInvariant() == resourceOwnerId.ToUpperInvariant()
                     orderby x.Value.IssuedOn descending
                     select x.Value).FirstOrDefault();
+        }
+
+
+        public RefreshTokenBase FindRefreshToken(string refreshToken)
+        {
+            if (!RefreshTokenRepo.ContainsKey(refreshToken))
+                return null;
+
+            return RefreshTokenRepo[refreshToken];
         }
 
         #endregion

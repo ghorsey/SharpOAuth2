@@ -48,6 +48,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
                 if( !processor.IsSatisfiedBy(context)) continue;
                 processor.Process(context);
                 handled = true;
+                break;
             }
 
             if (!handled)

@@ -35,7 +35,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
                 },
                 IsApproved = true,
                 RedirectUri = new Uri("http://www.mysite.com/callback?param=maintain"),
-                ResourceOwnerId = "1234",
+                ResourceOwnerUsername = "1234",
                 ResponseType = responseType,
                 Scope = new string[] { "create", "delete" },
                 State = "special"

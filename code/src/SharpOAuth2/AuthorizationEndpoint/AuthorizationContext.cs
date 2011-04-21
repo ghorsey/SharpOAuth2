@@ -40,7 +40,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
         public ErrorResponse Error { get; set; }
         public IToken Token { get; set; }
         public bool IsApproved { get; set; }
-        public string ResourceOwnerId { get; set; }
+        public string ResourceOwnerUsername { get; set; }
         #endregion
     }
 }

@@ -63,6 +63,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
 
                     handled = true;
                     processor.Process(context);
+                    break;
                 }
 
                 if (!handled)
