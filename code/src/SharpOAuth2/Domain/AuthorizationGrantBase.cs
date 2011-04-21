@@ -25,7 +25,7 @@
 
 using System;
 using System.Collections.Generic;
-using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
@@ -58,7 +58,7 @@ namespace SharpOAuth2.Provider.Domain
         public IDictionary<string, object> ToResponseValues()
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters[SharpOAuth2.Provider.Framework.Parameters.AuthroizationCode] = Token;
+            parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Token;
 
             return parameters;
         }

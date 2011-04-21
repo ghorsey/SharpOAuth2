@@ -29,7 +29,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 using System.Web;
-using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Framework;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {

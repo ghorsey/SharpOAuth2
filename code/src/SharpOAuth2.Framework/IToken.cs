@@ -25,7 +25,7 @@
 
 using System.Collections.Generic;
 
-namespace SharpOAuth2.Provider.Framework
+namespace SharpOAuth2.Framework
 {
     public interface IToken 
     {

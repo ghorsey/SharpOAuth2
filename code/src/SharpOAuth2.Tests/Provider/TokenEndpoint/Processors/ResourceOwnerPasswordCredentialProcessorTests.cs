@@ -1,6 +1,7 @@
 ﻿using System;
 using Moq;
 using NUnit.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Services;

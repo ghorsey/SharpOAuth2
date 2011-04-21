@@ -93,6 +93,10 @@
     <Compile Include="Provider\TokenEndpoint\TokenResponseWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharpOAuth2.Framework\SharpOAuth2.Framework.csproj">
+      <Project>{A01AE1E2-E833-4822-B29B-E07CB69B572F}</Project>
+      <Name>SharpOAuth2.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.Provider.csproj">
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
       <Name>SharpOAuth2.Provider</Name>

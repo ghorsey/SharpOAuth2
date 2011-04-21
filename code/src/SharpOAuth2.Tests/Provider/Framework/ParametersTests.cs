@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Framework;
 namespace SharpOAuth2.Tests.Provider.Framework
 {
     [TestFixture]

@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider.Domain;

@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Web;
 using Moq;
 using NUnit.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.Framework;
 

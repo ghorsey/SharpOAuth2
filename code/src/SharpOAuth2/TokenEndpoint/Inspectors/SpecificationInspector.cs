@@ -23,6 +23,7 @@
  */
 #endregion
 
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Globalization;
 

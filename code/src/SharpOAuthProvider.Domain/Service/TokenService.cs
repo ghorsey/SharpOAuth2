@@ -1,4 +1,5 @@
 ﻿using System;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;

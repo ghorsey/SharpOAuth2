@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Specialized;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Globalization;

@@ -3,7 +3,7 @@ using CuttingEdge.ServiceLocation;
 using Microsoft.Practices.ServiceLocation;
 using Moq;
 using NUnit.Framework;
-using SharpOAuth2.Provider;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Inspectors;
 using SharpOAuth2.Provider.AuthorizationEndpoint.Processor;

@@ -25,6 +25,7 @@
 
 using System;
 using System.Globalization;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Globalization;
 using SharpOAuth2.Provider.ResourceEndpoint;
 using SharpOAuth2.Provider.TokenEndpoint;

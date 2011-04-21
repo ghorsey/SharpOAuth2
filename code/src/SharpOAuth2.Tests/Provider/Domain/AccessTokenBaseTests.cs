@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Domain;
-using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Tests.Provider.Domain
 {

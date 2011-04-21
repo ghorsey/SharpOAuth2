@@ -24,6 +24,7 @@
 #endregion
 
 using System.Collections.Specialized;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Provider.ResourceEndpoint

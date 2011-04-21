@@ -11,14 +11,27 @@ namespace SharpOAuth2.ClientSite.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
 
         public ActionResult Index()
         {
             return View("Index");
         }
 
+        #region Authorization Endpoint calls
+        [HttpGet]
+        public ActionResult ImplicitFlow()
+        {
+            return Redirect("http://localhost:15079/Home/Authorize?response_type=token&client_id=12345&scope=" + Uri.EscapeDataString("view edit") + "&redirect_uri=" + Uri.EscapeDataString("http://localhost:15075/Home/Callback"));
+        }
+        [HttpGet]
+        public ActionResult RedirectFlow()
+        {
+            return Redirect("http://localhost:15079/Home/Authorize?response_type=code&client_id=12345&scope=" + Uri.EscapeDataString("view edit") + "&redirect_uri=" + Uri.EscapeDataString("http://localhost:15075/Home/Callback"));
+        }
+
+        #endregion
+
+        #region Token Endpoint calls
         [HttpGet]
         public ActionResult ClientCredentials()
         {
@@ -120,6 +133,8 @@ namespace SharpOAuth2.ClientSite.Controllers
 
             return RedirectToAction("ViewResourceData");
         }
+        #endregion
+
         public ActionResult Callback(string code, string error, string error_description)
         {
             //TODO: This is all ugly and need refactoring when I build the oauth client routines

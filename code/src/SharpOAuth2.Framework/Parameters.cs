@@ -24,7 +24,7 @@
 #endregion
 
 
-namespace SharpOAuth2.Provider.Framework
+namespace SharpOAuth2.Framework
 {
     internal static class Parameters
     {

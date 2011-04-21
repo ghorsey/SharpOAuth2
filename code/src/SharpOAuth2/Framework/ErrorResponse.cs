@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using SharpOAuth2.Framework;
 
 namespace SharpOAuth2.Provider.Framework
 {

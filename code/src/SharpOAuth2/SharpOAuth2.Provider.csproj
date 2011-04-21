@@ -94,8 +94,6 @@
     <Compile Include="Domain\ClientBase.cs" />
     <Compile Include="AuthorizationEndpoint\IAuthorizationContext.cs" />
     <Compile Include="Framework\IClient.cs" />
-    <Compile Include="Framework\IToken.cs" />
-    <Compile Include="Framework\Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\OAuthErrorResponseException.cs" />
     <Compile Include="Domain\AccessTokenBase.cs" />
@@ -126,6 +124,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharpOAuth2.Framework\SharpOAuth2.Framework.csproj">
+      <Project>{A01AE1E2-E833-4822-B29B-E07CB69B572F}</Project>
+      <Name>SharpOAuth2.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpOAuth2.Globalization\SharpOAuth2.Provider.Globalization.csproj">
       <Project>{799D94B8-6301-46C2-AFEF-D783429EDF24}</Project>
       <Name>SharpOAuth2.Provider.Globalization</Name>

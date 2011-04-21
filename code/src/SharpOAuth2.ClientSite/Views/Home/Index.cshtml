@@ -7,11 +7,11 @@
 <ul>
     <li>
         <h3>Authorization Code</h3>
-        <a href="http://localhost:15079/Home/Authorize?response_type=code&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Redirect flow</a>
+        @Html.ActionLink("Redirect Flow", "RedirectFlow")
     </li>
     <li>
         <h3>Implicit Grant</h3>
-        <a href="http://localhost:15079/Home/Authorize?response_type=token&client_id=12345&scope=@HttpUtility.UrlEncode("view edit")&redirect_uri=@Uri.EscapeDataString("http://localhost:15075/Home/Callback")">Implicit flow</a>
+        @Html.ActionLink("Implicit Flow", "ImplicitFlow")
     </li>
     <li>
         <h3>Client Credentials</h3>

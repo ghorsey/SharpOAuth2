@@ -25,7 +25,7 @@
 
 using System;
 using System.Collections.Generic;
-using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
@@ -52,13 +52,13 @@ namespace SharpOAuth2.Provider.Domain
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
 
-            dictionary[SharpOAuth2.Provider.Framework.Parameters.AccessToken] = Token;
-            dictionary[SharpOAuth2.Provider.Framework.Parameters.AccessTokenExpiresIn] = ExpiresIn;
-            dictionary[SharpOAuth2.Provider.Framework.Parameters.RefreshToken] = RefreshToken;
-            dictionary[SharpOAuth2.Provider.Framework.Parameters.AccessTokenType] = TokenType;
+            dictionary[SharpOAuth2.Framework.Parameters.AccessToken] = Token;
+            dictionary[SharpOAuth2.Framework.Parameters.AccessTokenExpiresIn] = ExpiresIn;
+            dictionary[SharpOAuth2.Framework.Parameters.RefreshToken] = RefreshToken;
+            dictionary[SharpOAuth2.Framework.Parameters.AccessTokenType] = TokenType;
 
             if (Scope != null && Scope.Length > 0)
-                dictionary[Framework.Parameters.Scope] = string.Join(" ", Scope);
+                dictionary[SharpOAuth2.Framework.Parameters.Scope] = string.Join(" ", Scope);
 
 
             foreach (var itm in Parameters)
