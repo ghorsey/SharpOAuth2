@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationEndpoint\Processor\ImplicitFlowProcessor.cs" />
     <Compile Include="Domain\AuthorizationGrantBase.cs" />
     <Compile Include="TokenEndpoint\Processor\RefreshTokenProcessor.cs" />
     <Compile Include="Utility\Epoch.cs" />

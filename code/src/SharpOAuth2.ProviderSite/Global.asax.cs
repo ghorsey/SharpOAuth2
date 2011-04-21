@@ -58,19 +58,21 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<ITokenProvider>().To<TokenProvider>();
             kernel.Bind<IResourceProvider>().To<ResourceProvider>();
 
-
-            // Token Processors
+            
+            // Token Endpoint Processors
             kernel.Bind<ContextProcessor<ITokenContext>>().To<AuthenticationCodeProcessor>();
             kernel.Bind<ContextProcessor<ITokenContext>>().To<ResourceOwnerPasswordCredentialProcessor>();
             kernel.Bind<ContextProcessor<ITokenContext>>().To<ClientCredentialsProcessor>();
+            kernel.Bind<ContextProcessor<ITokenContext>>().To<RefreshTokenProcessor>();
 
-            // Resource Processors
+            // Resource Endpoint Processors
             //TODO: Build Mac Processor
             kernel.Bind<ContextProcessor<IResourceContext>>().To<BearerProcessor>();
 
-            // add supported response types
+            // Authorization Endpoint Processors
             kernel.Rebind<ContextProcessor<IAuthorizationContext>>().To<AuthorizationCodeProcessor>();
-                
+            kernel.Bind<ContextProcessor<IAuthorizationContext>>().To<ImplicitFlowProcessor>();
+    
             NinjectServiceLocator adapter = new NinjectServiceLocator(kernel);
 
             ServiceLocator.SetLocatorProvider(() => adapter);

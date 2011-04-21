@@ -88,7 +88,7 @@ namespace SharpOAuth2.ClientSite.Controllers
         {
             //TODO: This is all ugly and need refactoring when I build the oauth client routines
             string accessToken = "";
-            if (string.IsNullOrWhiteSpace(error))
+            if (string.IsNullOrWhiteSpace(error) && !string.IsNullOrEmpty(code))
             {
                 StringBuilder postData = new StringBuilder();
 
@@ -122,7 +122,7 @@ namespace SharpOAuth2.ClientSite.Controllers
                 return RedirectToAction("ViewResourceData");
             }
 
-            if (!string.IsNullOrWhiteSpace(error))
+            if (!string.IsNullOrWhiteSpace(error) || string.IsNullOrWhiteSpace(code))
             {
                 return View("Callback", new CallbackModel(accessToken, !string.IsNullOrWhiteSpace(error), error, error_description));
             }

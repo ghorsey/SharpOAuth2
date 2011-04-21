@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Provider\AuthorizationEndpoint\Processor\ImplicitFlowProcessorTests.cs" />
     <Compile Include="Provider\Domain\AccessGrantBaseTests.cs" />
     <Compile Include="Provider\Domain\AccessTokenBaseTests.cs" />
     <Compile Include="Provider\TokenEndpoint\Processors\RefreshTokenProcessorTests.cs" />
