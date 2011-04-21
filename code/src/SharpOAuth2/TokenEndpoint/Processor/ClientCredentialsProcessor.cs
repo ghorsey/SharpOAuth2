@@ -48,7 +48,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
 
             ClientBase client = ServiceFactory.ClientService.FindClient(context.Client.ClientId);
 
-            context.Token = ServiceFactory.TokenService.MakeAccessToken(client);
+            context.Token = ServiceFactory.TokenService.IssueAccessToken(client);
         }
     }
 }

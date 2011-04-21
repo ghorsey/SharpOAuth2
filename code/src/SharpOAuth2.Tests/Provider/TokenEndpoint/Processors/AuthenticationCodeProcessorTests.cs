@@ -38,7 +38,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
             mckTokenService.Setup(x => x.FindAuthorizationGrant("123")).Returns(new AuthorizationGrantBase { Client = new ClientBase { ClientId = "321", ClientSecret = "secret" }, IsApproved = true, RedirectUri = new Uri("http://www.mysites.com/callback") });
             mckTokenService.Setup(x=>x.ConsumeGrant(It.IsAny<AuthorizationGrantBase>()));
-            mckTokenService.Setup(x=>x.MakeAccessToken(It.IsAny<AuthorizationGrantBase>())).Returns(new AccessTokenBase{ TokenType="bearer", RefreshToken="refresh_token", Token = "token", ExpiresIn=120});
+            mckTokenService.Setup(x=>x.IssueAccessToken(It.IsAny<AuthorizationGrantBase>())).Returns(new AccessTokenBase{ TokenType="bearer", RefreshToken="refresh_token", Token = "token", ExpiresIn=120});
             mckTokenService.Setup(x => x.ValidateRedirectUri(context, It.IsAny<AuthorizationGrantBase>())).Returns(true);
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.FindClient("321")).Returns(new ClientBase { ClientSecret = "secret", ClientId = "321" });

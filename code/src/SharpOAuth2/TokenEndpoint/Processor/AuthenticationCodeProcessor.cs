@@ -66,7 +66,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             if (client.ClientId != grant.Client.ClientId)
                 throw Errors.InvalidGrant(context);
 
-            context.Token = ServiceFactory.TokenService.MakeAccessToken(grant);
+            context.Token = ServiceFactory.TokenService.IssueAccessToken(grant);
 
             ServiceFactory.TokenService.ConsumeGrant(grant);
 

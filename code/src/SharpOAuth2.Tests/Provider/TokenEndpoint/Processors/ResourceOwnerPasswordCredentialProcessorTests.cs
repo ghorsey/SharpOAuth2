@@ -59,7 +59,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);
 
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.MakeAccessToken("username")).Returns(token);
+            mckTokenService.Setup(x => x.IssueAccessToken("username")).Returns(token);
 
             Mock<IServiceFactory> mckServicFactory = new Mock<IServiceFactory>();
             mckServicFactory.SetupGet(x => x.ClientService).Returns(mckClientService.Object);

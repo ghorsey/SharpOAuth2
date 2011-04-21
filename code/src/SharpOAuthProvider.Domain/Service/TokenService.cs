@@ -20,7 +20,7 @@ namespace SharpOAuthProvider.Domain.Service
 
         #region ITokenService Members
 
-        public AuthorizationGrantBase MakeAuthorizationGrant(IAuthorizationContext context)
+        public AuthorizationGrantBase IssueAuthorizationGrant(IAuthorizationContext context)
         {
             AuthorizationGrant grant = new AuthorizationGrant();
             Client client = ClientRepo.FindClient(context.Client.ClientId);
@@ -55,7 +55,7 @@ namespace SharpOAuthProvider.Domain.Service
             TokenRepo.AddAuthorizationGrant(gr);
         }
 
-        public AccessTokenBase MakeAccessToken(AuthorizationGrantBase grant)
+        public IToken IssueAccessToken(AuthorizationGrantBase grant)
         {
             AccessToken token = new AccessToken
             {
@@ -81,7 +81,7 @@ namespace SharpOAuthProvider.Domain.Service
             return TokenRepo.FindToken(token);
         }
 
-        public IToken MakeAccessToken(string resourceOwnerUsername)
+        public IToken IssueAccessToken(string resourceOwnerUsername)
         {
             AccessToken token = new AccessToken
             {
@@ -95,7 +95,7 @@ namespace SharpOAuthProvider.Domain.Service
             return token;
         }
 
-        public AccessTokenBase MakeAccessToken(ClientBase client)
+        public IToken IssueAccessToken(ClientBase client)
         {
             AccessToken token = new AccessToken
             {
@@ -108,6 +108,21 @@ namespace SharpOAuthProvider.Domain.Service
             TokenRepo.AddAccessToken(token);
 
             return token;
+        }
+
+        #endregion
+
+        #region ITokenService Members
+
+
+        public bool ValidateRefreshTokenForClient(string refreshToken, ClientBase client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IToken IssueAccessToken(string refreshToken, ClientBase client)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

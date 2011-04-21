@@ -57,6 +57,10 @@ namespace SharpOAuth2.Provider.Domain
             dictionary[SharpOAuth2.Provider.Framework.Parameters.RefreshToken] = RefreshToken;
             dictionary[SharpOAuth2.Provider.Framework.Parameters.AccessTokenType] = TokenType;
 
+            if (Scope != null && Scope.Length > 0)
+                dictionary[Framework.Parameters.Scope] = string.Join(" ", Scope);
+
+
             foreach (var itm in Parameters)
                 dictionary.Add(itm.Key, itm.Value);
 

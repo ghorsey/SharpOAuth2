@@ -62,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Provider\Domain\AccessGrantBaseTests.cs" />
+    <Compile Include="Provider\Domain\AccessTokenBaseTests.cs" />
+    <Compile Include="Provider\TokenEndpoint\Processors\RefreshTokenProcessorTests.cs" />
     <Compile Include="Provider\Utility\EpochTests.cs" />
     <Compile Include="Provider\Framework\ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

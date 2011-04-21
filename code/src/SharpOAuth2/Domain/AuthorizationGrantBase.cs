@@ -43,13 +43,12 @@ namespace SharpOAuth2.Provider.Domain
         public virtual bool IsApproved { get; set; }
         public virtual ClientBase Client { get; set; }
         public virtual Uri RedirectUri { get; set; }
-        public virtual IDictionary<string, object> Parameters { get; private set; }
+        public virtual IDictionary<string, object> Parameters { get { throw new NotSupportedException(); } }
         #endregion
 
         public AuthorizationGrantBase()
         {
             IssuedOn = DateTime.Now.ToEpoch();
-            Parameters = new Dictionary<string, object>();
         }
 
         #region IToken Members
@@ -59,10 +58,6 @@ namespace SharpOAuth2.Provider.Domain
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters[SharpOAuth2.Provider.Framework.Parameters.AuthroizationCode] = Token;
-
-
-            foreach (var item in Parameters)
-                parameters.Add(item.Key, item.Value);
 
             return parameters;
         }

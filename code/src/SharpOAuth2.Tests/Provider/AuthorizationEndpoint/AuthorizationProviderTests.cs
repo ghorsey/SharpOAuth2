@@ -37,13 +37,13 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         private static Mock<ITokenService> MakeTokenService(IAuthorizationContext context, AuthorizationGrantBase token)
         {
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.MakeAuthorizationGrant(context)).Returns(token);
+            mckTokenService.Setup(x => x.IssueAuthorizationGrant(context)).Returns(token);
             return mckTokenService;
         }
         private static Mock<ITokenService> MakeTokenService(IAuthorizationContext context)
         {
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.MakeAuthorizationGrant(context)).Returns(MakeCommonToken(context));
+            mckTokenService.Setup(x => x.IssueAuthorizationGrant(context)).Returns(MakeCommonToken(context));
             return mckTokenService;
         }
         private static AuthorizationContext MakeCommonAuthorizationContext()

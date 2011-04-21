@@ -40,7 +40,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
 
         public override void Process(IAuthorizationContext context)
         {
-            AuthorizationGrantBase grant = ServiceFactory.TokenService.MakeAuthorizationGrant(context);
+            AuthorizationGrantBase grant = ServiceFactory.TokenService.IssueAuthorizationGrant(context);
             grant.Scope = context.Scope;
             grant.RedirectUri = context.RedirectUri;
             grant.IsApproved = context.IsApproved;

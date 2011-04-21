@@ -70,6 +70,7 @@ namespace SharpOAuth2.Provider.Framework
         {
             return new OAuthErrorResponseException<T>(context,
                 Parameters.ErrorParameters.ErrorValues.UnauthorizedClient,
+                httpStatusCode: 401,
                 description: string.Format(CultureInfo.CurrentUICulture, AuthorizationEndpointResources.InvalidClient, client.ClientId));
         }
 

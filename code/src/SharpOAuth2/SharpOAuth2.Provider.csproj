@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\AuthorizationGrantBase.cs" />
+    <Compile Include="TokenEndpoint\Processor\RefreshTokenProcessor.cs" />
     <Compile Include="Utility\Epoch.cs" />
     <Compile Include="Fluent\FluentAuthorizationContext.cs" />
     <Compile Include="Fluent\FluentTokenContext.cs" />

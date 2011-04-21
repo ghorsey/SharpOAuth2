@@ -52,7 +52,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             mckClientService.Setup(x=>x.AuthenticateClient(context)).Returns(true);
             mckClientService.Setup(x => x.FindClient("123")).Returns(cl);
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x=>x.MakeAccessToken(cl)).Returns(token);
+            mckTokenService.Setup(x=>x.IssueAccessToken(cl)).Returns(token);
             Mock<IServiceFactory> mckServiceFactory = new Mock<IServiceFactory>();
             mckServiceFactory.SetupGet(x=>x.ClientService).Returns(mckClientService.Object);
             mckServiceFactory.SetupGet(x=>x.TokenService).Returns(mckTokenService.Object);
@@ -97,7 +97,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             catch (OAuthErrorResponseException<ITokenContext> x)
             {
                 Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.UnauthorizedClient, x.Error);
-                Assert.AreEqual(400, x.HttpStatusCode);
+                Assert.AreEqual(401, x.HttpStatusCode);
             }
             catch (Exception x)
             {
