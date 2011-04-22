@@ -26,44 +26,38 @@
 using System;
 using System.Collections.Generic;
 using SharpOAuth2.Framework;
-using SharpOAuth2.Provider.Framework;
-using SharpOAuth2.Provider.Utility;
-
-namespace SharpOAuth2.Provider.Domain
+using OAParameters = SharpOAuth2.Framework.Parameters;
+namespace SharpOAuth2.Client
 {
-    public class AuthorizationGrantBase : IToken, ITokenizer
+    public class AccessToken : IToken
     {
-        #region IToken Members
-
-        public virtual string Token { get; set; }
-        public virtual string TokenType { get; set; }
-        public virtual int ExpiresIn { get; set; }
-        public virtual string RefreshToken { get; set; }
-        public virtual string[] Scope { get; set; }
-        public virtual long IssuedOn { get; private set; }
-        public virtual bool IsApproved { get; set; }
-        public virtual ClientBase Client { get; set; }
-        public virtual Uri RedirectUri { get; set; }
-        public virtual string ResourceOwnerUsername { get; set; }
-        public virtual IDictionary<string, object> Parameters { get { throw new NotSupportedException(); } }
-        #endregion
-
-        public AuthorizationGrantBase()
+        public AccessToken(IDictionary<string, object> source)
         {
-            IssuedOn = DateTime.Now.ToEpoch();
+            Token = (string)SafeGet(OAParameters.AccessToken, source) ?? string.Empty;
+            TokenType = (string)SafeGet(OAParameters.AccessTokenType, source) ?? string.Empty;
+            ExpiresIn = Convert.ToInt32(SafeGet(OAParameters.AccessTokenExpiresIn, source));
+            RefreshToken = (string)SafeGet(OAParameters.RefreshToken, source) ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace((string)SafeGet(OAParameters.Scope, source) ?? string.Empty))
+                Scope = ((string)SafeGet(OAParameters.Scope, source)).Split(' ');
+            Parameters = source;
         }
 
+        private object SafeGet(string key, IDictionary<string, object> source)
+        {
+            if (!source.ContainsKey(key))
+                return null;
+
+            return source[key];
+        }
         #region IToken Members
 
+        public string Token { get; set; }
+        public string TokenType{ get; set; }
+        public int ExpiresIn{ get; set; }
+        public string RefreshToken{ get; set; }
+        public string[] Scope{ get; set; }
 
-        public IDictionary<string, object> ToResponseValues()
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Token;
-
-            return parameters;
-        }
-
+        public IDictionary<string, object> Parameters{ get; private set; }
         #endregion
     }
 }

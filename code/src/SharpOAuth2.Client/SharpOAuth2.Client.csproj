@@ -37,6 +37,9 @@
     <AssemblyOriginatorKeyFile>..\SharpOAuth2.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Json.Net\40r1\Bin\Net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +51,9 @@
   <ItemGroup>
     <Compile Include="Authorization\AuthorizationRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AccessToken.cs" />
+    <Compile Include="Token\ITokenContext.cs" />
+    <Compile Include="Token\TokenSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SharpOAuth2.snk">

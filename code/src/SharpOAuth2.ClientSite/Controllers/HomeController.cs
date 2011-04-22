@@ -5,8 +5,11 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using SharpOAuth2.ClientSite.Models.Home;
 using SharpOAuth2.Client.Authorization;
+using SharpOAuth2.ClientSite.Models.Home;
+using SharpOAuth2.Client.Token;
+using SharpOAuth2.Client;
+using SharpOAuth2.Framework;
 
 namespace SharpOAuth2.ClientSite.Controllers
 {
@@ -30,7 +33,7 @@ namespace SharpOAuth2.ClientSite.Controllers
                 Endpoint = new Uri("http://localhost:15079/Home/Authorize"),
                 RedirectUri = new Uri("http://localhost:15075/Home/Callback")
             };
-            
+
             return Redirect(request.ToAbsoluteUri());
         }
         [HttpGet]
@@ -54,101 +57,39 @@ namespace SharpOAuth2.ClientSite.Controllers
         [HttpGet]
         public ActionResult ClientCredentials()
         {
-            //TODO: This is all ugly and need refactoring when I build the oauth client routines
-            string accessToken = "";
+            //Session session = new Session(new Uri("http://localhost:15079/Home/Token"));
+            //IToken token = session.ClientCredentials("refresh")
+            //    .ExchangeForToken();
+            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+            IToken token = session.ExchangeClientCredentials("12345", "secret");
 
-            StringBuilder postData = new StringBuilder();
-
-            postData.Append("grant_type=client_credentials");
-            postData.Append("&client_id=12345");
-            postData.Append("&client_secret=secret");
-
-            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
-
-            WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
-
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-            Stream reqStream = request.GetRequestStream();
-            reqStream.Write(data, 0, data.Length);
-            reqStream.Close();
-
-            WebResponse response = request.GetResponse();
-
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                accessToken = sr.ReadToEnd();
-
-            return View("ClientCredentials", (object)accessToken);
+            return View("ClientCredentials", token);
         }
 
         [HttpGet]
         public ActionResult RefreshToken()
         {
-            //TODO: This is all ugly and need refactoring when I build the oauth client routines
-            string accessToken = "";
+            //Session session = new Session(new Uri("http://localhost:15079/Home/Token"));
+            //IToken token = session.RefreshToken("refresh")
+            //    .SetClient("12345", "secret")
+            //    .ExchangeForToken();
+         
+            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
 
-            StringBuilder postData = new StringBuilder();
-
-            postData.Append("grant_type=refresh_token");
-            postData.Append("&client_id=12345");
-            postData.Append("&client_secret=secret");
-            postData.Append("&refresh_token=refresh");
-
-            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
-
-            WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
-
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-            Stream reqStream = request.GetRequestStream();
-            reqStream.Write(data, 0, data.Length);
-            reqStream.Close();
-
-            WebResponse response = request.GetResponse();
-
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                accessToken = sr.ReadToEnd();
-
-            Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(accessToken);
-            Session["Token"] = dictionary;
+            Session["Token"] = session.RefreshAccessToken("12345", "secret", "refresh");
 
             return RedirectToAction("ViewResourceData");
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult ResourceOwnerPassword(string username, string password)
         {
-            //TODO: This is all ugly and need refactoring when I build the oauth client routines
-            string accessToken = "";
+            //IToken token = session.ResourceOwnerPasswordCredentials(username, password)
+            //    .SetClient("12345", "secret")
+            //    .ExchangeForToken();
+            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
 
-            StringBuilder postData = new StringBuilder();
-
-            postData.Append("grant_type=password");
-            postData.Append("&client_id=12345");
-            postData.Append("&client_secret=secret");
-            postData.AppendFormat("&username={0}", Uri.EscapeDataString(username));
-            postData.AppendFormat("&password={0}", Uri.EscapeDataString(password));
-
-            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
-
-            WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
-            
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-            Stream reqStream = request.GetRequestStream();
-            reqStream.Write(data, 0, data.Length);
-            reqStream.Close();
-
-            WebResponse response = request.GetResponse();
-
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                accessToken = sr.ReadToEnd();
-
-            Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(accessToken);
-            Session["Token"] = dictionary;
+            Session["Token"] = session.ExchangeResourceOwnerCredentials("12345", "secret", username, password);
 
             return RedirectToAction("ViewResourceData");
         }
@@ -156,45 +97,23 @@ namespace SharpOAuth2.ClientSite.Controllers
 
         public ActionResult Callback(string code, string error, string error_description)
         {
-            //TODO: This is all ugly and need refactoring when I build the oauth client routines
-            string accessToken = "";
             if (string.IsNullOrWhiteSpace(error) && !string.IsNullOrEmpty(code))
             {
-                StringBuilder postData = new StringBuilder();
+                TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+                IToken token = session.ExchangeAuthorizationGrant("12345", "secret", code, new Uri("http://localhost:15075/Home/Callback"));
+                //Session session = new Session(new Uri("http://localhost:15079/Home/Token"));
+                //IToken token = session.ExchangeAuthorizationGrant(code)
+                //    .SetClient("12345", "secret")
+                //    .ExchangeForToken();
 
-                postData.Append("grant_type=authorization_code");
-                postData.Append("&client_id=12345");
-                postData.Append("&client_secret=secret");
-                postData.Append("&code=");
-                postData.Append(Uri.EscapeDataString(code));
-                postData.Append("&redirect_uri=");
-                postData.Append(Uri.EscapeDataString("http://localhost:15075/Home/Callback"));
-                byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(postData.ToString());
-
-                WebRequest request = WebRequest.Create("http://localhost:15079/Home/Token");
-
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-                Stream reqStream = request.GetRequestStream();
-                reqStream.Write(data, 0, data.Length);
-                reqStream.Close();
-
-
-                WebResponse response = request.GetResponse();
-                
-                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                    accessToken = sr.ReadToEnd();
-
-                Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(accessToken);
-                Session["Token"] = dictionary;
+                Session["Token"] = token;
 
                 return RedirectToAction("ViewResourceData");
             }
 
             if (!string.IsNullOrWhiteSpace(error) || string.IsNullOrWhiteSpace(code))
             {
-                return View("Callback", new CallbackModel(accessToken, !string.IsNullOrWhiteSpace(error), error, error_description));
+                return View("Callback", new CallbackModel(!string.IsNullOrWhiteSpace(error), error, error_description));
             }
             else
             {
@@ -205,10 +124,10 @@ namespace SharpOAuth2.ClientSite.Controllers
         [HttpGet]
         public ActionResult ViewResourceData()
         {
-            IDictionary<string, object> token = (IDictionary<string, object>)Session["Token"];
+            IToken token = (IToken)Session["Token"];
             WebRequest request = WebRequest.Create("http://localhost:15079/Home/ViewResourceOwnerData");
             request.Method = "GET";
-            request.Headers["Authorization"] = "Bearer " + token["access_token"];
+            request.Headers["Authorization"] = "Bearer " + token.Token;
 
             WebResponse response = request.GetResponse();
 

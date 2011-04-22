@@ -29,6 +29,7 @@ using System.Collections.Specialized;
 using System.Web;
 using SharpOAuth2.Framework;
 using SharpOAuth2.Framework.Utility;
+using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
@@ -54,7 +55,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
                 return result.Uri;
             }
 
-            IDictionary<string, object> responseValues = context.Token.ToResponseValues();
+            IDictionary<string, object> responseValues = ((ITokenizer)context.Token).ToResponseValues();
             BuildResponseValues(queryComponents, responseValues);
             queryComponents[Parameters.State] = context.State;
 

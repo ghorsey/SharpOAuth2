@@ -23,16 +23,12 @@
  */
 #endregion
 
-using SharpOAuth2.Framework;
-namespace SharpOAuth2.Provider.Domain
+
+namespace SharpOAuth2.Framework
 {
-    public class ClientBase : IClient
+    public interface IClient
     {
-        #region IClient Members
-
-        public string ClientId{ get; set; }
-        public string ClientSecret{ get; set; }
-
-        #endregion
+        string ClientId { get; set; }
+        string ClientSecret { get; set; }
     }
 }

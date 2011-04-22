@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Practices.ServiceLocation;
+using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Globalization;
 using SharpOAuth2.Provider.Utility;
@@ -57,7 +58,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             if (context.Token == null)
                 throw Errors.InvalidToken(context);
 
-            if (context.Token.ExpiresIn > 0 && (context.Token.IssuedOn + context.Token.ExpiresIn) < DateTime.Now.ToEpoch())
+            if (context.Token.ExpiresIn > 0 && (((AccessTokenBase) context.Token).IssuedOn + context.Token.ExpiresIn) < DateTime.Now.ToEpoch())
                 throw Errors.InvalidToken(context);
 
         }

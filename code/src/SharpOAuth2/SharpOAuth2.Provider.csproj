@@ -61,6 +61,7 @@
     <Compile Include="AuthorizationEndpoint\Processor\ImplicitFlowProcessor.cs" />
     <Compile Include="Domain\AuthorizationGrantBase.cs" />
     <Compile Include="Domain\RefreshTokenBase.cs" />
+    <Compile Include="Framework\ITokenizer.cs" />
     <Compile Include="TokenEndpoint\Processor\RefreshTokenProcessor.cs" />
     <Compile Include="Utility\Epoch.cs" />
     <Compile Include="Fluent\FluentAuthorizationContext.cs" />
@@ -93,7 +94,6 @@
     <Compile Include="AuthorizationEndpoint\Inspectors\SpecificationInspector.cs" />
     <Compile Include="Domain\ClientBase.cs" />
     <Compile Include="AuthorizationEndpoint\IAuthorizationContext.cs" />
-    <Compile Include="Framework\IClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\OAuthErrorResponseException.cs" />
     <Compile Include="Domain\AccessTokenBase.cs" />

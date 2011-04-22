@@ -23,16 +23,39 @@
  */
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections.Specialized;
 using SharpOAuth2.Framework;
-namespace SharpOAuth2.Provider.Domain
+using SharpOAuth2.Framework.Utility;
+
+namespace SharpOAuth2.Client.Authorization
 {
-    public class ClientBase : IClient
+    public class AuthorizationRequest
     {
-        #region IClient Members
+        public string ResponseType { get; set; }
+        public string[] Scope { get; set; }
+        public Uri RedirectUri { get; set; }
+        public Uri Endpoint { get; set; }
+        public string ClientId { get; set; }
+        public string Method { get; set; }
+        public string ToAbsoluteUri()
+        {
+            UriBuilder builder = new UriBuilder(Endpoint);
+            NameValueCollection components = new NameValueCollection();
+            components[Parameters.ResponseType] = ResponseType;
+            components[Parameters.ClientId] = ClientId;
 
-        public string ClientId{ get; set; }
-        public string ClientSecret{ get; set; }
+            if (Scope != null && Scope.Length > 0)
+                components[Parameters.Scope] = string.Join(" ", Scope);
 
-        #endregion
+            components[Parameters.RedirectUri] = RedirectUri.AbsoluteUri;
+
+            builder.Query = UriHelper.ReconstructQueryString(components);
+
+            return builder.Uri.AbsoluteUri;
+        }
     }
 }

@@ -26,11 +26,12 @@
 using System;
 using System.Collections.Generic;
 using SharpOAuth2.Framework;
+using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
 {
-    public class AccessTokenBase : IToken
+    public class AccessTokenBase : IToken, ITokenizer
     {
 
         public AccessTokenBase()

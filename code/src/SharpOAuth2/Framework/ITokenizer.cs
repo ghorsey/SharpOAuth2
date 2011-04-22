@@ -23,12 +23,12 @@
  */
 #endregion
 
+using System.Collections.Generic;
 
 namespace SharpOAuth2.Provider.Framework
 {
-    public interface IClient
+    public interface ITokenizer
     {
-        string ClientId { get; set; }
-        string ClientSecret { get; set; }
+        IDictionary<string, object> ToResponseValues();
     }
 }

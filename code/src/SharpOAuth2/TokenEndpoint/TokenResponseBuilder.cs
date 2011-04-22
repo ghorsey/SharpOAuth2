@@ -71,7 +71,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
                 throw new OAuthFatalException(TokenEndpointResources.ContextDoesNotContainToken);
 
             TokenResponse response = new TokenResponse { HttpStatusCode = 200 };
-            response.Body = SerializeResponse(context.Token.ToResponseValues());
+            response.Body = SerializeResponse(((ITokenizer)context.Token).ToResponseValues());
             return response;
         }
 

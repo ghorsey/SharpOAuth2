@@ -23,16 +23,33 @@
  */
 #endregion
 
-using SharpOAuth2.Framework;
-namespace SharpOAuth2.Provider.Domain
+using System;
+using System.Collections.Specialized;
+using System.IO;
+using System.Text;
+
+namespace SharpOAuth2.Framework.Utility
 {
-    public class ClientBase : IClient
+    internal static class UriHelper
     {
-        #region IClient Members
+        internal static string ReconstructQueryString(NameValueCollection queryComponents)
+        {
+            StringBuilder output = new StringBuilder();
+            TextWriter writer = new StringWriter(output);
 
-        public string ClientId{ get; set; }
-        public string ClientSecret{ get; set; }
+            string queryComponentFormat = "{0}={1}";
+            for (int i = 0; i < queryComponents.Count; i++)
+            {
+                if (string.IsNullOrWhiteSpace(queryComponents[i]))
+                    continue;
 
-        #endregion
+                if (i > 0)
+                    writer.Write("&");
+
+                writer.Write(queryComponentFormat, queryComponents.Keys[i], Uri.EscapeDataString(queryComponents[i]));
+            }
+
+            return output.ToString();
+        }
     }
 }

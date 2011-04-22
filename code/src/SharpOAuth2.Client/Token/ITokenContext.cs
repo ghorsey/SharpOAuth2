@@ -23,16 +23,17 @@
  */
 #endregion
 
+using System;
 using SharpOAuth2.Framework;
-namespace SharpOAuth2.Provider.Domain
+
+namespace SharpOAuth2.Client.Token
 {
-    public class ClientBase : IClient
+    public interface ITokenContext
     {
-        #region IClient Members
-
-        public string ClientId{ get; set; }
-        public string ClientSecret{ get; set; }
-
-        #endregion
+        string GrantType { get; set; }
+        IClient Client { get; set; }
+        string Code { get; set; }
+        Uri RedirectUri { get; set; }
+        Uri TokenEndpoint { get; set; }
     }
 }
