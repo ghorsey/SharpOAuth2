@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Web.Mvc;
-using Newtonsoft.Json;
-using SharpOAuth2.Client.Authorization;
+using SharpOAuth2.Client.AuthorizationEndpoint;
+using SharpOAuth2.Client.TokenEndpoint;
 using SharpOAuth2.ClientSite.Models.Home;
-using SharpOAuth2.Client.Token;
-using SharpOAuth2.Client;
 using SharpOAuth2.Framework;
 
 namespace SharpOAuth2.ClientSite.Controllers
@@ -60,7 +56,7 @@ namespace SharpOAuth2.ClientSite.Controllers
             //Session session = new Session(new Uri("http://localhost:15079/Home/Token"));
             //IToken token = session.ClientCredentials("refresh")
             //    .ExchangeForToken();
-            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+            TokenRequest session = new TokenRequest(new Uri("http://localhost:15079/Home/Token"));
             IToken token = session.ExchangeClientCredentials("12345", "secret");
 
             return View("ClientCredentials", token);
@@ -74,7 +70,7 @@ namespace SharpOAuth2.ClientSite.Controllers
             //    .SetClient("12345", "secret")
             //    .ExchangeForToken();
          
-            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+            TokenRequest session = new TokenRequest(new Uri("http://localhost:15079/Home/Token"));
 
             Session["Token"] = session.RefreshAccessToken("12345", "secret", "refresh");
 
@@ -87,7 +83,7 @@ namespace SharpOAuth2.ClientSite.Controllers
             //IToken token = session.ResourceOwnerPasswordCredentials(username, password)
             //    .SetClient("12345", "secret")
             //    .ExchangeForToken();
-            TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+            TokenRequest session = new TokenRequest(new Uri("http://localhost:15079/Home/Token"));
 
             Session["Token"] = session.ExchangeResourceOwnerCredentials("12345", "secret", username, password);
 
@@ -99,7 +95,7 @@ namespace SharpOAuth2.ClientSite.Controllers
         {
             if (string.IsNullOrWhiteSpace(error) && !string.IsNullOrEmpty(code))
             {
-                TokenSession session = new TokenSession(new Uri("http://localhost:15079/Home/Token"));
+                TokenRequest session = new TokenRequest(new Uri("http://localhost:15079/Home/Token"));
                 IToken token = session.ExchangeAuthorizationGrant("12345", "secret", code, new Uri("http://localhost:15075/Home/Callback"));
                 //Session session = new Session(new Uri("http://localhost:15079/Home/Token"));
                 //IToken token = session.ExchangeAuthorizationGrant(code)
@@ -125,6 +121,12 @@ namespace SharpOAuth2.ClientSite.Controllers
         public ActionResult ViewResourceData()
         {
             IToken token = (IToken)Session["Token"];
+
+            //string result = token
+            //    .Get()
+            //    .RequestResource(new Uri("http://localhost:15079/Home/ViewResourceOwnerData"))
+            //    .ReadBody();
+
             WebRequest request = WebRequest.Create("http://localhost:15079/Home/ViewResourceOwnerData");
             request.Method = "GET";
             request.Headers["Authorization"] = "Bearer " + token.Token;

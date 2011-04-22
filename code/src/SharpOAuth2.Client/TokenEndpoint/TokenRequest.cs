@@ -32,13 +32,13 @@ using Newtonsoft.Json;
 using SharpOAuth2.Framework;
 using SharpOAuth2.Framework.Utility;
 
-namespace SharpOAuth2.Client.Token
+namespace SharpOAuth2.Client.TokenEndpoint
 {
-    public class TokenSession
+    public class TokenRequest
     {
         public Uri TokenEndpoint{ get; private set; }
 
-        public TokenSession(Uri tokenEndpoint)
+        public TokenRequest(Uri tokenEndpoint)
         {
             TokenEndpoint = tokenEndpoint;
         }
