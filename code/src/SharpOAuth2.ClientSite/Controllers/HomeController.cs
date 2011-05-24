@@ -127,7 +127,7 @@ namespace SharpOAuth2.ClientSite.Controllers
             //    .RequestResource(new Uri("http://localhost:15079/Home/ViewResourceOwnerData"))
             //    .ReadBody();
 
-            WebRequest request = WebRequest.Create("http://localhost:15079/Home/ViewResourceOwnerData");
+            WebRequest request = WebRequest.Create("http://localhost:7675/Contacts");
             request.Method = "GET";
             request.Headers["Authorization"] = "Bearer " + token.Token;
 

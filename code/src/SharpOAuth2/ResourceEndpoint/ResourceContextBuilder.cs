@@ -54,7 +54,6 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             context.Form = request.Form;
             context.QueryString = request.QueryString;
             context.Headers = request.Headers;
-
             return context;
         }
 
