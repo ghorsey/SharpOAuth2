@@ -70,19 +70,19 @@ namespace RESTSample
         }
 
 
-        protected void Application_AuthenticateRequest(Object sender, EventArgs e)
-        {
-            IResourceProvider provider = ServiceLocator.Current.GetInstance<IResourceProvider>();
+        //protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        //{
+        //    IResourceProvider provider = ServiceLocator.Current.GetInstance<IResourceProvider>();
 
-            IResourceContext context = new ResourceContextBuilder().FromHttpRequest(new HttpRequestWrapper(HttpContext.Current.Request));
+        //    IResourceContext context = new ResourceContextBuilder().FromHttpRequest(new HttpRequestWrapper(HttpContext.Current.Request));
 
-            provider.AccessProtectedResource(context);
+        //    provider.AccessProtectedResource(context);
 
-            TokenPrincipal principal = new TokenPrincipal(new GenericIdentity(context.Token.Token, "OAuth"), context.Token.Scope, context.Token);
+        //    TokenPrincipal principal = new TokenPrincipal(new GenericIdentity(context.Token.Token, "OAuth"), context.Token.Scope, context.Token);
 
 
-            HttpContext.Current.User = principal;
+        //    HttpContext.Current.User = principal;
 
-        }
+        //}
     }
 }

@@ -95,6 +95,10 @@
       <Project>{A01AE1E2-E833-4822-B29B-E07CB69B572F}</Project>
       <Name>SharpOAuth2.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpOAuth2.Provider.ResourceAuthorizationHttpModule\SharpOAuth2.Provider.ResourceAuthorizationHttpModule.csproj">
+      <Project>{2BDCE683-FE10-4B7E-8934-084E24CBA705}</Project>
+      <Name>SharpOAuth2.Provider.ResourceAuthorizationHttpModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpOAuth2\SharpOAuth2.Provider.csproj">
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
       <Name>SharpOAuth2.Provider</Name>
