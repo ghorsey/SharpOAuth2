@@ -29,10 +29,17 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         {
             AuthorizationContext context = new AuthorizationContext
             {
-                Token = new AuthorizationGrantBase
+                AuthorizationGrant = new AuthorizationGrantBase
                 {
-                    Scope = new string[] { "create", "delete" },
-                    Token = "special-token-value"
+                    //Scope = new string[] { "create", "delete" },
+                    Code = "special-token-value"
+                },
+                Token = new AccessTokenBase
+                {
+                    Token = "access-token",
+                    TokenType="bearer",
+                    ExpiresIn = 123,
+                    Scope = new string[]{ "read"}
                 },
                 IsApproved = true,
                 RedirectUri = new Uri("http://www.mysite.com/callback?param=maintain"),
@@ -53,7 +60,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             context.State = "";
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain&code=special-token-value"), result.ToString());
+            Assert.AreEqual("http://www.mysite.com/callback?param=maintain&code=special-token-value", result.AbsoluteUri);
         }
 
         [Test]
@@ -70,14 +77,14 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
         }
 
         [Test]
-        public void CreateTokenAuthorizationResponseForRedirectFlow()
+        public void CreateTokenAuthorizationResponseForImplicit()
         {
             IAuthorizationContext context = MakeAuthorizatonCodeContext(Parameters.ResponseTypeValues.AccessToken);
             IAuthorizationResponseBuilder builder = new AuthorizationResponseBuilder();
 
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain#code=special-token-value&state=special"), result.ToString());
+            Assert.AreEqual("http://www.mysite.com/callback?param=maintain#access_token=access-token&expires_in=123&token_type=bearer&scope=read&state=special", result.AbsoluteUri);
         }
 
         [Test]
@@ -88,7 +95,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             Uri result = builder.CreateResponse(context);
 
-            Assert.AreEqual(new Uri("http://www.mysite.com/callback?param=maintain#error=access_denied&error_description=You%20do%20not%20have%20access"), result);
+            Assert.AreEqual("http://www.mysite.com/callback?param=maintain#error=access_denied&error_description=You%20do%20not%20have%20access", result.AbsoluteUri);
         }
     }
 }

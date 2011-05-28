@@ -4,6 +4,10 @@ namespace SharpOAuthProvider.Domain
 {
     public class AuthorizationGrant : AuthorizationGrantBase
     {
+        public Client Client { get; set; }
+        public bool IsApproved { get; set; }
+        public int ExpiresIn { get; set; }
+        public int IssuedOn { get; set; }
         public bool IsUsed { get; set; }
         public string ResourceOwnerId { get; set; }
     }

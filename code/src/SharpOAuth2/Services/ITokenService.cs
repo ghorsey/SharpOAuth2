@@ -32,20 +32,18 @@ namespace SharpOAuth2.Provider.Services
 {
     public interface ITokenService
     {
-        AuthorizationGrantBase IssueAuthorizationGrant(IAuthorizationContext context);
+        #region AccessToken Methods
         IToken IssueAccessToken(string resourceOwnerUsername);
         IToken IssueAccessToken(ClientBase client);
         IToken IssueAccessToken(RefreshTokenBase refreshToken);
         IToken IssueAccessToken(AuthorizationGrantBase grant);
-
-        void ApproveAuthorizationGrant(AuthorizationGrantBase authorizationGrant, bool isApproved);
-
-        AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode);
         AccessTokenBase FindToken(string token);
-        bool ValidateRedirectUri(IOAuthContext context, AuthorizationGrantBase grant);
+        #endregion
 
-        void ConsumeGrant(AuthorizationGrantBase grant);
+
 
         RefreshTokenBase FindRefreshToken(string refreshToken);
+
+
     }
 }

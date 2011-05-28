@@ -62,6 +62,7 @@
     <Compile Include="Domain\AuthorizationGrantBase.cs" />
     <Compile Include="Domain\RefreshTokenBase.cs" />
     <Compile Include="Framework\ITokenizer.cs" />
+    <Compile Include="Services\IAuthorizationGrantService.cs" />
     <Compile Include="TokenEndpoint\Processor\RefreshTokenProcessor.cs" />
     <Compile Include="Utility\Epoch.cs" />
     <Compile Include="Fluent\FluentAuthorizationContext.cs" />

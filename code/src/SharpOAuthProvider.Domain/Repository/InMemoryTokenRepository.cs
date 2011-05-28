@@ -24,7 +24,7 @@ namespace SharpOAuthProvider.Domain.Repository
 
         public void AddAuthorizationGrant(AuthorizationGrant grant)
         {
-            GrantRepo[grant.Token] = grant;
+            GrantRepo[grant.Code] = grant;
         }
 
         public AuthorizationGrant FindAuthorizationGrant(string authorizationCode)

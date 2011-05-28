@@ -35,8 +35,6 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationResponseBuilder : IAuthorizationResponseBuilder
     {
-        
-
         #region IAuthorizationResponseBuilder Members
 
         public Uri CreateResponse(IAuthorizationContext context)
@@ -54,8 +52,14 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 
                 return result.Uri;
             }
+            IDictionary<string, object> responseValues;
 
-            IDictionary<string, object> responseValues = ((ITokenizer)context.Token).ToResponseValues();
+            if (context.ResponseType == Parameters.ResponseTypeValues.AuthorizationCode)
+                responseValues = ((ITokenizer)context.AuthorizationGrant).ToResponseValues();
+            else if (context.ResponseType == Parameters.ResponseTypeValues.AccessToken)
+                responseValues = ((ITokenizer)context.Token).ToResponseValues();
+            else
+                throw new InvalidOperationException("invalid type");
             BuildResponseValues(queryComponents, responseValues);
             queryComponents[Parameters.State] = context.State;
 

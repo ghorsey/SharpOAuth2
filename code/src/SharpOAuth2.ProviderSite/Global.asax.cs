@@ -51,6 +51,7 @@ namespace SharpOAuth2.ProviderSite
             kernel.Bind<IClientService>().To<ClientService>();
             kernel.Bind<ITokenService>().To<TokenService>();
             kernel.Bind<IResourceOwnerService>().To<ResourceOwnerService>();
+            kernel.Bind<IAuthorizationGrantService>().To<AuthorizationGrantService>();
             kernel.Bind<IServiceFactory>().To<ServiceFactory>();
 
             // Providers

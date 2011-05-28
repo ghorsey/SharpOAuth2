@@ -31,35 +31,16 @@ using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
 {
-    public class AuthorizationGrantBase : IToken, ITokenizer
+    public class AuthorizationGrantBase : ITokenizer
     {
-        #region IToken Members
+        public virtual string Code { get; set; }
 
-        public virtual string Token { get; set; }
-        public virtual string TokenType { get; set; }
-        public virtual int ExpiresIn { get; set; }
-        public virtual string RefreshToken { get; set; }
-        public virtual string[] Scope { get; set; }
-        public virtual long IssuedOn { get; private set; }
-        public virtual bool IsApproved { get; set; }
-        public virtual ClientBase Client { get; set; }
-        public virtual Uri RedirectUri { get; set; }
-        public virtual string ResourceOwnerUsername { get; set; }
-        public virtual IDictionary<string, object> Parameters { get { throw new NotSupportedException(); } }
-        #endregion
+        #region ITokenizer Members
 
-        public AuthorizationGrantBase()
-        {
-            IssuedOn = DateTime.Now.ToEpoch();
-        }
-
-        #region IToken Members
-
-
-        public IDictionary<string, object> ToResponseValues()
+        IDictionary<string, object> ITokenizer.ToResponseValues()
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Token;
+            parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Code;
 
             return parameters;
         }

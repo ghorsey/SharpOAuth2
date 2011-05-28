@@ -46,12 +46,12 @@ namespace SharpOAuthProvider.Domain.Service
         }
 
         public bool IsAccessGranted(IClient client, string[] scope, string resourceOwnerId)
-        {
+        { //TODO: see why I'm passing in the scope
             AuthorizationGrant grant = TokenRepo.FindAuthorizationGrant(client.ClientId, resourceOwnerId);
             if (grant == null) return false;
             if (!grant.IsApproved) return false;
 
-            return  scope.Where(x => !grant.Scope.Contains(x.ToLower())).Count() == 0;
+            return true; //  scope.Where(x => !grant.Scope.Contains(x.ToLower())).Count() == 0;
         }
 
         #endregion

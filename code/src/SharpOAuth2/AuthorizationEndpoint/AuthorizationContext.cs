@@ -26,22 +26,24 @@
 using System;
 using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Provider.Domain;
 
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public class AuthorizationContext : IAuthorizationContext
     {
         #region IAuthorizationContext Members
-
-        public IClient Client{ get; set; }
-        public string ResponseType{ get; set; }
-        public Uri RedirectUri{ get; set; }
-        public string[] Scope{ get; set; }
-        public string State{ get; set; }
+        public AuthorizationGrantBase AuthorizationGrant { get; set; }
+        public IClient Client { get; set; }
+        public string ResponseType { get; set; }
+        public Uri RedirectUri { get; set; }
+        public string[] Scope { get; set; }
+        public string State { get; set; }
         public ErrorResponse Error { get; set; }
         public IToken Token { get; set; }
         public bool IsApproved { get; set; }
         public string ResourceOwnerUsername { get; set; }
         #endregion
+
     }
 }

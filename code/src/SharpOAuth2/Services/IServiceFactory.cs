@@ -30,5 +30,6 @@ namespace SharpOAuth2.Provider.Services
         IClientService ClientService { get; }
         ITokenService TokenService { get; }
         IResourceOwnerService ResourceOwnerService { get; }
+        IAuthorizationGrantService AuthorizationGrantService { get; }
     }
 }

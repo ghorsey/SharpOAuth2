@@ -58,7 +58,6 @@ namespace SharpOAuth2.ProviderSite.Controllers
         public ActionResult HandleAuthorization( string authButton)
         {
             IAuthorizationContext ctx = (IAuthorizationContext)Session["context"];
-            //IAuthorizationProvider provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
 
             bool isAuthorized = (authButton == "GRANT");
 

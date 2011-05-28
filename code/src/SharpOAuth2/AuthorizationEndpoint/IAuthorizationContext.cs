@@ -24,11 +24,12 @@
 #endregion
 
 using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Provider.Domain;
 namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public interface IAuthorizationContext : IOAuthContext
     {
-        
+        AuthorizationGrantBase AuthorizationGrant { get; set; }
         string ResponseType { get; set; }   
         string State { get; set; }
         bool IsApproved { get; set; }
