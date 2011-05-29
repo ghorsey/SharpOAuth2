@@ -27,7 +27,7 @@ using System;
 
 namespace SharpOAuth2.Provider.Utility
 {
-    internal static class Epoch
+    public static class Epoch
     {
         public static long ToEpoch(this DateTime time)
         {
