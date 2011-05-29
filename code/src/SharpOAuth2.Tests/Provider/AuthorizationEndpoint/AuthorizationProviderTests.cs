@@ -105,8 +105,8 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
             context.IsApproved = false;
             context.ResourceOwnerUsername = "12345";
             Mock<IClientService> mckClientService = MakeClientService(context, true, true);
-            Mock<IAuthorizationGrantService> mckAuthService = MakeGrantService(context);
-            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, mckAuthService);
+            //Mock<IAuthorizationGrantService> mckAuthService = MakeGrantService(context);
+            Mock<IServiceFactory> mckServiceFactory = MakeServiceFactory(mckClientService, new Mock<IAuthorizationGrantService>());
 
             SetUp(mckServiceFactory.Object);
 
@@ -114,11 +114,11 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint
 
             provider.CreateAuthorizationGrant(context);
 
-            Assert.IsNotNull(context.AuthorizationGrant);
+            Assert.IsNull(context.AuthorizationGrant);
             Assert.IsFalse(context.IsApproved);
             Assert.IsNotNull(context.Error);
             Assert.AreEqual(Parameters.ErrorParameters.ErrorValues.AccessDenied, context.Error.Error);
-            mckAuthService.VerifyAll();
+            //mckAuthService.VerifyAll();
             mckClientService.VerifyAll();
         }
 

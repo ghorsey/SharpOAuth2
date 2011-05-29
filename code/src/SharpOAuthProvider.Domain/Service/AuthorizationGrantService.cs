@@ -17,16 +17,6 @@ namespace SharpOAuthProvider.Domain.Service
         }
         #region IAuthorizationGrantService Members
 
-        public void ApproveAuthorizationGrant(AuthorizationGrantBase authorizationGrant, bool isApproved)
-        {
-            AuthorizationGrant grant = (AuthorizationGrant)authorizationGrant;
-
-            grant.IsUsed = false;
-            grant.IsApproved = isApproved;
-
-            TokenRepo.AddAuthorizationGrant(grant);
-        }
-
         public AuthorizationGrantBase FindAuthorizationGrant(string authorizationCode)
         {
             return TokenRepo.FindAuthorizationGrant(authorizationCode);
@@ -42,6 +32,8 @@ namespace SharpOAuthProvider.Domain.Service
             grant.IsApproved = false;
             grant.ExpiresIn = 120; // 2 minutes
             grant.Code = Guid.NewGuid().ToString();
+
+            TokenRepo.AddAuthorizationGrant(grant);
             return grant;
         }
 

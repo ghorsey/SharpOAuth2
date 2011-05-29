@@ -41,8 +41,10 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
 
         public override void Process(IAuthorizationContext context)
         {
+            if (!context.IsApproved) return;
+
             AuthorizationGrantBase grant = ServiceFactory.AuthorizationGrantService.IssueAuthorizationGrant(context);
-            ServiceFactory.AuthorizationGrantService.ApproveAuthorizationGrant(grant, context.IsApproved);
+            
             context.AuthorizationGrant = grant;
         }
     }
