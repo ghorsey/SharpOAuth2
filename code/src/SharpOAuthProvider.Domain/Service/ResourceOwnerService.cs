@@ -1,4 +1,5 @@
 ﻿using SharpOAuth2.Provider.Services;
+using SharpOAuth2.Provider.TokenEndpoint;
 
 namespace SharpOAuthProvider.Domain.Service
 {
@@ -6,9 +7,9 @@ namespace SharpOAuthProvider.Domain.Service
     {
         #region IResourceOwnerService Members
 
-        public bool CredentialsAreValid(string resourceOwnerId, string resourceOwnerPassword)
+        public bool CredentialsAreValid(ITokenContext context)
         {
-            return (resourceOwnerId.ToUpperInvariant() == "GEOFF" && resourceOwnerPassword == "password");
+            return (context.ResourceOwnerUsername.ToUpperInvariant() == "GEOFF" && context.ResourceOwnerPassword == "password");
         }
 
         #endregion

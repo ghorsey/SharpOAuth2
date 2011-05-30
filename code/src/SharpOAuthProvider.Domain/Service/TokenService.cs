@@ -5,6 +5,7 @@ using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.Services;
 using SharpOAuthProvider.Domain.Repository;
+using SharpOAuth2.Provider.TokenEndpoint;
 
 namespace SharpOAuthProvider.Domain.Service
 {
@@ -44,22 +45,25 @@ namespace SharpOAuthProvider.Domain.Service
             return TokenRepo.FindToken(token);
         }
 
-        public IToken IssueAccessToken(string resourceOwnerUsername)
+        public IToken IssueAccessTokenForResourceOwner(ITokenContext context)
         {
+
             AccessToken token = new AccessToken
             {
                 ExpiresIn = 120,
                 Token = Guid.NewGuid().ToString(),
                 RefreshToken = Guid.NewGuid().ToString(),
                 Scope = new string[] { "create", "delete", "view" },
-                ResourceOwnerUsername = resourceOwnerUsername
+                ResourceOwnerUsername = context.ResourceOwnerUsername
             };
             TokenRepo.AddAccessToken(token);
             return token;
+
         }
 
         public IToken IssueAccessToken(ClientBase client)
         {
+
             AccessToken token = new AccessToken
             {
                 ExpiresIn = 120,
@@ -72,7 +76,7 @@ namespace SharpOAuthProvider.Domain.Service
 
             return token;
         }
-
+        
         public IToken IssueAccessToken(RefreshTokenBase refreshToken)
         {
             AccessToken token = new AccessToken

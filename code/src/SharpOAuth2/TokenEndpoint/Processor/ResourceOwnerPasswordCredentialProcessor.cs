@@ -43,10 +43,10 @@ namespace SharpOAuth2.Provider.TokenEndpoint.Processor
             if (!ServiceFactory.ClientService.AuthenticateClient(context))
                 throw Errors.InvalidClient(context);
 
-            if( !ServiceFactory.ResourceOwnerService.CredentialsAreValid(context.ResourceOwnerUsername, context.ResourceOwnerPassword))
+            if( !ServiceFactory.ResourceOwnerService.CredentialsAreValid(context))
                 throw Errors.InvalidRequestException(context, Parameters.ResourceOwnerUsername);
 
-            context.Token = ServiceFactory.TokenService.IssueAccessToken(context.ResourceOwnerUsername);
+            context.Token = ServiceFactory.TokenService.IssueAccessTokenForResourceOwner(context);
         }
     }
 }

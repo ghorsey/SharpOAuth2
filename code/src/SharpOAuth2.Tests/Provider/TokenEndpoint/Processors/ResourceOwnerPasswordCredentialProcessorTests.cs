@@ -54,13 +54,13 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
 
             AccessTokenBase token = new AccessTokenBase();
             Mock<IResourceOwnerService> mckResourceOwnerService = new Mock<IResourceOwnerService>();
-            mckResourceOwnerService.Setup(x => x.CredentialsAreValid("username", "password")).Returns(true);
+            mckResourceOwnerService.Setup(x => x.CredentialsAreValid(context)).Returns(true);
 
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);
 
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.IssueAccessToken("username")).Returns(token);
+            mckTokenService.Setup(x => x.IssueAccessTokenForResourceOwner(context)).Returns(token);
 
             Mock<IServiceFactory> mckServicFactory = new Mock<IServiceFactory>();
             mckServicFactory.SetupGet(x => x.ClientService).Returns(mckClientService.Object);
@@ -96,7 +96,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             context.ResourceOwnerUsername = "username";
 
             Mock<IResourceOwnerService> mckResourceOwnerService = new Mock<IResourceOwnerService>();
-            mckResourceOwnerService.Setup(x => x.CredentialsAreValid("username", "password")).Returns(false);
+            mckResourceOwnerService.Setup(x => x.CredentialsAreValid(context)).Returns(false);
 
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);

@@ -43,7 +43,7 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             mckAuthService.Setup(x => x.ValidateGrant(context, authorizationGrant)).Returns(true);
 
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();
-            mckTokenService.Setup(x => x.IssueAccessToken(It.IsAny<AuthorizationGrantBase>())).Returns(new AccessTokenBase { TokenType = "bearer", RefreshToken = "refresh_token", Token = "token", ExpiresIn = 120 });
+            mckTokenService.Setup(x => x.IssueAccessToken(authorizationGrant)).Returns(new AccessTokenBase { TokenType = "bearer", RefreshToken = "refresh_token", Token = "token", ExpiresIn = 120 });
             
             Mock<IClientService> mckClientService = new Mock<IClientService>();
             mckClientService.Setup(x => x.AuthenticateClient(context)).Returns(true);

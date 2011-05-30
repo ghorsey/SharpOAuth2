@@ -23,10 +23,11 @@
  */
 #endregion
 
+using SharpOAuth2.Provider.TokenEndpoint;
 namespace SharpOAuth2.Provider.Services
 {
     public interface IResourceOwnerService
     {
-        bool CredentialsAreValid(string resourceOwnerUsername, string resourceOwnerPassword);
+        bool CredentialsAreValid(ITokenContext context);
     }
 }

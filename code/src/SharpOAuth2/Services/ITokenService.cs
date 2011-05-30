@@ -27,20 +27,20 @@ using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.AuthorizationEndpoint;
 using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
+using SharpOAuth2.Provider.TokenEndpoint;
 
 namespace SharpOAuth2.Provider.Services
 {
     public interface ITokenService
     {
         #region AccessToken Methods
-        IToken IssueAccessToken(string resourceOwnerUsername);
-        IToken IssueAccessToken(ClientBase client);
+        IToken IssueAccessTokenForResourceOwner(ITokenContext context);
         IToken IssueAccessToken(RefreshTokenBase refreshToken);
-        IToken IssueAccessToken(AuthorizationGrantBase grant);
+        IToken IssueAccessToken(ClientBase client);
+
+        IToken IssueAccessToken(AuthorizationGrantBase authorizationGrant);
         AccessTokenBase FindToken(string token);
         #endregion
-
-
 
         RefreshTokenBase FindRefreshToken(string refreshToken);
 
