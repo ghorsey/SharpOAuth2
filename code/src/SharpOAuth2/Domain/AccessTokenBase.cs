@@ -37,7 +37,7 @@ namespace SharpOAuth2.Provider.Domain
         public AccessTokenBase()
         {
             IssuedOn = DateTime.Now.ToEpoch();
-            Parameters = new Dictionary<string, object>();
+            Parameters = new Dictionary<string, string>();
         }
         #region IToken Members
         public virtual string ResourceOwnerUsername { get; set; }
@@ -47,7 +47,7 @@ namespace SharpOAuth2.Provider.Domain
         public virtual string RefreshToken{ get; set; }
         public virtual long IssuedOn { get; set; }
         public virtual string[] Scope { get; set; }
-        public virtual IDictionary<string, object> Parameters { get; private set; }
+        public virtual IDictionary<string, string> Parameters { get; private set; }
 
         public virtual IDictionary<string, object> ToResponseValues()
         {

@@ -31,7 +31,7 @@ namespace SharpOAuth2.Client
 {
     public class AccessToken : IToken
     {
-        public AccessToken(IDictionary<string, object> source)
+        public AccessToken(IDictionary<string, string> source)
         {
             Token = (string)SafeGet(OAParameters.AccessToken, source) ?? string.Empty;
             TokenType = (string)SafeGet(OAParameters.AccessTokenType, source) ?? string.Empty;
@@ -42,7 +42,7 @@ namespace SharpOAuth2.Client
             Parameters = source;
         }
 
-        private object SafeGet(string key, IDictionary<string, object> source)
+        private object SafeGet(string key, IDictionary<string, string> source)
         {
             if (!source.ContainsKey(key))
                 return null;
@@ -57,7 +57,7 @@ namespace SharpOAuth2.Client
         public string RefreshToken{ get; set; }
         public string[] Scope{ get; set; }
 
-        public IDictionary<string, object> Parameters{ get; private set; }
+        public IDictionary<string, string> Parameters{ get; private set; }
         #endregion
     }
 }

@@ -135,12 +135,13 @@ namespace SharpOAuth2.Client.TokenEndpoint
                 using (StreamReader sr = new StreamReader(response.GetResponseStream()))
                     accessToken = sr.ReadToEnd();
 
-                Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(accessToken);
+                Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(accessToken);
 
                 return new AccessToken(dictionary);
             } catch( WebException webEx)
             {
-                throw;
+
+                throw ;
             }
         }
     }

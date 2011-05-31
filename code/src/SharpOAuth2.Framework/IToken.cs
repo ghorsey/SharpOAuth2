@@ -35,7 +35,7 @@ namespace SharpOAuth2.Framework
         string RefreshToken{ get; set; }
         //long IssuedOn { get; }
         string[] Scope { get; set; }
-        IDictionary<string, object> Parameters { get; }
+        IDictionary<string, string> Parameters { get; }
 
         
     }
