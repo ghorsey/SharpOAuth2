@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\SharpOAuth2.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,6 +57,11 @@
       <Project>{31316DF7-5293-4235-B299-1C172A9BFF79}</Project>
       <Name>SharpOAuth2.Provider</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SharpOAuth2.snk">
+      <Link>SharpOAuth2.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
