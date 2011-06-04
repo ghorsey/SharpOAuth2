@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Web;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.ResourceEndpoint;
+using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Provider.ResourceAuthorizationHttpModule
 {
@@ -27,14 +28,18 @@ namespace SharpOAuth2.Provider.ResourceAuthorizationHttpModule
             IResourceProvider provider = ServiceLocator.Current.GetInstance<IResourceProvider>();
 
             IResourceContext context = new ResourceContextBuilder().FromHttpRequest(new HttpRequestWrapper(HttpContext.Current.Request));
+            try
+            {
+                provider.AccessProtectedResource(context);
+                TokenPrincipal principal = new TokenPrincipal(new GenericIdentity(context.Token.Token, "OAuth"), context.Token.Scope, context.Token);
 
-            provider.AccessProtectedResource(context);
-
-            TokenPrincipal principal = new TokenPrincipal(new GenericIdentity(context.Token.Token, "OAuth"), context.Token.Scope, context.Token);
-
-
-            HttpContext.Current.User = principal;
-
+                HttpContext.Current.User = principal;
+            }
+            catch (OAuthErrorResponseException<IResourceContext>)
+            {
+                // an oauthResponseException occured
+                return;
+            }
         }
 
     }

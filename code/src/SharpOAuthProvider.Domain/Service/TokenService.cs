@@ -54,7 +54,6 @@ namespace SharpOAuthProvider.Domain.Service
                 Token = Guid.NewGuid().ToString(),
                 RefreshToken = Guid.NewGuid().ToString(),
                 Scope = new string[] { "create", "delete", "view" },
-                ResourceOwnerUsername = context.ResourceOwnerUsername
             };
             TokenRepo.AddAccessToken(token);
             return token;
@@ -84,7 +83,6 @@ namespace SharpOAuthProvider.Domain.Service
                 ExpiresIn = 120,
                 Token = Guid.NewGuid().ToString(),
                 RefreshToken = refreshToken.Token,
-                ResourceOwnerUsername = refreshToken.ResourceOwnerUsername,
                 Scope = refreshToken.Scope,
                 TokenType = "bearer"
             };

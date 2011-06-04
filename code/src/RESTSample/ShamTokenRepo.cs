@@ -41,7 +41,6 @@ namespace RESTSample
             {
                 Token = token,
                 Scope = new string[] { "view", "edit" },
-                ResourceOwnerUsername = "geoff"
             };
             return sham;
         }

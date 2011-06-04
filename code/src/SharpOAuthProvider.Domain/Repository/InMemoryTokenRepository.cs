@@ -14,7 +14,6 @@ namespace SharpOAuthProvider.Domain.Repository
             RefreshTokenRepo["refresh"] = new RefreshTokenBase
             {
                 ClientId = "12345",
-                ResourceOwnerUsername ="Geoff",
                 Scope = new string[] { "create", "view", "delete"},
                 Token = "refresh"
             };

@@ -44,7 +44,6 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             RefreshTokenBase refreshToken = new RefreshTokenBase
             {
                 ClientId = "id",
-                ResourceOwnerUsername = "owner",
                 Scope = new string[] { "create", "delete" },
                 Token = "refresh_token"
             };
@@ -86,7 +85,6 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
             RefreshTokenBase refreshToken = new RefreshTokenBase
             {
                 ClientId = "123",
-                ResourceOwnerUsername = "owner",
                 Scope = new string[] { "create", "delete" },
                 Token = "refresh_token"
             };
