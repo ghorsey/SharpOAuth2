@@ -37,6 +37,10 @@
     <AssemblyOriginatorKeyFile>..\SharpOAuth2.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=1.1.0.2, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Common.Logging\v2.0.0\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\lib\CommonServiceLocator\v1.0\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
