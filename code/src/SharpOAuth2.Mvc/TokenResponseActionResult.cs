@@ -34,6 +34,7 @@ namespace SharpOAuth2.Provider.Mvc
         }
         public override void ExecuteResult(System.Web.Mvc.ControllerContext context)
         {
+
             context.HttpContext.Response.WriteTokenResponse(TokenResponse);
         }
     }
