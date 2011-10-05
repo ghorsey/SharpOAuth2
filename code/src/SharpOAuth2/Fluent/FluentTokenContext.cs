@@ -27,6 +27,7 @@ using System;
 using System.Web;
 using Common.Logging;
 using Microsoft.Practices.ServiceLocation;
+using SharpOAuth2.Provider.Exceptions;
 using SharpOAuth2.Provider.Framework;
 using SharpOAuth2.Provider.TokenEndpoint;
 
@@ -61,7 +62,7 @@ namespace SharpOAuth2.Provider.Fluent
             catch (Exception x)
             {
                 Log.Error("Failed to inject ITokenProvider", x);
-                throw;
+                throw new InjectionException("Failed to inject ITokenProvider", x);
             }
         }
 
