@@ -26,6 +26,7 @@
 using System;
 using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Framework;
+using System.Collections.Specialized;
 
 namespace SharpOAuth2.Provider.TokenEndpoint
 {
@@ -42,7 +43,9 @@ namespace SharpOAuth2.Provider.TokenEndpoint
         public string[] Scope{ get; set; }
         public ErrorResponse Error{ get; set; }
         public IToken Token{ get; set; }
-
+        public NameValueCollection Headers { get; set; }
+        public NameValueCollection Form { get; set; }
+        public NameValueCollection QueryString { get; set; }
         #endregion
     }
 }

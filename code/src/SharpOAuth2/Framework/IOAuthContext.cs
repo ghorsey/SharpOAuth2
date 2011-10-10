@@ -25,6 +25,7 @@
 
 using System;
 using SharpOAuth2.Framework;
+using System.Collections.Specialized;
 
 namespace SharpOAuth2.Provider.Framework
 {
@@ -35,5 +36,8 @@ namespace SharpOAuth2.Provider.Framework
         string[] Scope { get; set; }
         IClient Client { get; set; }
         Uri RedirectUri { get; set; }
+        NameValueCollection Headers { get; set; }
+        NameValueCollection QueryString { get; set; }
+        NameValueCollection Form { get; set; }
     }
 }

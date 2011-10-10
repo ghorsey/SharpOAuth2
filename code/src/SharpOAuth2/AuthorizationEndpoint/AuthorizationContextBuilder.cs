@@ -84,15 +84,16 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 
         
 
-        private IAuthorizationContext CreateContext(NameValueCollection values)
+        private IAuthorizationContext CreateContext(NameValueCollection querystring)
         {
             AuthorizationContext context = new AuthorizationContext();
-            context.Client = CreateClient(values[Parameters.ClientId], values[Parameters.ClientSecret]);
-            context.RedirectUri = ContextBuilderHelpers.CreateRedirectUri(values[Parameters.RedirectUri]);
-            context.ResponseType = values[Parameters.ResponseType];
-            context.State = values[Parameters.State];
-            context.Scope = ContextBuilderHelpers.CreateScope(values[Parameters.Scope]);
+            context.Client = CreateClient(querystring[Parameters.ClientId], querystring[Parameters.ClientSecret]);
+            context.RedirectUri = ContextBuilderHelpers.CreateRedirectUri(querystring[Parameters.RedirectUri]);
+            context.ResponseType = querystring[Parameters.ResponseType];
+            context.State = querystring[Parameters.State];
+            context.Scope = ContextBuilderHelpers.CreateScope(querystring[Parameters.Scope]);
 
+            context.QueryString = querystring;
             return context;
         }
     }

@@ -36,22 +36,25 @@ namespace SharpOAuth2.Provider.TokenEndpoint
     public class TokenContextBuilder : IContextBuilder<ITokenContext>
     {
        
-        private ITokenContext CreateContext(NameValueCollection parameters)
+        private ITokenContext CreateContext(NameValueCollection querystring, NameValueCollection form, NameValueCollection headers)
         {
             return new TokenContext()
             {
                 Client = new ClientBase
                 {
-                    ClientId = parameters[Parameters.ClientId],
-                    ClientSecret = parameters[Parameters.ClientSecret]
+                    ClientId = form[Parameters.ClientId],
+                    ClientSecret = form[Parameters.ClientSecret]
                 },
-                AuthorizationCode = parameters[Parameters.AuthroizationCode],
-                GrantType = parameters[Parameters.GrantType],
-                RedirectUri = ContextBuilderHelpers.CreateRedirectUri(parameters[Parameters.RedirectUri]),
-                ResourceOwnerUsername = parameters[Parameters.ResourceOwnerUsername],
-                ResourceOwnerPassword = parameters[Parameters.ResourceOwnerPassword],
-                RefreshToken = parameters[Parameters.RefreshToken],
-                Scope = ContextBuilderHelpers.CreateScope(parameters[Parameters.Scope])
+                AuthorizationCode = form[Parameters.AuthroizationCode],
+                GrantType = form[Parameters.GrantType],
+                RedirectUri = ContextBuilderHelpers.CreateRedirectUri(form[Parameters.RedirectUri]),
+                ResourceOwnerUsername = form[Parameters.ResourceOwnerUsername],
+                ResourceOwnerPassword = form[Parameters.ResourceOwnerPassword],
+                RefreshToken = form[Parameters.RefreshToken],
+                Scope = ContextBuilderHelpers.CreateScope(form[Parameters.Scope]),
+                Headers = headers,
+                Form = form,
+                QueryString = querystring
             };
             
         }
@@ -72,7 +75,7 @@ namespace SharpOAuth2.Provider.TokenEndpoint
             if (request.HttpMethod.ToUpperInvariant() != "POST")
                 throw new OAuthFatalException(TokenEndpointResources.InvalidHttpMethodTokenRequest);
 
-            return CreateContext(request.Form);
+            return CreateContext(request.QueryString, request.Form, request.Headers);
 
         }
 
