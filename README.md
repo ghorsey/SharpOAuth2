@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2011 Geoff Horsey
+Copyright (c) 2011-12 Geoff Horsey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,26 @@ THE SOFTWARE.
 SharpOAuth2 is an OAuth2 Implementation.  A work in progress is only partially complete
 
 Provider
+===
 Things To Do
---Implicit Grant
---Refresh an Access Token
+---
+* Remove Service Location
+* Implicit Grant
+* Refresh an Access Token
 
 Done
---Accessing Protected Resources
---Issuing Access Token
---Issue Authorization Code (response_type=authorization_code)
---Building authorization response URL (authorization & token response_types)
---Resource Owner Password Credentials
---Client Credentials
+---
+
+* Accessing Protected Resources
+* Issuing Access Token
+* Issue Authorization Code (response_type=authorization_code)
+* Building authorization response URL (authorization & token response_types)
+* Resource Owner Password Credentials
+* Client Credentials
 
 Client
+===
+
 TTD
---Build Authorization Code Request (authorizaton & token response_types)
---Access Protected Resource
---Build Token Request
+---
+* Remove thie entirely..

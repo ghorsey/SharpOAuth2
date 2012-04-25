@@ -46,7 +46,7 @@ namespace SharpOAuth2.Provider.Fluent
             }
             catch (Exception ex)
             {
-                Log.Info("Failed to inject IContextBuilder<ITokenContext>", ex);
+                Log.Info("Failed to inject IContextBuilder<ITokenContext>, using default TokenContextBuilder", ex);
                 builder = new TokenContextBuilder();
             }
 

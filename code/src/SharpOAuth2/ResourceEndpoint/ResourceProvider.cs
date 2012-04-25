@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Logging;
 using Microsoft.Practices.ServiceLocation;
 using SharpOAuth2.Provider.Domain;
 using SharpOAuth2.Provider.Framework;
@@ -36,6 +37,8 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
 {
     public class ResourceProvider  : IResourceProvider
     {
+        public static ILog Log = LogManager.GetCurrentClassLogger();
+
         #region IResourceProvider Members
 
         public void AccessProtectedResource(IResourceContext context)
@@ -46,15 +49,17 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             bool handled = false;
             foreach( ContextProcessor<IResourceContext> processor in processors)
             {
-                if( !processor.IsSatisfiedBy(context)) continue;
+                if( !processor.IsSatisfiedBy(context)) continue;        
                 processor.Process(context);
                 handled = true;
                 break;
             }
 
             if (!handled)
+            {
+                Log.Error(m => m("Failed to find a processor for the context: {0}", context.ToString()));
                 throw new OAuthFatalException(ResourceEndpointResources.UnsupportedTokenType);
-
+            }
             if (context.Token == null)
                 throw Errors.InvalidToken(context);
 

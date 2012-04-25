@@ -49,13 +49,16 @@ namespace SharpOAuth2.Provider.ResourceAuthorizationHttpModule
                 catch (OAuthFatalException x)
                 {
                     StringBuilder report = new StringBuilder();
-
+                    
                     FormatReportHeader(report, "QueryString");
                     FormatReportDictionary(report, context.QueryString);
                     FormatReportHeader(report, "Form");
                     FormatReportDictionary(report, context.Form);
                     FormatReportHeader(report, "Headers");
                     FormatReportDictionary(report, context.Headers);
+                    FormatReportHeader(report, "URL");
+
+                    report.AppendLine(HttpContext.Current.Request.Url.ToString());
 
                     Log.Warn(m => m("{0}\r\n{1}", x.Message, report.ToString()), x);
                 }

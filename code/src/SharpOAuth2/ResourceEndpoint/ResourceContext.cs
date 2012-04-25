@@ -24,6 +24,7 @@
 #endregion
 
 using System.Collections.Specialized;
+using System.Text;
 using SharpOAuth2.Framework;
 using SharpOAuth2.Provider.Framework;
 
@@ -39,5 +40,56 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
         public NameValueCollection Form{ get; set; }
         public IToken Token{ get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            
+            builder.Append("{");
+            builder.AppendFormat(@"Realm: ""{0}"", ", SafeString(this.Realm));
+            builder.AppendFormat(@"ErrorResponse: ""{0}"", ", SafeString(this.Error));
+            builder.AppendFormat(@"Headers: ""{0}"", ", SafeString(this.Headers));
+            builder.AppendFormat(@"QueryString: ""{0}"", ", SafeString(this.QueryString));
+            builder.AppendFormat(@"Form: ""{0}""", SafeString(this.Form));
+            builder.Append("}");
+
+            return base.ToString();
+        }
+
+
+        private static string SafeString(ErrorResponse error)
+        {
+            if (error == null) return "null";
+
+            return error.ToString();
+        }
+
+        private static string SafeString(NameValueCollection coll)
+        {
+            if (coll == null) return "null";
+
+            var builder = new StringBuilder();
+            builder.Append("{");
+
+            for (var i = 0; i < coll.Keys.Count; i++)
+            {
+                var format = @"{0}: ""{1}""";
+                if (i != 0)
+                    format = "," + format;
+                var key = coll.Keys[i];
+
+                builder.AppendFormat(format, key, coll[key]);
+            }
+
+            builder.Append("}");
+
+            return builder.ToString();
+        }
+
+        private static string SafeString(string input)
+        {
+            if (input == null) return "";
+            return input;
+        }
     }
 }

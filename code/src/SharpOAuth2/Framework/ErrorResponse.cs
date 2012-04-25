@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using SharpOAuth2.Framework;
 
 namespace SharpOAuth2.Provider.Framework
@@ -43,6 +44,27 @@ namespace SharpOAuth2.Provider.Framework
             response[Parameters.ErrorParameters.ErrorUri] = ErrorUri;
 
             return response;
+        }
+
+        private static string SafeString(Uri input)
+        {
+            if (input == null) return "";
+            return input.ToString();
+        }
+        private static string SafeString(string input)
+        {
+            if (input == null) return "";
+            return input;
+        }
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append("{");
+            builder.AppendFormat(@"Error: ""{0}"", ", SafeString(Error));
+            builder.AppendFormat(@"ErrorDescription: ""{0}"", ", SafeString(ErrorDescription));
+            builder.AppendFormat(@"ErrorUri: ""{0}""", SafeString(ErrorUri));
+            builder.Append("}");
+            return base.ToString();
         }
     }
 }
