@@ -53,7 +53,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             builder.AppendFormat(@"Form: ""{0}""", SafeString(this.Form));
             builder.Append("}");
 
-            return base.ToString();
+            return builder.ToString();
         }
 
 
