@@ -57,7 +57,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
 
             if (!handled)
             {
-                Log.Error(m => m("Failed to find a processor for the context: {0}", context.ToString()));
+                Log.Info(m => m("Failed to find a processor for the context: {0}", context.ToString()));
                 throw new OAuthFatalException(ResourceEndpointResources.UnsupportedTokenType);
             }
             if (context.Token == null)

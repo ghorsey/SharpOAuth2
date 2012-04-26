@@ -47,10 +47,10 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             
             builder.Append("{");
             builder.AppendFormat(@"Realm: ""{0}"", ", SafeString(this.Realm));
-            builder.AppendFormat(@"ErrorResponse: ""{0}"", ", SafeString(this.Error));
-            builder.AppendFormat(@"Headers: ""{0}"", ", SafeString(this.Headers));
-            builder.AppendFormat(@"QueryString: ""{0}"", ", SafeString(this.QueryString));
-            builder.AppendFormat(@"Form: ""{0}""", SafeString(this.Form));
+            builder.AppendFormat(@"ErrorResponse: {0}, ", SafeString(this.Error));
+            builder.AppendFormat(@"Headers: {0}, ", SafeString(this.Headers));
+            builder.AppendFormat(@"QueryString: {0}, ", SafeString(this.QueryString));
+            builder.AppendFormat(@"Form: {0}", SafeString(this.Form));
             builder.Append("}");
 
             return builder.ToString();

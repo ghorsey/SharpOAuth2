@@ -60,7 +60,7 @@ namespace SharpOAuth2.Provider.ResourceAuthorizationHttpModule
 
                     report.AppendLine(HttpContext.Current.Request.Url.ToString());
 
-                    Log.Warn(m => m("{0}\r\n{1}", x.Message, report.ToString()), x);
+                    Log.Info(m => m("{0}\r\n{1}", x.Message, report.ToString()), x);
                 }
             }
             catch (Exception x)
