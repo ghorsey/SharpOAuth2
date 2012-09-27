@@ -63,7 +63,8 @@ namespace SharpOAuth2.Provider.ResourceEndpoint
             if (context.Token == null)
                 throw Errors.InvalidToken(context);
 
-            if (context.Token.ExpiresIn > 0 && (((AccessTokenBase) context.Token).IssuedOn + context.Token.ExpiresIn) < DateTime.Now.ToEpoch())
+			//if (context.Token.ExpiresIn > 0 && (((AccessTokenBase) context.Token).IssuedOn + context.Token.ExpiresIn) < DateTime.Now.ToEpoch())
+			if (context.Token.ExpiresIn > 0 && (SharpOAuth2.Provider.Utility.Epoch.FromEpoch(((AccessTokenBase)context.Token).IssuedOn).AddSeconds(context.Token.ExpiresIn) < DateTime.Now))
                 throw Errors.InvalidToken(context);
 
         }
