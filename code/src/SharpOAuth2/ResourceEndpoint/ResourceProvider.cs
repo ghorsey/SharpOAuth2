@@ -35,52 +35,52 @@ using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.ResourceEndpoint
 {
-    public class ResourceProvider  : IResourceProvider
-    {
-        public static ILog Log = LogManager.GetCurrentClassLogger();
+	public class ResourceProvider : IResourceProvider
+	{
+		public static ILog Log = LogManager.GetCurrentClassLogger();
 
-        #region IResourceProvider Members
+		#region IResourceProvider Members
 
-        public void AccessProtectedResource(IResourceContext context)
-        {
+		public void AccessProtectedResource(IResourceContext context)
+		{
 
-            IEnumerable<ContextProcessor<IResourceContext>> processors = ServiceLocator.Current.GetAllInstances<ContextProcessor<IResourceContext>>();
+			IEnumerable<ContextProcessor<IResourceContext>> processors = ServiceLocator.Current.GetAllInstances<ContextProcessor<IResourceContext>>();
 
-            bool handled = false;
-            foreach( ContextProcessor<IResourceContext> processor in processors)
-            {
-                if( !processor.IsSatisfiedBy(context)) continue;        
-                processor.Process(context);
-                handled = true;
-                break;
-            }
+			bool handled = false;
+			foreach (ContextProcessor<IResourceContext> processor in processors)
+			{
+				if (!processor.IsSatisfiedBy(context)) continue;
+				processor.Process(context);
+				handled = true;
+				break;
+			}
 
-            if (!handled)
-            {
-                Log.Info(m => m("Failed to find a processor for the context: {0}", context.ToString()));
-                throw new OAuthFatalException(ResourceEndpointResources.UnsupportedTokenType);
-            }
-            if (context.Token == null)
-                throw Errors.InvalidToken(context);
+			if (!handled)
+			{
+				Log.Info(m => m("Failed to find a processor for the context: {0}", context.ToString()));
+				throw new OAuthFatalException(ResourceEndpointResources.UnsupportedTokenType);
+			}
+			if (context.Token == null)
+				throw Errors.InvalidToken(context);
 
-            if (context.Token.ExpiresIn > 0 && (((AccessTokenBase) context.Token).IssuedOn + context.Token.ExpiresIn) < DateTime.Now.ToEpoch())
-                throw Errors.InvalidToken(context);
+			if (context.Token.ExpiresIn > 0 && (SharpOAuth2.Provider.Utility.Epoch.FromEpoch(((IAccessToken)context.Token).IssuedOn).AddSeconds(context.Token.ExpiresIn) < DateTime.Now))	
+				throw Errors.InvalidToken(context);
 
-        }
+		}
 
 
-        public void ValidateScope(IResourceContext context, string[] scope)
-        {
-            if (context.Token == null)
-                throw Errors.InvalidToken(context);
+		public void ValidateScope(IResourceContext context, string[] scope)
+		{
+			if (context.Token == null)
+				throw Errors.InvalidToken(context);
 
-            foreach (string scopeItem in scope)
-            {
-                if (context.Token.Scope.Where(x => x.ToUpperInvariant() == scopeItem.ToUpperInvariant()).Count() != 1)
-                    throw Errors.InsufficientScope(context, string.Join(" ", scope));
-            }
-        }
+			foreach (string scopeItem in scope)
+			{
+				if (context.Token.Scope.Where(x => x.ToUpperInvariant() == scopeItem.ToUpperInvariant()).Count() != 1)
+					throw Errors.InsufficientScope(context, string.Join(" ", scope));
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

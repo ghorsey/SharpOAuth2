@@ -56,6 +56,7 @@ namespace SharpOAuth2.Client
         public int ExpiresIn{ get; set; }
         public string RefreshToken{ get; set; }
         public string[] Scope{ get; set; }
+		public long IssuedOn { get; private set; }
 
         public IDictionary<string, string> Parameters{ get; private set; }
         #endregion

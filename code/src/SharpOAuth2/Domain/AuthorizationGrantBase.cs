@@ -31,20 +31,20 @@ using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
 {
-    public class AuthorizationGrantBase : ITokenizer
-    {
-        public virtual string Code { get; set; }
+	public class AuthorizationGrantBase : IAuthorizationGrant, ITokenizer
+	{
+		public virtual string Code { get; set; }
 
-        #region ITokenizer Members
+		#region ITokenizer Members
 
-        IDictionary<string, object> ITokenizer.ToResponseValues()
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Code;
+		IDictionary<string, object> ITokenizer.ToResponseValues()
+		{
+			Dictionary<string, object> parameters = new Dictionary<string, object>();
+			parameters[SharpOAuth2.Framework.Parameters.AuthroizationCode] = Code;
 
-            return parameters;
-        }
+			return parameters;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

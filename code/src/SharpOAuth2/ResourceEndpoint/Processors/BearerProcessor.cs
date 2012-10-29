@@ -63,7 +63,7 @@ namespace SharpOAuth2.Provider.ResourceEndpoint.Processors
         {
             string rawToken = ParseBearerToken(context);
 
-            AccessTokenBase token = ServiceFactory.TokenService.FindToken(rawToken);
+			IToken token = ServiceFactory.TokenService.FindToken(rawToken);
 
             context.Token = token;
         }

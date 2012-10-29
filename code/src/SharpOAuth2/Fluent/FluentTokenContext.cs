@@ -33,89 +33,89 @@ using SharpOAuth2.Provider.TokenEndpoint;
 
 namespace SharpOAuth2.Provider.Fluent
 {
-    public static class FluentTokenContext
-    {
-        readonly static ILog Log = LogManager.GetCurrentClassLogger();
+	public static class FluentTokenContext
+	{
+		readonly static ILog Log = LogManager.GetCurrentClassLogger();
 
-        private static IContextBuilder<ITokenContext> GetContextBuilder()
-        {
-            IContextBuilder<ITokenContext> builder;
-            try
-            {
-                builder = ServiceLocator.Current.GetInstance<IContextBuilder<ITokenContext>>();
-            }
-            catch (Exception ex)
-            {
-                Log.Info("Failed to inject IContextBuilder<ITokenContext>, using default TokenContextBuilder", ex);
-                builder = new TokenContextBuilder();
-            }
+		private static IContextBuilder<ITokenContext> GetContextBuilder()
+		{
+			IContextBuilder<ITokenContext> builder;
+			try
+			{
+				builder = ServiceLocator.Current.GetInstance<IContextBuilder<ITokenContext>>();
+			}
+			catch (Exception ex)
+			{
+				Log.Info("Failed to inject IContextBuilder<ITokenContext>, using default TokenContextBuilder", ex);
+				builder = new TokenContextBuilder();
+			}
 
-            return builder;
-        }
+			return builder;
+		}
 
-        private static ITokenProvider GetProvider()
-        {
-            try
-            {
-                return ServiceLocator.Current.GetInstance<ITokenProvider>();
-            }
-            catch (Exception x)
-            {
-                Log.Error("Failed to inject ITokenProvider", x);
-                throw new InjectionException("Failed to inject ITokenProvider", x);
-            }
-        }
+		private static ITokenProvider GetProvider()
+		{
+			try
+			{
+				return ServiceLocator.Current.GetInstance<ITokenProvider>();
+			}
+			catch (Exception x)
+			{
+				Log.Error("Failed to inject ITokenProvider", x);
+				throw new InjectionException("Failed to inject ITokenProvider", x);
+			}
+		}
 
-        private static ITokenResponseBuilder GetResponseBuilder()
-        {
-            ITokenResponseBuilder builder;
+		private static ITokenResponseBuilder GetResponseBuilder()
+		{
+			ITokenResponseBuilder builder;
 
-            try
-            {
-                builder = ServiceLocator.Current.GetInstance<ITokenResponseBuilder>();
-            }
-            catch (Exception x)
-            {
-                Log.Info("Failed to inject ITokenResponseBuilder, using default", x);
-                builder = new TokenResponseBuilder();
-            }
+			try
+			{
+				builder = ServiceLocator.Current.GetInstance<ITokenResponseBuilder>();
+			}
+			catch (Exception x)
+			{
+				Log.Info("Failed to inject ITokenResponseBuilder, using default", x);
+				builder = new TokenResponseBuilder();
+			}
 
-            return builder;
-        }
+			return builder;
+		}
 
-        public static ITokenContext ToTokenContext(this HttpRequest request)
-        {
-            return ToTokenContext(new HttpRequestWrapper(request));
-        }
-        public static ITokenContext ToTokenContext(this HttpRequestBase request)
-        {
-            IContextBuilder<ITokenContext> builder = GetContextBuilder();
-            return builder.FromHttpRequest(request);
-        }
+		public static ITokenContext ToTokenContext(this HttpRequest request)
+		{
+			return ToTokenContext(new HttpRequestWrapper(request));
+		}
+		public static ITokenContext ToTokenContext(this HttpRequestBase request)
+		{
+			IContextBuilder<ITokenContext> builder = GetContextBuilder();
+			return builder.FromHttpRequest(request);
+		}
 
-        public static ITokenContext GrantAccessToken(this ITokenContext context)
-        {
-            ITokenProvider provider = GetProvider();
+		public static ITokenContext GrantAccessToken(this ITokenContext context)
+		{
+			ITokenProvider provider = GetProvider();
 
-            provider.GrantAccessToken(context);
-            return context;
-        }
+			provider.GrantAccessToken(context);
+			return context;
+		}
 
-        public static TokenResponse CreateTokenResponse(this ITokenContext context)
-        {
-            ITokenResponseBuilder builder = GetResponseBuilder();
-            return builder.CreateResponse(context);
-        }
+		public static TokenResponse CreateTokenResponse(this ITokenContext context)
+		{
+			ITokenResponseBuilder builder = GetResponseBuilder();
+			return builder.CreateResponse(context);
+		}
 
-        public static void WriteTokenResponse(this HttpResponse response, TokenResponse tokenResponse)
-        {
-            WriteTokenResponse(new HttpResponseWrapper(response), tokenResponse);
-        }
-        public static void WriteTokenResponse(this HttpResponseBase response, TokenResponse tokenResponse)
-        {
-            TokenResponseWriter writer = new TokenResponseWriter(response);
+		public static void WriteTokenResponse(this HttpResponse response, TokenResponse tokenResponse)
+		{
+			WriteTokenResponse(new HttpResponseWrapper(response), tokenResponse);
+		}
+		public static void WriteTokenResponse(this HttpResponseBase response, TokenResponse tokenResponse)
+		{
+			TokenResponseWriter writer = new TokenResponseWriter(response);
 
-            writer.WriteResponse(tokenResponse);
-        }
-    }
+			writer.WriteResponse(tokenResponse);
+		}
+	}
 }

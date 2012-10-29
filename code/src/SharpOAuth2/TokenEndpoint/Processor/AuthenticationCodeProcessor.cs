@@ -32,34 +32,34 @@ using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.TokenEndpoint.Processor
 {
-    public class AuthenticationCodeProcessor : ContextProcessor<ITokenContext>
-    {
-        public AuthenticationCodeProcessor(IServiceFactory serviceFactory) 
-            :base(serviceFactory){}
-        
+	public class AuthenticationCodeProcessor : ContextProcessor<ITokenContext>
+	{
+		public AuthenticationCodeProcessor(IServiceFactory serviceFactory)
+			: base(serviceFactory) { }
 
-        #region IContextProcessor<ITokenContext> Members
 
-        public override bool IsSatisfiedBy(ITokenContext context)
-        {
-            return context.GrantType == Parameters.GrantTypeValues.AuthorizationCode;
-        }
+		#region IContextProcessor<ITokenContext> Members
 
-        public override void Process(ITokenContext context)
-        {
-            AuthorizationGrantBase grant = ServiceFactory.AuthorizationGrantService.FindAuthorizationGrant(context.AuthorizationCode);
+		public override bool IsSatisfiedBy(ITokenContext context)
+		{
+			return context.GrantType == Parameters.GrantTypeValues.AuthorizationCode;
+		}
 
-            if (!ServiceFactory.ClientService.AuthenticateClient(context))
-                throw Errors.InvalidClient(context);
+		public override void Process(ITokenContext context)
+		{
+			IAuthorizationGrant grant = ServiceFactory.AuthorizationGrantService.FindAuthorizationGrant(context.AuthorizationCode);
 
-            if (!ServiceFactory.AuthorizationGrantService.ValidateGrant(context, grant))
-                throw Errors.InvalidGrant(context);            
+			if (!ServiceFactory.ClientService.AuthenticateClient(context))
+				throw Errors.InvalidClient(context);
 
-            context.Token = ServiceFactory.TokenService.IssueAccessToken(grant);
+			if (!ServiceFactory.AuthorizationGrantService.ValidateGrant(context, grant))
+				throw Errors.InvalidGrant(context);
 
-            ServiceFactory.AuthorizationGrantService.ConsumeGrant(grant);          
-        }
+			context.Token = ServiceFactory.TokenService.IssueAccessToken(grant);
 
-        #endregion
-    }
+			ServiceFactory.AuthorizationGrantService.ConsumeGrant(grant);
+		}
+
+		#endregion
+	}
 }

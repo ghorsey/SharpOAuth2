@@ -32,111 +32,111 @@ using SharpOAuth2.Provider.Framework;
 
 namespace SharpOAuth2.Provider.Fluent
 {
-    public static class FluentAuthorizationContext
-    {
-        readonly static ILog Log = LogManager.GetCurrentClassLogger();
-        readonly static object Lck = new object();
-        private static IContextBuilder<IAuthorizationContext> GetBuilder()
-        {
-            IContextBuilder<IAuthorizationContext> builder;
-            try
-            {
-                builder = ServiceLocator.Current.GetInstance<IContextBuilder<IAuthorizationContext>>();
-            }
-            catch (Exception ex)
-            {
-                Log.Info("Faild to inject IContextBuilder<IAuthorizationContext>", ex);
-                builder = new AuthorizationContextBuilder();
-            }
-            return builder;
-        }
+	public static class FluentAuthorizationContext
+	{
+		readonly static ILog Log = LogManager.GetCurrentClassLogger();
+		readonly static object Lck = new object();
+		private static IContextBuilder<IAuthorizationContext> GetBuilder()
+		{
+			IContextBuilder<IAuthorizationContext> builder;
+			try
+			{
+				builder = ServiceLocator.Current.GetInstance<IContextBuilder<IAuthorizationContext>>();
+			}
+			catch (Exception ex)
+			{
+				Log.Info("Faild to inject IContextBuilder<IAuthorizationContext>", ex);
+				builder = new AuthorizationContextBuilder();
+			}
+			return builder;
+		}
 
-        private static IAuthorizationProvider _provider;
-        private static IAuthorizationProvider GetProvider()
-        {
-            if (_provider != null)
-                return _provider;
-            try
-            {
-                lock (Lck)
-                {
-                    _provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
-                }
-                return _provider;
-            }
-            catch (Exception x)
-            {
-                Log.Error("Failed to inject the AuthorizationProvider", x);
-                throw;
-            }
-        }
+		private static IAuthorizationProvider _provider;
+		private static IAuthorizationProvider GetProvider()
+		{
+			if (_provider != null)
+				return _provider;
+			try
+			{
+				lock (Lck)
+				{
+					_provider = ServiceLocator.Current.GetInstance<IAuthorizationProvider>();
+				}
+				return _provider;
+			}
+			catch (Exception x)
+			{
+				Log.Error("Failed to inject the AuthorizationProvider", x);
+				throw;
+			}
+		}
 
-        static IAuthorizationResponseBuilder _responseBuilder;
-        private static IAuthorizationResponseBuilder GetResponseBuilder()
-        {
-            if (_responseBuilder != null)
-                return _responseBuilder;
+		static IAuthorizationResponseBuilder _responseBuilder;
+		private static IAuthorizationResponseBuilder GetResponseBuilder()
+		{
+			if (_responseBuilder != null)
+				return _responseBuilder;
 
-            lock (Lck)
-            {
-                try
-                {
-                    _responseBuilder = ServiceLocator.Current.GetInstance<IAuthorizationResponseBuilder>();
-                }
-                catch (Exception x)
-                {
-                    Log.Info("Failed to inject IAuthorizationResponseBuilder", x);
-                    _responseBuilder = new AuthorizationResponseBuilder();
-                }
-            }
-            return _responseBuilder;
-        }
-        public static IAuthorizationContext ToAuthorizationContext(this HttpRequest reqeust)
-        {
-            return ToAuthorizationContext(new HttpRequestWrapper(reqeust));
-        }
-        public static IAuthorizationContext ToAuthorizationContext(this HttpRequestBase request)
-        {
-            IContextBuilder<IAuthorizationContext> builder = GetBuilder();
+			lock (Lck)
+			{
+				try
+				{
+					_responseBuilder = ServiceLocator.Current.GetInstance<IAuthorizationResponseBuilder>();
+				}
+				catch (Exception x)
+				{
+					Log.Info("Failed to inject IAuthorizationResponseBuilder", x);
+					_responseBuilder = new AuthorizationResponseBuilder();
+				}
+			}
+			return _responseBuilder;
+		}
+		public static IAuthorizationContext ToAuthorizationContext(this HttpRequest reqeust)
+		{
+			return ToAuthorizationContext(new HttpRequestWrapper(reqeust));
+		}
+		public static IAuthorizationContext ToAuthorizationContext(this HttpRequestBase request)
+		{
+			IContextBuilder<IAuthorizationContext> builder = GetBuilder();
 
-            return builder.FromHttpRequest(request);
-        }
+			return builder.FromHttpRequest(request);
+		}
 
-        public static IAuthorizationContext ToAuthorizationContext(this Uri uri)
-        {
-            IContextBuilder<IAuthorizationContext> builder = GetBuilder();
+		public static IAuthorizationContext ToAuthorizationContext(this Uri uri)
+		{
+			IContextBuilder<IAuthorizationContext> builder = GetBuilder();
 
-            return builder.FromUri(uri);
-        }
+			return builder.FromUri(uri);
+		}
 
-        public static IAuthorizationContext SetResourceOwner( this IAuthorizationContext context, string resourceOwnerId)
-        {
-            context.ResourceOwnerUsername = resourceOwnerId;
-            return context;
-        }
+		public static IAuthorizationContext SetResourceOwner(this IAuthorizationContext context, string resourceOwnerId)
+		{
+			context.ResourceOwnerUsername = resourceOwnerId;
+			return context;
+		}
 
-        public static IAuthorizationContext SetApproval(this IAuthorizationContext context, bool isApproved)
-        {
-            context.IsApproved = isApproved;
-            return context;
-        }
+		public static IAuthorizationContext SetApproval(this IAuthorizationContext context, bool isApproved)
+		{
+			context.IsApproved = isApproved;
+			return context;
+		}
 
-        public static IAuthorizationContext CreateAuthorizationGrant(this IAuthorizationContext context)
-        {
-            GetProvider().CreateAuthorizationGrant(context);
-            return context;
-        }
+		public static IAuthorizationContext CreateAuthorizationGrant(this IAuthorizationContext context)
+		{
+			GetProvider().CreateAuthorizationGrant(context);
+			return context;
+		}
 
-        public static Uri CreateAuthorizationResponse(this IAuthorizationContext context)
-        {
-            return GetResponseBuilder().CreateResponse(context);
-        }
+		public static Uri CreateAuthorizationResponse(this IAuthorizationContext context)
+		{
+			return GetResponseBuilder().CreateResponse(context);
+		}
 
-        public static bool IsAccessApproved(this IAuthorizationContext context)
-        {
-            return GetProvider().IsAccessApproved(context);
-        }
+		public static bool IsAccessApproved(this IAuthorizationContext context)
+		{
+			return GetProvider().IsAccessApproved(context);
+		}
 
 
-    }
+	}
 }

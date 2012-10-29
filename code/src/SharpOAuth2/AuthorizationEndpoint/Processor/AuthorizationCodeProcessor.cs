@@ -43,7 +43,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
         {
             if (!context.IsApproved) return;
 
-            AuthorizationGrantBase grant = ServiceFactory.AuthorizationGrantService.IssueAuthorizationGrant(context);
+			IAuthorizationGrant grant = ServiceFactory.AuthorizationGrantService.IssueAuthorizationGrant(context);
             
             context.AuthorizationGrant = grant;
         }

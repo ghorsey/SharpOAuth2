@@ -33,7 +33,7 @@ namespace SharpOAuth2.Framework
         string TokenType { get; set; }
         int ExpiresIn{ get; set; }
         string RefreshToken{ get; set; }
-        //long IssuedOn { get; }
+        long IssuedOn { get; }
         string[] Scope { get; set; }
         IDictionary<string, string> Parameters { get; }
 

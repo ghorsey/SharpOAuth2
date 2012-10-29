@@ -96,7 +96,7 @@ namespace SharpOAuth2.Tests.Provider.ResourceEndpoint
             context.Headers = new NameValueCollection();
             context.Headers["Authorization"] = "bearer my-token";
 
-            AccessTokenBase expiredToken = new AccessTokenBase
+			IAccessToken expiredToken = new AccessTokenBase
             {
                 Token = "my-token",
                 ExpiresIn = 2,
