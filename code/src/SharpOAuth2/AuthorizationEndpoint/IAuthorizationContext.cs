@@ -29,7 +29,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
 {
     public interface IAuthorizationContext : IOAuthContext
     {
-        AuthorizationGrantBase AuthorizationGrant { get; set; }
+		IAuthorizationGrant AuthorizationGrant { get; set; }
         string ResponseType { get; set; }   
         string State { get; set; }
         bool IsApproved { get; set; }

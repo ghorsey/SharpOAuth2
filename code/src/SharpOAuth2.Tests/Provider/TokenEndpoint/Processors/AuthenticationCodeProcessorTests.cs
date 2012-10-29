@@ -35,11 +35,11 @@ namespace SharpOAuth2.Tests.Provider.TokenEndpoint.Processors
                 Scope = new string[] { "create", "delete" }
             };
 
-            AuthorizationGrantBase authorizationGrant = new AuthorizationGrantBase { Code = "123"};
+			IAuthorizationGrant authorizationGrant = new AuthorizationGrantBase { Code = "123" };
 
             Mock<IAuthorizationGrantService> mckAuthService = new Mock<IAuthorizationGrantService>();
             mckAuthService.Setup(x => x.FindAuthorizationGrant("123")).Returns(authorizationGrant);
-            mckAuthService.Setup(x => x.ConsumeGrant(It.IsAny<AuthorizationGrantBase>()));
+			mckAuthService.Setup(x => x.ConsumeGrant(It.IsAny<IAuthorizationGrant>()));
             mckAuthService.Setup(x => x.ValidateGrant(context, authorizationGrant)).Returns(true);
 
             Mock<ITokenService> mckTokenService = new Mock<ITokenService>();

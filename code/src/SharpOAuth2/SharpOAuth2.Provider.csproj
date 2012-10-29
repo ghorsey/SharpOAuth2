@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AuthorizationEndpoint\Processor\ImplicitFlowProcessor.cs" />
     <Compile Include="Domain\AuthorizationGrantBase.cs" />
+    <Compile Include="Domain\IAuthorizationGrant.cs" />
     <Compile Include="Domain\RefreshTokenBase.cs" />
     <Compile Include="Framework\ITokenizer.cs" />
     <Compile Include="Exceptions\InjectionException.cs" />

@@ -31,43 +31,58 @@ using SharpOAuth2.Provider.Utility;
 
 namespace SharpOAuth2.Provider.Domain
 {
-    public class AccessTokenBase : IToken, ITokenizer
-    {
+	public class AccessTokenBase : IAccessToken
+	{
+		public AccessTokenBase()
+		{
+			IssuedOn = DateTime.Now.ToEpoch();
+			Parameters = new Dictionary<string, string>();
+		}
+		#region IToken Members
+		//public virtual string ResourceOwnerUsername { get; set; }
+		public virtual string Token { get; set; }
+		public virtual string TokenType { get; set; }
+		public virtual int ExpiresIn { get; set; }
+		public virtual string RefreshToken { get; set; }
+		public virtual long IssuedOn { get; set; }
+		public virtual string[] Scope { get; set; }
+		public virtual IDictionary<string, string> Parameters { get; private set; }
 
-        public AccessTokenBase()
-        {
-            IssuedOn = DateTime.Now.ToEpoch();
-            Parameters = new Dictionary<string, string>();
-        }
-        #region IToken Members
-        //public virtual string ResourceOwnerUsername { get; set; }
-        public virtual string Token{ get; set; }
-        public virtual string TokenType{ get; set; } 
-        public virtual int ExpiresIn{ get; set; }
-        public virtual string RefreshToken{ get; set; }
-        public virtual long IssuedOn { get; set; }
-        public virtual string[] Scope { get; set; }
-        public virtual IDictionary<string, string> Parameters { get; private set; }
+		public virtual IDictionary<string, object> ToResponseValues()
+		{
+			Dictionary<string, object> dictionary = new Dictionary<string, object>();
 
-        public virtual IDictionary<string, object> ToResponseValues()
-        {
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+			dictionary[SharpOAuth2.Framework.Parameters.AccessToken] = Token;
+			dictionary[SharpOAuth2.Framework.Parameters.AccessTokenExpiresIn] = ExpiresIn;
+			dictionary[SharpOAuth2.Framework.Parameters.RefreshToken] = RefreshToken;
+			dictionary[SharpOAuth2.Framework.Parameters.AccessTokenType] = TokenType;
 
-            dictionary[SharpOAuth2.Framework.Parameters.AccessToken] = Token;
-            dictionary[SharpOAuth2.Framework.Parameters.AccessTokenExpiresIn] = ExpiresIn;
-            dictionary[SharpOAuth2.Framework.Parameters.RefreshToken] = RefreshToken;
-            dictionary[SharpOAuth2.Framework.Parameters.AccessTokenType] = TokenType;
-
-            if (Scope != null && Scope.Length > 0)
-                dictionary[SharpOAuth2.Framework.Parameters.Scope] = string.Join(" ", Scope);
+			if (Scope != null && Scope.Length > 0)
+				dictionary[SharpOAuth2.Framework.Parameters.Scope] = string.Join(" ", Scope);
 
 
-            foreach (var itm in Parameters)
-                dictionary.Add(itm.Key, itm.Value);
+			foreach (var itm in Parameters)
+				dictionary.Add(itm.Key, itm.Value);
 
-            return dictionary;
-        }
+			return dictionary;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
+
+	public interface IAccessToken : IToken, ITokenizer
+	{
+		//IDictionary<string, object> ToResponseValues();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
