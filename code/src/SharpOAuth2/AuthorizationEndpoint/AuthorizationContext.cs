@@ -34,7 +34,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint
     public class AuthorizationContext : IAuthorizationContext
     {
         #region IAuthorizationContext Members
-        public AuthorizationGrantBase AuthorizationGrant { get; set; }
+		public IAuthorizationGrant AuthorizationGrant { get; set; }
         public IClient Client { get; set; }
         public string ResponseType { get; set; }
         public Uri RedirectUri { get; set; }

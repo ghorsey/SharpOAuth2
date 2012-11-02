@@ -43,7 +43,7 @@ namespace SharpOAuth2.Tests.Provider.AuthorizationEndpoint.Processor
                 ClientSecret = "secret"
             };
 
-            AuthorizationGrantBase grant = new AuthorizationGrantBase
+			IAuthorizationGrant grant = new AuthorizationGrantBase
             {
                 Code = "123"
             };

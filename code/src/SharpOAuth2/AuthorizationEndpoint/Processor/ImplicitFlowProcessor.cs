@@ -43,7 +43,7 @@ namespace SharpOAuth2.Provider.AuthorizationEndpoint.Processor
         {
             ClientBase client = ServiceFactory.ClientService.FindClient(context.Client.ClientId);
 
-            AuthorizationGrantBase grant = ServiceFactory.AuthorizationGrantService.IssueAuthorizationGrant(context);
+			IAuthorizationGrant grant = ServiceFactory.AuthorizationGrantService.IssueAuthorizationGrant(context);
             context.AuthorizationGrant = grant;
             context.Token = ServiceFactory.TokenService.IssueAccessToken(grant);
 

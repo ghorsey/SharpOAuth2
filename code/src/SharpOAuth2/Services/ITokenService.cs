@@ -31,19 +31,19 @@ using SharpOAuth2.Provider.TokenEndpoint;
 
 namespace SharpOAuth2.Provider.Services
 {
-    public interface ITokenService
-    {
-        #region AccessToken Methods
-        IToken IssueAccessTokenForResourceOwner(ITokenContext context);
-        IToken IssueAccessToken(RefreshTokenBase refreshToken);
-        IToken IssueAccessToken(ClientBase client);
+	public interface ITokenService
+	{
+		#region AccessToken Methods
+		IToken IssueAccessTokenForResourceOwner(ITokenContext context);
+		IToken IssueAccessToken(RefreshTokenBase refreshToken);
+		IToken IssueAccessToken(ClientBase client);
 
-        IToken IssueAccessToken(AuthorizationGrantBase authorizationGrant);
-        AccessTokenBase FindToken(string token);
-        #endregion
+		IToken IssueAccessToken(IAuthorizationGrant authorizationGrant);
+		IAccessToken FindToken(string token);
+		#endregion
 
-        RefreshTokenBase FindRefreshToken(string refreshToken);
+		RefreshTokenBase FindRefreshToken(string refreshToken);
 
 
-    }
+	}
 }
